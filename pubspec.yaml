@@ -1,7 +1,7 @@
 name: foodage_morello
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
@@ -17,19 +17,18 @@ dependencies:
   date_field: ^2.0.1 # per selezionare una data
   group_button: ^3.1.0 # per lista di bottoni (chips)
   image_picker: ^0.8.3+2 # per caricare foto dalla gallery
-
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - images/
-#    - images/frigo.png
+    - images/frigo.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

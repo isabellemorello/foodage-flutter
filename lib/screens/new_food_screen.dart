@@ -9,12 +9,6 @@ enum DeadlineType {
   longTerm,
 }
 
-enum SectionType {
-  Frigo,
-  Freezer,
-  Dispensa,
-}
-
 class NewFoodScreen extends StatelessWidget {
   static const String id = 'new_food_screen';
 
@@ -42,13 +36,19 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
         leading: TextButton(
           child: Column(
             children: [
-              Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+              Expanded(
+                flex: 1,
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
               ),
-              Text(
-                'Annulla',
-                style: TextStyle(fontSize: 11, color: Colors.white),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  'Annulla',
+                  style: TextStyle(fontSize: 10, color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -65,13 +65,19 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.check,
-                color: Colors.white,
+              Expanded(
+                flex: 1,
+                child: Icon(
+                  Icons.check,
+                  color: Colors.white,
+                ),
               ),
-              Text(
-                'Salva',
-                style: TextStyle(fontSize: 11, color: Colors.white),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  'Salva',
+                  style: TextStyle(fontSize: 10, color: Colors.white),
+                ),
               ),
             ],
           )
@@ -79,11 +85,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
       ),
       body: Container(
         color: Colors.teal[50],
-        padding: EdgeInsets.only(
-          top: 30,
-          left: 30,
-          right: 30,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: ListView(
           children: [
             Image.asset(
@@ -122,8 +124,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
             SizedBox(
               height: 40,
             ),
-            // TODO: inserire classe DeadLineContent
-            // DeadlineTypeContent(),
+            //TODO: inserire classe DeadLineContent DeadlineTypeContent(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -204,47 +205,8 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
               children: [
                 TableRow(
                   children: [
-                    // TODO: provare GestureDetector
-                    TextButton(
-                        style: TextButton.styleFrom(
-                          textStyle: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
-                        // disabledTextColor: Colors.black,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'images/frigo.png',
-                              width: 12,
-                            ),
-                            Text('Frigo'),
-                          ],
-                        ),
-                        onPressed: () {
-                          // bool value = true;
-                          // if()
-                        } // !SectionType.Frigo ? null : (){print('Frigo');},
-                        ),
-                    TextButton(
-                      child: Column(
-                        children: [
-                          Icon(Icons.ac_unit_sharp),
-                          Text('Freezer'),
-                        ],
-                      ),
-                      onPressed: () {},
-                    ),
-                    TextButton(
-                      child: Column(
-                        children: [
-                          Icon(Icons.free_breakfast),
-                          Text(
-                            'Dispensa',
-                          ),
-                        ],
-                      ),
-                      onPressed: () {},
-                    ),
+                    SectionTypeSelectionButton(),
+                    //
                   ],
                 ),
               ],

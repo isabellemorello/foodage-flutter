@@ -1,21 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/home_content.dart';
+import 'package:foodage_morello/models/food_model.dart';
+import 'package:foodage_morello/models/screens_model.dart';
+import 'package:provider/provider.dart';
+import 'new_food_screen.dart';
+import 'package:foodage_morello/models/screens_model.dart';
 
 class HomepageScreen extends StatelessWidget {
   static const String id = 'homepage_screen';
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(length: 4, child: MyScaffold());
+    // return DefaultTabController(length: 4, child: MyScaffold());
+
+    return ChangeNotifierProvider.value(
+      value: screenModel,
+      child: Consumer<ScreenModel>(
+        builder: (context, screenModel, child) {
+          return IndexedStack(
+            index: screenModel.currentScreenState,
+            children: [
+              DefaultTabController(length: 4, child: MyScaffold()),
+              NewFoodScreen(),
+            ],
+          );
+        },
+      ),
+    );
   }
 }
 
-class MyScaffold extends StatefulWidget {
-  @override
-  _MyScaffoldState createState() => _MyScaffoldState();
-}
-
-class _MyScaffoldState extends State<MyScaffold> {
+//
+class MyScaffold extends StatelessWidget {
   var currentScreen = 0;
   var screens = [
     HomeContent(),
@@ -31,43 +47,42 @@ class _MyScaffoldState extends State<MyScaffold> {
         child: screens.elementAt(currentScreen),
         color: Colors.teal[50],
       ),
-      // body: Center(
-      //   child: screens,
-      // ),
-      // floatingActionButton: floatActBut(currentScreen),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomAppBar(
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.teal,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.delete),
-              label: 'Cestino',
-              backgroundColor: Colors.teal,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Impostazioni',
-              backgroundColor: Colors.teal,
-            ),
-            BottomNavigationBarItem(
-              icon: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 10.0,
-              ),
-              label: 'Casa',
-              backgroundColor: Colors.teal,
-            ),
-          ],
-          currentIndex: currentScreen,
-          onTap: (int inIndex) {
-            setState(() {
-              currentScreen = inIndex;
-            });
+        //TODO: wrappare dentro Consumer la BottomNavigationBar
+        child: Consumer<ScreenModel>(
+          builder: (context, screenModel, child) {
+            return BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                  backgroundColor: Colors.teal,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.delete),
+                  label: 'Cestino',
+                  backgroundColor: Colors.teal,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  label: 'Impostazioni',
+                  backgroundColor: Colors.teal,
+                ),
+                BottomNavigationBarItem(
+                  icon: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 10.0,
+                  ),
+                  label: 'Casa',
+                  backgroundColor: Colors.teal,
+                ),
+              ],
+              currentIndex: currentScreen,
+              onTap: (int inIndex) {
+                screenModel.setScreen(inIndex);
+                // currentScreen = inIndex;
+              },
+            );
           },
         ),
       ),
@@ -272,58 +287,3 @@ class MoreButtons extends StatelessWidget {
     );
   }
 }
-
-// FloatingActionButton floatActBut(int stateScreen) {
-//   if (stateScreen == 0 || stateScreen == 1) {
-//     return FloatingActionButton(
-//       child: Icon(Icons.add),
-//       elevation: 4.0,
-//       onPressed: () {},
-//     );
-//   } else {
-//     return FloatingActionButton(
-//       backgroundColor: Colors.purple,
-//       child: Icon(Icons.delete),
-//       elevation: 4.0,
-//       onPressed: () {},
-//     );
-//   }
-// }
-
-// Container(
-// color: Colors.teal,
-// child:  Row(
-// mainAxisSize: MainAxisSize.max,
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: <Widget>[
-// IconButton(
-// icon: Icon(
-// Icons.home,
-// color: Colors.white,
-// ),
-// onPressed: () {},
-// ),
-// IconButton(
-// icon: Icon(
-// Icons.delete,
-// color: Colors.white,
-// ),
-// onPressed: () {},
-// ),
-// IconButton(
-// icon: Icon(
-// Icons.settings,
-// color: Colors.white,
-// ),
-// onPressed: () {},
-// ),
-// IconButton(
-// icon: CircleAvatar(
-// backgroundColor: Colors.white,
-// radius: 10.0,
-// ),
-// onPressed: () {},
-// ),
-// ],
-// ),
-// ),

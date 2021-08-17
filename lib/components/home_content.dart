@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/screens/new_food_screen.dart';
+import 'package:foodage_morello/constants/constants.dart';
 
 class HomeContent extends StatelessWidget {
   List<String?> typeContainerFood = [
@@ -31,6 +32,7 @@ class HomeContent extends StatelessWidget {
           ),
         ],
         bottom: TabBar(
+          labelStyle: TextStyle(fontSize: 11),
           tabs: [
             Tab(
               icon: Image.asset(
@@ -40,7 +42,11 @@ class HomeContent extends StatelessWidget {
               text: typeContainerFood[0],
             ),
             Tab(
-              icon: Icon(Icons.cake),
+              icon: Image.asset(
+                'images/frigo.png',
+                width: 12,
+                color: Colors.teal[100],
+              ),
               text: typeContainerFood[1],
             ),
             Tab(
@@ -84,6 +90,7 @@ class HomeContent extends StatelessWidget {
                             bottom: MediaQuery.of(context).viewInsets.bottom),
                         child: Column(
                           children: [
+                            // TODO: fare una lista di card
                             Card(
                               child: ListTile(
                                 leading: Icon(Icons.photo),
