@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:foodage_morello/components/new_food_content.dart';
+import 'package:foodage_morello/components/new_food_screen/section_type_selection_button.dart';
 import 'package:date_field/date_field.dart';
 import 'package:group_button/group_button.dart';
 
@@ -32,6 +32,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: TextButton(
           child: Column(
@@ -85,7 +86,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
       ),
       body: Container(
         color: Colors.teal[50],
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        padding: EdgeInsets.only(top: 20, right: 30, left: 30),
         child: ListView(
           children: [
             Image.asset(
@@ -272,6 +273,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
               height: 40,
             ),
             Container(
+              margin: EdgeInsets.only(bottom: 20),
               child: TextField(
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,

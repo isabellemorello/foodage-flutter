@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/main.dart';
+import 'package:foodage_morello/constants/constants.dart';
 
 enum DeadlineType {
   shortTerm,
@@ -42,7 +43,7 @@ class _SectionTypeSelectionButtonState
             child: Column(
               children: [
                 Image.asset(
-                  'images/frigo.png',
+                  kFridgeIcon,
                   color: sectionType == SectionType.Frigo
                       ? kActiveColorComponentsSectionType
                       : kInactiveColorComponentsSectionType,
@@ -83,7 +84,7 @@ class _SectionTypeSelectionButtonState
             child: Column(
               children: [
                 Icon(
-                  Icons.ac_unit_sharp,
+                  kFreezerIcon,
                   color: sectionType == SectionType.Freezer
                       ? kActiveColorComponentsSectionType
                       : kInactiveColorComponentsSectionType,
@@ -122,7 +123,7 @@ class _SectionTypeSelectionButtonState
             child: Column(
               children: [
                 Icon(
-                  Icons.free_breakfast,
+                  kDispensaIcon,
                   color: sectionType == SectionType.Dispensa
                       ? kActiveColorComponentsSectionType
                       : kInactiveColorComponentsSectionType,

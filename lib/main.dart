@@ -13,13 +13,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final screens = [
-    HomepageScreen(),
-    HomepageScreen(),
-    HomepageScreen(),
-    HomepageScreen(),
-  ];
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -37,7 +30,7 @@ class MyApp extends StatelessWidget {
         HomepageScreen.id: (context) => HomepageScreen(),
         NewFoodScreen.id: (context) => NewFoodScreen(),
       },
-      home: HomepageScreen(),
+      home: WelcomeScreen(),
       // home: Provider<ScreenModel>.value(
       //   value: screenModel,
       //   child: Consumer<ScreenModel>(
