@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/constants/constants.dart';
-import 'package:foodage_morello/main.dart';
 import 'package:foodage_morello/constants/constants.dart';
 
 enum DeadlineType {
@@ -42,12 +41,11 @@ class _SectionTypeSelectionButtonState
             ),
             child: Column(
               children: [
-                Image.asset(
+                Icon(
                   kFridgeIcon,
                   color: sectionType == SectionType.Frigo
                       ? kActiveColorComponentsSectionType
                       : kInactiveColorComponentsSectionType,
-                  width: 12,
                 ),
                 SizedBox(height: 8),
                 Text(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/homepage_screen/home_content.dart';
 import 'package:foodage_morello/constants/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:foodage_morello/models/food_list_model.dart';
 
 class HomepageScreen extends StatelessWidget {
   static const String id = 'homepage_screen';
@@ -28,45 +30,48 @@ class _MyScaffoldState extends State<MyScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: screens.elementAt(currentScreen),
-        color: Colors.teal[50],
-      ),
-      //
-      bottomNavigationBar: BottomAppBar(
-        child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(kHomeIcon),
-                label: 'Home',
-                backgroundColor: Colors.teal,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(kDeleteIcon),
-                label: 'Cestino',
-                backgroundColor: Colors.teal,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(kSettingsIcon),
-                label: 'Impostazioni',
-                backgroundColor: Colors.teal,
-              ),
-              BottomNavigationBarItem(
-                icon: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 10.0,
+    return ChangeNotifierProvider.value(
+      value: foodModel,
+      child: Scaffold(
+        body: Container(
+          child: screens.elementAt(currentScreen),
+          color: Colors.teal[50],
+        ),
+        //
+        bottomNavigationBar: BottomAppBar(
+          child: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(kHomeIcon),
+                  label: 'Home',
+                  backgroundColor: Colors.teal,
                 ),
-                label: 'Casa',
-                backgroundColor: Colors.teal,
-              ),
-            ],
-            currentIndex: currentScreen,
-            onTap: (int inIndex) {
-              setState(() {
-                currentScreen = inIndex;
-              });
-            }),
+                BottomNavigationBarItem(
+                  icon: Icon(kDeleteIcon),
+                  label: 'Cestino',
+                  backgroundColor: Colors.teal,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(kSettingsIcon),
+                  label: 'Impostazioni',
+                  backgroundColor: Colors.teal,
+                ),
+                BottomNavigationBarItem(
+                  icon: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 10.0,
+                  ),
+                  label: 'Casa',
+                  backgroundColor: Colors.teal,
+                ),
+              ],
+              currentIndex: currentScreen,
+              onTap: (int inIndex) {
+                setState(() {
+                  currentScreen = inIndex;
+                });
+              }),
+        ),
       ),
     );
   }

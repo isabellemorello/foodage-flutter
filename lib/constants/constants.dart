@@ -7,7 +7,8 @@ const Color kInactiveColorComponentsSectionType = Colors.black;
 Color kActiveColorComponentsSectionType = Colors.teal.shade50;
 
 // Icone
-const kFridgeIcon = 'images/frigo.png';
+const kFrigoIcon = 'images/frigo.png';
+const kFridgeIcon = Icons.kitchen;
 const kFreezerIcon = Icons.ac_unit_sharp;
 const kDispensaIcon = Icons.free_breakfast;
 const kHomeIcon = Icons.home;

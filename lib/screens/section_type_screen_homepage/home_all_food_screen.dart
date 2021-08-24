@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/components/food_layout/food.dart';
 
 class HomeAllFoodScreen extends StatelessWidget {
   const HomeAllFoodScreen({
@@ -13,64 +15,27 @@ class HomeAllFoodScreen extends StatelessWidget {
       child: ListView(
         children: [
           Text('Scaduto'),
-          Card(
-            child: ListTile(
-              leading: FlutterLogo(),
-              title: Text('Ciao'),
-              trailing: Icon(Icons.delete),
-              onLongPress: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (context) => SingleChildScrollView(
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: Column(
-                        children: [
-                          // TODO: fare una lista di card
-                          Card(
-                            child: ListTile(
-                              leading: Icon(Icons.photo),
-                              title: Text('take a picture'),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              leading: Icon(Icons.photo),
-                              title: Text('from the gallery'),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+          FoodCard(
+            sectionIcon: kFridgeIcon,
+            foodName: 'Ciaooo',
+            deadlineDate: '22/08/2021',
           ),
           SizedBox(
             height: 30.0,
           ),
           Text('Scade oggi'),
-          Card(
-            child: ListTile(
-              leading: FlutterLogo(),
-              title: Text('Ciao'),
-              trailing: Icon(Icons.delete),
-            ),
-          ),
+          FoodCard(
+              sectionIcon: kFreezerIcon,
+              foodName: 'foodName',
+              deadlineDate: '22/08/2021'),
           SizedBox(
             height: 30.0,
           ),
           Text('Scade domani'),
-          Card(
-            child: ListTile(
-              leading: FlutterLogo(),
-              title: Text('Ciao'),
-              trailing: Icon(Icons.delete),
-            ),
-          ),
+          FoodCard(
+              sectionIcon: kDispensaIcon,
+              foodName: 'foodName',
+              deadlineDate: '22/08/2021'),
         ],
       ),
     );

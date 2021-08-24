@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:foodage_morello/models/food.dart';
 import 'package:foodage_morello/components/new_food_screen/section_type_selection_button.dart';
 
-class Food {
-  String foodName = '';
-  DateTime seadlineDate = DateTime.now();
-  DeadlineType deadlineType = DeadlineType.shortTerm;
-  SectionType sectionType = SectionType.Frigo;
-  List<String> labelList = [];
-  String shopName = '';
-  String price = '';
-}
-
 class FoodsModel extends ChangeNotifier {
-  int stackIndex = 0;
-  List<Food> foodList = [];
+  int stackIndex = 0; // ! non so se metterlo
+  List<Food> foodList = [
+    Food(
+        foodName: '',
+        deadlineDate: DateTime.september,
+        sectionType: SectionType.Frigo),
+  ];
   Food foodBeingEdited = Food();
   SectionType sectionType = SectionType.Frigo;
 

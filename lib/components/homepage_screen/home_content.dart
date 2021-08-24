@@ -43,11 +43,7 @@ class HomeContent extends StatelessWidget {
               text: typeContainerFood[0],
             ),
             Tab(
-              icon: Image.asset(
-                kFridgeIcon,
-                width: 12,
-                color: Colors.teal[100],
-              ),
+              icon: Icon(kFridgeIcon),
               text: typeContainerFood[1],
             ),
             Tab(
