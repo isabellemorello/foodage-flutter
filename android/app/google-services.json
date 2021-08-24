@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229976506112",
+    "project_id": "foodage-82a63",
+    "storage_bucket": "foodage-82a63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229976506112:android:f6a4eee8a87d65cb853de5",
+        "android_client_info": {
+          "package_name": "com.morello_isabelle_michelle.foodage_morello"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229976506112-cf5g83ad5hdqhcgvf35ihaeg5a4u6aeq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1V8gNcK7zlKh8yI-eIK3LGT0ciLmoWaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229976506112-cf5g83ad5hdqhcgvf35ihaeg5a4u6aeq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
