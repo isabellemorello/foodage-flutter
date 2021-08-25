@@ -10,28 +10,48 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.teal.shade100,
         body: SafeArea(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'images/nameLogo.png',
-                  height: 60.0,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Hero(
+                        tag: 'logo',
+                        child: Image.asset('images/logo.png',
+                            height: 70, color: Colors.pink // Color(0xFFce3a55),
+                            ),
+                      ),
+                    ),
+                    Text(
+                      'FOODAGE',
+                      style: TextStyle(
+                        fontFamily: 'PatrickHand',
+                        fontSize: 60,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 3,
+                        // color: Colors.pinkAccent
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 30.0,
                 ),
                 RoundedButton(
-                  Colors.blue,
+                  // ThemeData().copyWith(accentColor: Colors.pinkAccent),
+                  Colors.teal,
                   'Login',
                   () {
                     Navigator.pushNamed(context, LoginScreen.id);
                   },
                 ),
                 RoundedButton(
-                  Colors.blue,
+                  Colors.teal,
                   'Registrazione',
                   () {
                     Navigator.pushNamed(context, RegistrationScreen.id);

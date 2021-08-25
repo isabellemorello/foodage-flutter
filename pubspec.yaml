@@ -18,6 +18,9 @@ dependencies:
   group_button: ^3.1.0 # per lista di bottoni (chips)
   image_picker: ^0.8.3+2 # per caricare foto dalla gallery
   provider: ^5.0.0
+  firebase_core: ^1.5.0
+  firebase_auth: ^3.0.2
+  cloud_firestore: ^2.5.0
 
 dev_dependencies:
   flutter_test:
@@ -29,7 +32,23 @@ flutter:
   assets:
     - images/
     - images/frigo.svg
-  #   - images/a_dot_ham.jpeg
+
+  fonts:
+    - family: ArchitectsDaughter
+      fonts:
+        - asset: fonts/ArchitectsDaughter-Regular.ttf
+
+    - family: PatrickHand
+      fonts:
+        - asset: fonts/PatrickHand-Regular.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Medium.ttf
+
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

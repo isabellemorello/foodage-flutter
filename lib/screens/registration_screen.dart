@@ -17,7 +17,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal.shade100,
       //TODO: Aggiungere per l'animazione dello spinner di caricamento:
       //         body: ModalProgressHUD(
       //         inAsyncCall: showSpinner,
@@ -28,14 +28,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Flexible(
-              child: Hero(
-                tag: 'logo',
-                child: Container(
-                  height: 150.0,
-                  child: Image.asset('images/nameLogo.png'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Hero(
+                    tag: 'logo',
+                    child: Image.asset('images/logo.png',
+                        height: 70.0, color: Colors.pink // Color(0xFFce3a55),
+                        ),
+                  ),
                 ),
-              ),
+                Text(
+                  'FOODAGE',
+                  style: TextStyle(
+                    fontFamily: 'PatrickHand',
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3,
+                    // color: Colors.pinkAccent
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 48.0,
@@ -66,7 +80,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 24.0,
             ),
-            RoundedButton(Colors.lightBlue, 'Register', () {
+            RoundedButton(Colors.teal, 'Register', () {
               Navigator.pop(context);
             }),
           ],

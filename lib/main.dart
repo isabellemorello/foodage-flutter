@@ -7,8 +7,10 @@ import 'screens/welcome_screen.dart';
 import 'screens/homepage_screen.dart';
 import 'screens/registration_screen.dart';
 import 'screens/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         accentColor: Colors.greenAccent,
       ),
-      initialRoute: HomepageScreen.id,
+      initialRoute: WelcomeScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
