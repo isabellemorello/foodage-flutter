@@ -37,8 +37,9 @@ class HomeContent extends StatelessWidget {
           tabs: [
             Tab(
               icon: Image.asset(
-                'images/logo.png',
+                'images/logo3.png',
                 width: 30,
+                color: Colors.tealAccent,
               ),
               text: typeContainerFood[0],
             ),

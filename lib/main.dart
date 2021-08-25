@@ -11,11 +11,13 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,22 +34,22 @@ class MyApp extends StatelessWidget {
         HomepageScreen.id: (context) => HomepageScreen(),
         NewFoodScreen.id: (context) => NewFoodScreen(),
       },
-      home: WelcomeScreen(),
-      // home: Provider<ScreenModel>.value(
-      //   value: screenModel,
-      //   child: Consumer<ScreenModel>(
-      //     builder: (context, screenModel, child) {
-      //       return screens[screenModel.currentScreenState];
-      //     },
-      //   ),
-      // ),
-
-      // home: Provider<ScreenModel>(
-      //   create: (_) => screenModel,
-      //   builder: (context, child) {
-      //     return screens[context.watch<ScreenModel>().currentScreenState];
-      //   },
-      // ),
+      home: FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('You have an error: ${snapshot.hasError}');
+            return Text('Something went wrong!');
+          } else if (snapshot.hasData) {
+            return WelcomeScreen();
+          } else {
+            return Container(
+              color: Colors.teal.shade100,
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+        },
+      ),
     );
   }
 }

@@ -21,6 +21,7 @@ dependencies:
   firebase_core: ^1.5.0
   firebase_auth: ^3.0.2
   cloud_firestore: ^2.5.0
+  modal_progress_hud_nsn: ^0.1.0-nullsafety-1 # per lo spinner di caricamento
 
 dev_dependencies:
   flutter_test:

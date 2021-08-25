@@ -22,10 +22,14 @@ class WelcomeScreen extends StatelessWidget {
                     Flexible(
                       child: Hero(
                         tag: 'logo',
-                        child: Image.asset('images/logo.png',
-                            height: 70, color: Colors.pink // Color(0xFFce3a55),
+                        child: Image.asset('images/logo3.png',
+                            height: 70.0,
+                            color: Colors.pink // Color(0xFFce3a55),
                             ),
                       ),
+                    ),
+                    SizedBox(
+                      width: 20.0,
                     ),
                     Text(
                       'FOODAGE',
@@ -44,16 +48,16 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 RoundedButton(
                   // ThemeData().copyWith(accentColor: Colors.pinkAccent),
-                  Colors.teal,
-                  'Login',
-                  () {
+                  colour: Colors.teal,
+                  title: 'Login',
+                  onPressed: () {
                     Navigator.pushNamed(context, LoginScreen.id);
                   },
                 ),
                 RoundedButton(
-                  Colors.teal,
-                  'Registrazione',
-                  () {
+                  colour: Colors.teal,
+                  title: 'Registrazione',
+                  onPressed: () {
                     Navigator.pushNamed(context, RegistrationScreen.id);
                   },
                 ),

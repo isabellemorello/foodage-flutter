@@ -3,6 +3,12 @@ import 'package:foodage_morello/components/homepage_screen/home_content.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:foodage_morello/models/food_list_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final _firestore = FirebaseFirestore.instance;
+User? loggedInUser;
 
 class HomepageScreen extends StatelessWidget {
   static const String id = 'homepage_screen';
@@ -20,6 +26,7 @@ class MyScaffold extends StatefulWidget {
 }
 
 class _MyScaffoldState extends State<MyScaffold> {
+  final _auth = FirebaseAuth.instance;
   var currentScreen = 0;
   var screens = [
     HomeContent(),
@@ -29,6 +36,24 @@ class _MyScaffoldState extends State<MyScaffold> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    Firebase.initializeApp();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser?.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: foodModel,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:foodage_morello/components/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
   // Firebase.initializeApp();
@@ -9,10 +11,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  //final _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   String email = '';
   String password = '';
   //bool showSpinner = false;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +37,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 Flexible(
                   child: Hero(
                     tag: 'logo',
-                    child: Image.asset('images/logo.png',
-                        height: 70.0, color: Colors.pink // Color(0xFFce3a55),
+                    child: Image.asset('images/logo2.png',
+                        height: 60.0, color: Colors.pink // Color(0xFFce3a55),
                         ),
                   ),
+                ),
+                SizedBox(
+                  width: 10.0,
                 ),
                 Text(
                   'FOODAGE',
                   style: TextStyle(
                     fontFamily: 'PatrickHand',
-                    fontSize: 60,
+                    fontSize: 50,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 3,
                     // color: Colors.pinkAccent
@@ -54,35 +60,78 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 48.0,
             ),
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                email = value;
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    validator: (String? inValue) {
+                      if (inValue.toString().length == 0) {
+                        return 'Perfavore inserisci la tua email';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      this.email = value.toString();
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Inserisci la tua email',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    textAlign: TextAlign.center,
+                    validator: (String? inValue) {
+                      if (inValue.toString().length < 8) {
+                        return 'La password deve essere di almeno 8 lettere';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      this.password = value.toString();
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Inserisci la password',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24.0,
+                  ),
+                  RoundedButton(
+                    colour: Colors.teal,
+                    title: 'Register',
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        print('Username: $email');
+                        print('Username: $password');
+                      }
+                      // setState(() {
+                      //   showSpinner = true;
+                      // });
+                      try {
+                        final newUser =
+                            await _auth.createUserWithEmailAndPassword(
+                                email: email, password: password);
+                        if (newUser != null) {
+                          Navigator.pushNamed(context, HomepageScreen.id);
+                        }
+                        // setState(() {
+                        //   showSpinner = false;
+                        // });
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 8.0,
-            ),
-            TextField(
-              obscureText: true,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                password = value;
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your password',
-              ),
-            ),
-            SizedBox(
-              height: 24.0,
-            ),
-            RoundedButton(Colors.teal, 'Register', () {
-              Navigator.pop(context);
-            }),
           ],
         ),
       ),
