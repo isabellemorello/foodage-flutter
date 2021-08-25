@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal.shade100,
+        backgroundColor: Colors.teal,
         body: SafeArea(
           child: Center(
             child: Column(
@@ -22,9 +22,9 @@ class WelcomeScreen extends StatelessWidget {
                     Flexible(
                       child: Hero(
                         tag: 'logo',
-                        child: Image.asset('images/logo3.png',
+                        child: Image.asset('images/logo.png',
                             height: 70.0,
-                            color: Colors.pink // Color(0xFFce3a55),
+                            color: Colors.red.shade100 // Color(0xFFce3a55),
                             ),
                       ),
                     ),
@@ -34,12 +34,11 @@ class WelcomeScreen extends StatelessWidget {
                     Text(
                       'FOODAGE',
                       style: TextStyle(
-                        fontFamily: 'PatrickHand',
-                        fontSize: 60,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 3,
-                        // color: Colors.pinkAccent
-                      ),
+                          fontFamily: 'PatrickHand',
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 3,
+                          color: Colors.teal.shade50),
                     ),
                   ],
                 ),
@@ -48,14 +47,16 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 RoundedButton(
                   // ThemeData().copyWith(accentColor: Colors.pinkAccent),
-                  colour: Colors.teal,
+                  colour: Colors.red.shade100,
+                  textColour: Colors.teal,
                   title: 'Login',
                   onPressed: () {
                     Navigator.pushNamed(context, LoginScreen.id);
                   },
                 ),
                 RoundedButton(
-                  colour: Colors.teal,
+                  colour: Colors.red.shade100,
+                  textColour: Colors.teal,
                   title: 'Registrazione',
                   onPressed: () {
                     Navigator.pushNamed(context, RegistrationScreen.id);

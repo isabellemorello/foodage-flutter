@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Foodage',
       theme: ThemeData(
         primarySwatch: Colors.teal,
-        accentColor: Colors.greenAccent,
+        accentColor: Colors.red.shade100,
       ),
       initialRoute: WelcomeScreen.id,
       routes: {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:foodage_morello/components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodage_morello/db/firestore_db.dart';
 
 class RegistrationScreen extends StatefulWidget {
   // Firebase.initializeApp();
@@ -20,7 +21,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal.shade100,
+      backgroundColor: Colors.red.shade50,
       //TODO: Aggiungere per l'animazione dello spinner di caricamento:
       //         body: ModalProgressHUD(
       //         inAsyncCall: showSpinner,
@@ -37,9 +38,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 Flexible(
                   child: Hero(
                     tag: 'logo',
-                    child: Image.asset('images/logo2.png',
-                        height: 60.0, color: Colors.pink // Color(0xFFce3a55),
-                        ),
+                    child: Image.asset(
+                      'images/logo.png',
+                      height: 60.0,
+                      color: Colors.teal, // Color(0xFFce3a55),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -48,12 +51,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 Text(
                   'FOODAGE',
                   style: TextStyle(
-                    fontFamily: 'PatrickHand',
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 3,
-                    // color: Colors.pinkAccent
-                  ),
+                      fontFamily: 'PatrickHand',
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 3,
+                      color: Colors.black),
                 ),
               ],
             ),
@@ -77,6 +79,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       this.email = value.toString();
                     },
                     decoration: InputDecoration(
+                      alignLabelWithHint: true,
                       hintText: 'Inserisci la tua email',
                     ),
                   ),
@@ -104,7 +107,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   RoundedButton(
                     colour: Colors.teal,
-                    title: 'Register',
+                    textColour: Colors.red.shade50,
+                    title: 'Registrati',
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
@@ -115,12 +119,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       //   showSpinner = true;
                       // });
                       try {
-                        final newUser =
-                            await _auth.createUserWithEmailAndPassword(
-                                email: email, password: password);
-                        if (newUser != null) {
-                          Navigator.pushNamed(context, HomepageScreen.id);
-                        }
+                        FoodDBWorker().registrateUser(context, email, password);
                         // setState(() {
                         //   showSpinner = false;
                         // });

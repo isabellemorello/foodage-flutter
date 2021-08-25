@@ -3,6 +3,7 @@ import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:foodage_morello/components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:foodage_morello/db/firestore_db.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -48,8 +49,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Flexible(
                     child: Hero(
                       tag: 'logo',
-                      child: Image.asset('images/logo3.png',
-                          height: 60.0, color: Colors.pink // Color(0xFFce3a55),
+                      child: Image.asset('images/logo.png',
+                          height: 60.0, color: Colors.teal // Color(0xFFce3a55),
                           ),
                     ),
                   ),
@@ -116,6 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     RoundedButton(
                       colour: Colors.teal,
+                      textColour: Colors.teal.shade50,
                       title: 'Log in',
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -129,18 +131,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             showSpinner = true;
                           });
 
-                          final user = await _auth.signInWithEmailAndPassword(
-                              email: email, password: password);
-                          if (user == null) {
-                            throw new Exception('user not exist');
-                          }
-                          Navigator.pushNamed(context, HomepageScreen.id);
+                          FoodDBWorker().loginUser(context, email, password);
 
-                          Future.delayed(Duration(seconds: 3), () {
-                            setState(() {
-                              showSpinner = false;
-                            });
+                          // Future.delayed(Duration(seconds: 3), () {
+                          setState(() {
+                            showSpinner = false;
                           });
+                          // });
                         } catch (e) {
                           print(e);
                         }
