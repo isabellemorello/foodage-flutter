@@ -104,13 +104,18 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                         ),
                         Positioned(
                           bottom: 0,
-                          right: 4,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.teal,
-                            child: Icon(
-                              Icons.add_a_photo,
-                              color: Colors.teal.shade50,
+                          right: 0,
+                          child: IconButton(
+                            // iconSize: ,
+                            icon: CircleAvatar(
+                              backgroundColor: Colors.teal,
+                              child: Icon(
+                                Icons.add_a_photo,
+                                color: Colors.teal.shade50,
+                                size: 20,
+                              ),
                             ),
+                            onPressed: () => capture(context),
                           ),
                         ),
                       ],
@@ -301,7 +306,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                           print(shortTermSwitched);
                         });
                       },
-                      activeTrackColor: selectedColorShortTerm,
+                      activeTrackColor: Colors.teal,
                       activeColor: Colors.teal.shade100,
                     ),
                   ),
@@ -345,7 +350,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                           print(longTermSwitched);
                         });
                       },
-                      activeTrackColor: selectedColorLongTerm,
+                      activeTrackColor: Colors.teal,
                       activeColor: Colors.teal.shade100,
                     ),
                   ),

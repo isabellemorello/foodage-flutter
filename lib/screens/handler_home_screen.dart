@@ -22,7 +22,7 @@ class HandlerHomeScaffold extends StatefulWidget {
 class _HandlerHomeScaffoldState extends State<HandlerHomeScaffold> {
   @override
   Widget build(BuildContext context) {
-    int membersNumber = 4; //!modificandolo non si modifica lo stato
+    int membersNumber = 4;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(
@@ -102,21 +102,25 @@ class _HandlerHomeScaffoldState extends State<HandlerHomeScaffold> {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, top: 15.0),
-                                  child: membersNumber == 1
-                                      ? Text('$membersNumber membro')
-                                      : Text('$membersNumber membri'),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15.0, top: 15.0),
+                                      child: membersNumber == 1
+                                          ? Text('$membersNumber membro')
+                                          : Text('$membersNumber membri'),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 20.0,
                                 ),
                                 Row(
-                                  children: membersNumber > 4
-                                      ? membersHome(4)
+                                  children: membersNumber > 3
+                                      ? membersHome(3)
                                       : membersHome(membersNumber),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -138,6 +142,18 @@ class _HandlerHomeScaffoldState extends State<HandlerHomeScaffold> {
                               ),
                             ),
                           ),
+                          membersNumber > 3
+                              ? Positioned(
+                                  bottom: 31,
+                                  right: 4,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.teal,
+                                  ),
+                                )
+                              : Positioned(
+                                  child: Text(''),
+                                ),
                         ],
                       ),
                     ),
@@ -148,6 +164,19 @@ class _HandlerHomeScaffoldState extends State<HandlerHomeScaffold> {
           ],
         ),
       ),
+    );
+  }
+
+  moreThanThreeMembers() {
+    Row(
+      children: [
+        CircleAvatar(
+            backgroundColor: Colors.teal,
+            child: Icon(
+              Icons.add,
+              color: Colors.red.shade100,
+            )),
+      ],
     );
   }
 }

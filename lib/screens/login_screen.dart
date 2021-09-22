@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal.shade100,
+      backgroundColor: Colors.red.shade100,
       //TODO: Aggiungere per l'animazione dello spinner di caricamento:
       //         body: ModalProgressHUD(
       //         inAsyncCall: showSpinner,
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     RoundedButton(
                       colour: Colors.teal,
-                      textColour: Colors.teal.shade50,
+                      textColour: Colors.red.shade100,
                       title: 'Log in',
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -140,6 +140,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         if (shouldNavigate) {
                           Navigator.pushNamed(context, HomepageScreen.id);
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    backgroundColor: Colors.red.shade100,
+                                    title: Text(
+                                      'Credenziali non valide',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    content: Text(
+                                      'L\'e-mail o la password è errata.',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text(
+                                          'RIPROVA',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                    ],
+                                  ));
                         }
                       },
                     ),
