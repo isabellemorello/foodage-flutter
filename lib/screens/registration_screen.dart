@@ -17,6 +17,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String password = '';
   //bool showSpinner = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController _emailField = TextEditingController();
+  TextEditingController _passwordField = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: Column(
                 children: [
                   TextFormField(
+                    controller: _emailField,
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.center,
                     validator: (String? inValue) {
@@ -75,9 +78,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       }
                       return null;
                     },
-                    onSaved: (value) {
-                      this.email = value.toString();
-                    },
+                    // onSaved: (value) {
+                    //   this.email = value.toString();
+                    // },
                     decoration: InputDecoration(
                       alignLabelWithHint: true,
                       hintText: 'Inserisci la tua email',
@@ -87,6 +90,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 8.0,
                   ),
                   TextFormField(
+                    controller: _passwordField,
                     obscureText: true,
                     textAlign: TextAlign.center,
                     validator: (String? inValue) {
@@ -102,34 +106,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       hintText: 'Inserisci la password',
                     ),
                   ),
-                  SizedBox(
-                    height: 24.0,
-                  ),
-                  RoundedButton(
-                    colour: Colors.teal,
-                    textColour: Colors.red.shade50,
-                    title: 'Registrati',
-                    onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        formKey.currentState!.save();
-                        print('Username: $email');
-                        print('Username: $password');
-                      }
-                      // setState(() {
-                      //   showSpinner = true;
-                      // });
-                      try {
-                        FoodDBWorker().registrateUser(context, email, password);
-                        // setState(() {
-                        //   showSpinner = false;
-                        // });
-                      } catch (e) {
-                        print(e);
-                      }
-                    },
-                  ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 24.0,
+            ),
+            RoundedButton(
+              colour: Colors.teal,
+              textColour: Colors.red.shade50,
+              title: 'Registrati',
+              onPressed: () async {
+                if (formKey.currentState!.validate()) {
+                  formKey.currentState!.save();
+                  print('Username: $_emailField');
+                  print('Username: $_passwordField');
+                }
+
+                bool shouldNavigate = await FoodDBWorker()
+                    .registerUser(_emailField.text, _passwordField.text);
+                if (shouldNavigate) {
+                  Navigator.pushNamed(context, HomepageScreen.id);
+                }
+              },
             ),
           ],
         ),

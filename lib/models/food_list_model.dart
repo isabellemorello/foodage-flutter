@@ -8,7 +8,7 @@ class FoodsModel extends ChangeNotifier {
 
   List<Food> foodList = [];
   Food? foodBeingEdited;
-  SectionType? sectionType;
+  String? sectionType;
   IconData? sectionIcon;
 
   void setStackIndex(int inStackIndex) {
@@ -16,7 +16,7 @@ class FoodsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSectionType(SectionType inSectionType) {
+  void setSectionType(String inSectionType) {
     sectionType = inSectionType;
     notifyListeners();
   }
@@ -27,9 +27,9 @@ class FoodsModel extends ChangeNotifier {
   }
 
   void setSectionIcon(IconData inSectionIcon) {
-    if (sectionType == SectionType.Frigo) {
+    if (sectionType == SectionType.Frigo.toString()) {
       sectionIcon = kFridgeIcon;
-    } else if (sectionType == SectionType.Freezer) {
+    } else if (sectionType == SectionType.Freezer.toString()) {
       sectionIcon = kFreezerIcon;
     } else {
       sectionIcon = kDispensaIcon;
@@ -39,4 +39,4 @@ class FoodsModel extends ChangeNotifier {
   }
 }
 
-FoodsModel foodModel = FoodsModel();
+FoodsModel foodsModel = FoodsModel();

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/components/homepage_screen/home_content.dart';
 import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/screens/handler_home_screen.dart';
+import 'package:foodage_morello/screens/settings_screen.dart';
+import 'package:foodage_morello/screens/trash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:foodage_morello/models/food_list_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodage_morello/db/firestore_db.dart';
 
 final _firestore = FirebaseFirestore.instance;
-User? loggedInUser;
+late User loggedInUser;
 
 class HomepageScreen extends StatelessWidget {
   static const String id = 'homepage_screen';
@@ -30,9 +35,9 @@ class _MyScaffoldState extends State<MyScaffold> {
   var currentScreen = 0;
   var screens = [
     HomeContent(),
-    Center(child: Text('Screen 1: Birthday')),
-    Center(child: Text('Screen 2: Data')),
-    MoreButtons(),
+    TrashScreen(),
+    SettingsScreen(),
+    HandlerHomeScreen(),
   ];
 
   @override
@@ -47,7 +52,7 @@ class _MyScaffoldState extends State<MyScaffold> {
       final user = await _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser?.email);
+        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -56,7 +61,7 @@ class _MyScaffoldState extends State<MyScaffold> {
 
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: foodModel,
+      value: foodsModel,
       child: Scaffold(
         body: Container(
           child: screens.elementAt(currentScreen),

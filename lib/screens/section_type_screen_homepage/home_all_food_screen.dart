@@ -15,9 +15,9 @@ class HomeAllFoodScreen extends StatelessWidget {
       color: Colors.teal[50],
       margin: EdgeInsets.only(top: 30.0, right: 20.0, left: 20.0),
       child: ListView.builder(
-        itemCount: foodModel.foodList.length,
+        itemCount: foodsModel.foodList.length,
         itemBuilder: (BuildContext inBuildContext, int inIndex) {
-          Food food = foodModel.foodList[inIndex];
+          Food food = foodsModel.foodList[inIndex];
 
           return
               // Text('Scaduto'),
@@ -29,7 +29,7 @@ class HomeAllFoodScreen extends StatelessWidget {
                   children: [
                     Text('Scaduto'),
                     FoodCard(
-                      sectionIcon: food.sectionIcon ?? kFridgeIcon,
+                      sectionIcon: food.sectionIcon as IconData,
                       foodName: '${food.foodName}',
                       deadlineDate: '${food.deadlineDate}',
                     ),
@@ -45,7 +45,7 @@ class HomeAllFoodScreen extends StatelessWidget {
                   children: [
                     Text('Scade oggi'),
                     FoodCard(
-                      sectionIcon: food.sectionIcon ?? kFridgeIcon,
+                      sectionIcon: food.sectionIcon as IconData,
                       foodName: '${food.foodName}',
                       deadlineDate: '${food.deadlineDate}',
                     ),

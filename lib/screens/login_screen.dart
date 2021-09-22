@@ -12,11 +12,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String email = '';
-  String password = '';
+  // String email = '';
+  // String password = '';
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController _emailField = TextEditingController();
+  TextEditingController _passwordField = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: _emailField,
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.emailAddress,
                       enableSuggestions: true,
@@ -87,9 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      onSaved: (value) {
-                        this.email = value.toString();
-                      },
+                      // onSaved: (value) {
+                      //   this.email = value.toString();
+                      // },
                       decoration: InputDecoration(
                         hintText: 'Inserisci la tua email',
                       ),
@@ -98,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 8.0,
                     ),
                     TextFormField(
+                      controller: _passwordField,
                       obscureText: true,
                       textAlign: TextAlign.center,
                       validator: (String? inValue) {
@@ -106,9 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      onSaved: (value) {
-                        this.password = value.toString();
-                      },
+                      // onSaved: (value) {
+                      //   this.password = value.toString();
+                      // },
                       decoration:
                           InputDecoration(hintText: 'Inserisci la password'),
                     ),
@@ -122,24 +127,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
-                          print('Username: $email');
-                          print('Username: $password');
+                          print('Username: $_emailField');
+                          print('Username: $_passwordField');
                         }
 
-                        try {
-                          setState(() {
-                            showSpinner = true;
-                          });
+                        bool shouldNavigate = await FoodDBWorker()
+                            .loginUser(_emailField.text, _passwordField.text);
 
-                          FoodDBWorker().loginUser(context, email, password);
+                        //TODO: aggiungere condizione: se bool = true passa alla home
+                        //altrimenti esce una finestra popup che dice che le credenziali
+                        //sono sbagliate
 
-                          // Future.delayed(Duration(seconds: 3), () {
-                          setState(() {
-                            showSpinner = false;
-                          });
-                          // });
-                        } catch (e) {
-                          print(e);
+                        if (shouldNavigate) {
+                          Navigator.pushNamed(context, HomepageScreen.id);
                         }
                       },
                     ),

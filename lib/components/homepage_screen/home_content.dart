@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/screens/new_food_screen.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import '/screens/section_type_screen_homepage/home_all_food_screen.dart';
+import 'package:foodage_morello/db/firestore_db.dart';
 
 class HomeContent extends StatelessWidget {
   List<String?> typeContainerFood = [
@@ -14,22 +16,26 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawerWidget(),
       appBar: AppBar(
-        leading: TextButton(
-          child: Icon(
-            Icons.dehaze,
-            color: Colors.white,
-          ),
-          onPressed: () {},
-        ),
+        // leading: TextButton(
+        //   child: Icon(
+        //     Icons.dehaze,
+        //     color: Colors.white,
+        //   ),
+        //   onPressed: () {},
+        // ),
         title: Text('Homepage'),
+        centerTitle: true,
         actions: [
           TextButton(
             child: Icon(
               Icons.search,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              FoodDBWorker().logOutUser(context);
+            },
           ),
         ],
         bottom: TabBar(
@@ -60,7 +66,10 @@ class HomeContent extends StatelessWidget {
       ),
       backgroundColor: Colors.teal[50],
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Colors.teal,
+        ),
         elevation: 4.0,
         onPressed: () {
           Navigator.pushNamed(context, NewFoodScreen.id);
