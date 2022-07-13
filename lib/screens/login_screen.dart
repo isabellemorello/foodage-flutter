@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:foodage_morello/components/rounded_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:foodage_morello/db/firestore_db.dart';
 
@@ -14,7 +13,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   // String email = '';
   // String password = '';
-  final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController _emailField = TextEditingController();
@@ -87,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       enableSuggestions: true,
                       validator: (String? inValue) {
                         if (inValue.toString().length == 0) {
-                          return 'Perfavore inserisci la tua email';
+                          return 'Per favore inserisci la tua email';
                         }
                         return null;
                       },

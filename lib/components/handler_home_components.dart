@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/constants/constants.dart';
 
+// usato in handler_home_screen per il numero di icone dei membri
 List<Widget> membersHome(int numberMembers) {
   List<Widget> members = [];
   for (int i = 0; i < numberMembers; i++) {
@@ -29,17 +30,19 @@ List<Widget> membersHome(int numberMembers) {
   return members;
 }
 
-List<MembersListTile> membersSetting(
-    int numberMembers, MembersListTile memberList) {
-  List<MembersListTile> members = [];
-  for (int i = 0; i < numberMembers; i++) {
-    members.add(
-      memberList,
-    );
-  }
-  return members;
-}
+//! non viene usato, si può cancellare
+// List<MembersListTile> membersSetting(
+//     int numberMembers, MembersListTile memberList) {
+//   List<MembersListTile> members = [];
+//   for (int i = 0; i < numberMembers; i++) {
+//     members.add(
+//       memberList,
+//     );
+//   }
+//   return members;
+// }
 
+// usato in handler_home_settings_screen per icona + n. membro + email
 class MembersListTile extends StatelessWidget {
   MembersListTile({
     required this.leading,
@@ -71,7 +74,7 @@ class MembersListTile extends StatelessWidget {
               ),
               onPressed: () => showDialog(
                     context: context,
-                    builder: (context) => AlertDialog(
+                    builder: (context2) => AlertDialog(
                       title: Text('ATTENZIONE'),
                       content: Text(
                           'Sicuro di voler rimuovere questo Membro dalla Casa?'),
@@ -81,7 +84,7 @@ class MembersListTile extends StatelessWidget {
                           child: Text('No'),
                         ),
                         TextButton(
-                          onPressed: () => kFeatureNotDeveloped(context),
+                          onPressed: () => kFeatureNotDeveloped(context2),
                           child: Text('Sì'),
                         ),
                       ],

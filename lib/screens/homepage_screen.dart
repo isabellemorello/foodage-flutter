@@ -43,7 +43,6 @@ class _MyScaffoldState extends State<MyScaffold> {
   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp();
     getCurrentUser();
   }
 

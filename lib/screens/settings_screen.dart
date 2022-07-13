@@ -40,7 +40,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp();
     getCurrentUser();
   }
 
@@ -226,17 +225,14 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                 children: [
                   NotificationBySection(
                     text: 'Frigo',
-                    onPressed: () {},
                   ),
                   Divider(),
                   NotificationBySection(
                     text: 'Freezer',
-                    onPressed: () {},
                   ),
                   Divider(),
                   NotificationBySection(
                     text: 'Dispensa',
-                    onPressed: () {},
                   ),
                 ],
               ),
@@ -341,7 +337,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                   Divider(),
                   ListTile(
                     title: Text(
-                        'Imposta come limite massimo di 7 giorni per la scadenza'),
+                        'Imposta come limite massimo di 14 giorni per la scadenza'),
                     trailing: Switch(
                       value: longTermSwitched,
                       onChanged: (value) {
@@ -397,6 +393,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
     );
   }
 
+// funzioni "capture" e "pickImage" per selezionare la foto di profilo
   Future capture(BuildContext context) async {
     showDialog(
       context: context,

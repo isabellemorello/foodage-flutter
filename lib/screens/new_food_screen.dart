@@ -58,7 +58,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   // @override
   // void initState() {
   //   super.initState();
-  //   Firebase.initializeApp();
   //   getCurrentUser();
   // }
 
