@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:foodage_morello/components/rounded_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodage_morello/db/firestore_db.dart';
 
 class RegistrationScreen extends StatefulWidget {
-  // Firebase.initializeApp();
   static const String id = 'registration_screen';
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final _auth = FirebaseAuth.instance;
   String email = '';
   String password = '';
   //bool showSpinner = false;

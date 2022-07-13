@@ -27,7 +27,7 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
       for (int i = 0; i < membersNumber; i++) {
         members.add(MembersListTile(
           leading: Icons.person,
-          title: Text('Membro ${i}'),
+          title: Text('Membro ${i + 1}'),
         ));
       }
       return members;
@@ -108,7 +108,7 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
                   ),
                   Container(
                     child: Column(
-                      children: getList(3),
+                      children: getList(4),
 
                       // membersSetting(
                       //     4,

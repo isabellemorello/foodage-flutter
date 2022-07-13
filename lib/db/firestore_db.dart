@@ -7,11 +7,15 @@ import 'package:foodage_morello/screens/welcome_screen.dart';
 import 'package:foodage_morello/models/food.dart';
 import 'package:foodage_morello/models/food_list_model.dart';
 
-class FoodDBWorker {
-  final auth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
-  final firebaseInitializeApp = Firebase.initializeApp();
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+class FoodDBWorker {
+  User? user;
+
+  FoodDBWorker() {
+    _auth.userChanges().listen((event) => user = event);
+  }
   // FoodDBWorker._();
   // static final FoodDBWorker foodDBWorker = FoodDBWorker._();
 
@@ -22,9 +26,12 @@ class FoodDBWorker {
 
   Future<bool> registerUser(String email, String password) async {
     try {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      return true;
+      final User? user = (await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      ))
+          .user;
+      return user != null;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('Questa password è debole.');
@@ -41,8 +48,11 @@ class FoodDBWorker {
 // Login
   Future<bool> loginUser(String email, String password) async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
       return true;
     } catch (e) {
       print(e);
@@ -84,9 +94,9 @@ class FoodDBWorker {
 
   // TODO! Da rivedere perché non funziona
   // Utente loggato
-  void getCurrentUser(User loggedInUser) async {
+  void getCurrentUser(User loggedInUser) {
     try {
-      final user = await auth.currentUser;
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
         print(loggedInUser.email);
@@ -97,8 +107,8 @@ class FoodDBWorker {
   }
 
   // Log Out
-  void logOutUser(BuildContext context) {
-    auth.signOut();
+  void logOutUser(BuildContext context) async {
+    await _auth.signOut();
     Navigator.pushNamed(context, WelcomeScreen.id);
   }
 
