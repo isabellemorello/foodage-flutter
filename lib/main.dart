@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:foodage_morello/models/screens_model.dart';
 import 'package:foodage_morello/screens/handler_home_screen.dart';
 import 'package:foodage_morello/screens/handler_home_settings_screen.dart';
 import 'package:foodage_morello/screens/new_food_screen.dart';
 import 'package:foodage_morello/screens/trash_screen.dart';
 import 'package:provider/provider.dart';
-import 'models/screens_model.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/homepage_screen.dart';
 import 'screens/registration_screen.dart';

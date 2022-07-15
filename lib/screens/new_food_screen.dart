@@ -3,10 +3,7 @@ import 'package:foodage_morello/components/new_food_screen/section_type_selectio
 import 'package:date_field/date_field.dart';
 import 'package:foodage_morello/models/food_list_model.dart';
 import 'package:group_button/group_button.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:foodage_morello/db/firestore_db.dart';
-import 'package:foodage_morello/db/firestore_db.dart';
 import 'package:provider/provider.dart';
 import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
 import 'package:foodage_morello/components/food_layout/food.dart';
@@ -74,11 +71,11 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   //   }
   // }
   TextEditingController _foodNameController = TextEditingController();
-  TextEditingController _deadlineDateController = TextEditingController();
-  TextEditingController _deadlineTypeController = TextEditingController();
-  TextEditingController _cookedByMeController = TextEditingController();
-  TextEditingController _sectionTypeController = TextEditingController();
-  TextEditingController _labelListController = TextEditingController();
+  // TextEditingController _deadlineDateController = TextEditingController();
+  // TextEditingController _deadlineTypeController = TextEditingController();
+  // TextEditingController _cookedByMeController = TextEditingController();
+  // TextEditingController _sectionTypeController = TextEditingController();
+  // TextEditingController _labelListController = TextEditingController();
   TextEditingController _shopNameController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
   TextEditingController _noteController = TextEditingController();
@@ -145,10 +142,11 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     foodName: 'Cavolo',
                     deadlineDate: '22/08/2022',
                   );
+                  Navigator.pop(context);
                   Provider.of<FoodListSections>(context, listen: false)
                       .addNewCardToTheList(newFood);
                   print('added from save new food');
-                  foodListSections.freezerExpiredFood;
+                  // return foodListSections.freezerExpiredFood;
                   //TODO
                   // Food newFood = Food(
                   //   foodName: foodName,
@@ -166,7 +164,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                   //   foodName as String,
                   //   newFood,
                   // );
-                  Navigator.pop(context);
                 },
               )
             ],

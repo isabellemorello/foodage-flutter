@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:foodage_morello/screens/homepage_screen.dart';
-import 'package:foodage_morello/screens/welcome_screen.dart';
 import 'package:foodage_morello/models/food.dart';
-import 'package:foodage_morello/models/food_list_model.dart';
 
 class NewFoodDBFirestore {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

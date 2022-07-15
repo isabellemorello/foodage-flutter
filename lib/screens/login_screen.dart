@@ -22,10 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red.shade100,
-      //TODO: Aggiungere per l'animazione dello spinner di caricamento:
-      //         body: ModalProgressHUD(
-      //         inAsyncCall: showSpinner,
-      //         child: Padding(
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
@@ -131,10 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         bool shouldNavigate = await FoodDBWorker()
                             .loginUser(_emailField.text, _passwordField.text);
-
-                        //TODO: aggiungere condizione: se bool = true passa alla home
-                        //altrimenti esce una finestra popup che dice che le credenziali
-                        //sono sbagliate
 
                         if (shouldNavigate) {
                           Navigator.pushNamed(context, HomepageScreen.id);

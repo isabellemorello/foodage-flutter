@@ -1,11 +1,6 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:foodage_morello/constants/constants.dart';
-import 'package:image_picker/image_picker.dart';
 
 // Per cambiare la foto profilo
 class ProfileCircleAvatar extends StatelessWidget {
@@ -59,7 +54,7 @@ class ProfileCircleAvatar extends StatelessWidget {
 
 // Per selezionare il tipo di promemoria in base alla sezione
 class NotificationBySection extends StatelessWidget {
-  String text;
+  final String text;
 
   NotificationBySection({
     required this.text,

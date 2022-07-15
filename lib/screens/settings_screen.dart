@@ -1,20 +1,12 @@
 import 'dart:io';
-// import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
-// import 'package:foodage_morello/components/homepage_screen/home_content.dart';
 import 'package:foodage_morello/components/settings_components.dart';
 import 'package:foodage_morello/constants/constants.dart';
-// import 'package:foodage_morello/screens/trash_screen.dart';
 import 'package:foodage_morello/db/firestore_db.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 
 TextEditingController _userName = TextEditingController();
 // TextEditingController _userEmail = TextEditingController();

@@ -4,7 +4,6 @@ import 'package:foodage_morello/screens/new_food_screen.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_dispensa_screen.dart';
 import '/screens/section_type_screen_homepage/home_all_food_screen.dart';
-import 'package:foodage_morello/db/firestore_db.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_fridge_screen.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_freezer_screen.dart';
 import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
@@ -102,6 +101,7 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ),
         backgroundColor: Colors.teal[50],
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,
@@ -112,7 +112,7 @@ class _HomeContentState extends State<HomeContent> {
             Navigator.pushNamed(context, NewFoodScreen.id);
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: TabBarView(
           children: [
             HomeAllFoodScreen(),

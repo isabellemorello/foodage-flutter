@@ -20,7 +20,7 @@ class FreezerHomeScreen extends StatelessWidget {
         // },
       );
       return Container(
-        margin: EdgeInsets.only(top: 30.0, right: 20.0, left: 20.0),
+        margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0),
         color: Colors.teal.shade50,
         child: Column(
           children: [

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/components/homepage_screen/home_content.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/screens/handler_home_screen.dart';
@@ -8,11 +7,9 @@ import 'package:foodage_morello/screens/trash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:foodage_morello/models/food_list_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:foodage_morello/db/firestore_db.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
-final _firestore = FirebaseFirestore.instance;
+// final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
 
 class HomepageScreen extends StatelessWidget {

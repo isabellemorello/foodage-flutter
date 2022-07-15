@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/food_layout/food.dart';
-import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
 import 'package:provider/provider.dart';
 

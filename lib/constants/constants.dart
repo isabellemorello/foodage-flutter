@@ -26,14 +26,19 @@ Future<dynamic> kFeatureNotDeveloped(BuildContext context) {
   return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+            backgroundColor: Colors.teal[600],
             content: Text(
               'Questa feature non è stata ancora implementata.',
               textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.red[100]),
             ),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text('OK'))
+                  child: Text(
+                    'OK',
+                    style: TextStyle(color: Colors.red.shade100),
+                  ))
             ],
           ));
 }
@@ -41,10 +46,10 @@ Future<dynamic> kFeatureNotDeveloped(BuildContext context) {
 class KShadowedContainer extends StatefulWidget {
   KShadowedContainer(
       {required this.child, this.padding, this.margin, this.color});
-  Widget child;
-  EdgeInsetsGeometry? padding;
-  EdgeInsetsGeometry? margin;
-  Color? color;
+  final Widget child;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final Color? color;
 
   @override
   _KShadowedContainerState createState() => _KShadowedContainerState();
@@ -75,9 +80,9 @@ class _KShadowedContainerState extends State<KShadowedContainer> {
 // Container per icone piccole circolari
 class KShadowedContainerCircular extends StatefulWidget {
   KShadowedContainerCircular({required this.child, this.padding, this.margin});
-  Widget child;
-  EdgeInsetsGeometry? padding;
-  EdgeInsetsGeometry? margin;
+  final Widget child;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
 
   @override
   _KShadowedContainerCircularState createState() =>

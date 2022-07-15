@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/constants/constants.dart';
-import 'package:foodage_morello/components/food_layout/food.dart';
 import 'package:provider/provider.dart';
 import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
 // import 'package:foodage_morello/models/food.dart';
@@ -16,9 +14,9 @@ class HomeAllFoodScreen extends StatelessWidget {
     return Consumer<FoodListSections>(
         builder: (context, foodListSections, child) {
       return Container(
-        padding: EdgeInsets.only(bottom: 30.0),
+        // padding: EdgeInsets.only(bottom: 30.0),
+        margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0),
         color: Colors.teal[50],
-        margin: EdgeInsets.only(top: 30.0, right: 20.0, left: 20.0),
         child: ListView.builder(
           itemCount:
               Provider.of<FoodListSections>(context).allExpiredFood.length,

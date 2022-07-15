@@ -48,8 +48,8 @@ class MembersListTile extends StatelessWidget {
     required this.leading,
     required this.title,
   });
-  IconData leading;
-  Text title;
+  final IconData leading;
+  final Text title;
 
   @override
   Widget build(BuildContext context) {

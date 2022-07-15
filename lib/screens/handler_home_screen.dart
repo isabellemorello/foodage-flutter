@@ -3,7 +3,6 @@ import 'package:foodage_morello/components/handler_home_components.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/screens/handler_home_settings_screen.dart';
-import 'package:foodage_morello/screens/settings_screen.dart';
 
 class HandlerHomeScreen extends StatelessWidget {
   static const String id = 'handler_home_screen';

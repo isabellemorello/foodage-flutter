@@ -20,7 +20,7 @@ class HandlerSettingsScaffold extends StatefulWidget {
 class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
   @override
   Widget build(BuildContext context) {
-    int membersNumber = 6;
+    // int membersNumber = 6;
 
     List<MembersListTile> getList(int membersNumber) {
       List<MembersListTile> members = [];

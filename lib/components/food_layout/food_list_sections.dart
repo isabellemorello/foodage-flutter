@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/food_layout/food.dart';
-import 'package:foodage_morello/components/new_food_screen/section_type_selection_button.dart';
 import 'package:foodage_morello/constants/constants.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 import 'dart:collection';
 
 // IconData sectionTypo = kFreezerIcon;
