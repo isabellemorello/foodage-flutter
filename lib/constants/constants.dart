@@ -106,3 +106,47 @@ class _KShadowedContainerCircularState
     );
   }
 }
+
+kLabelButton({required String icon, required text, onPressed}) {
+  final color = Colors.teal.shade50;
+
+  return TextButton(
+    onPressed: onPressed,
+    child: Column(
+      children: [
+        Text(
+          icon,
+          style: TextStyle(color: color),
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        Text(
+          text,
+          style: TextStyle(color: color),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget kBuildMenuItem({
+  required String text,
+  required dynamic icon,
+  VoidCallback? onClicked,
+}) {
+  final color = Colors.teal.shade50;
+  final hoverColor = Colors.white70;
+  return ListTile(
+    leading: Icon(
+      icon,
+      color: color,
+    ),
+    title: Text(
+      text,
+      style: TextStyle(color: color),
+    ),
+    hoverColor: hoverColor,
+    onTap: onClicked,
+  );
+}

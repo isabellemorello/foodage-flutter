@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:foodage_morello/components/new_food_screen/section_type_selection_button.dart';
 import 'package:date_field/date_field.dart';
-import 'package:foodage_morello/models/food.dart';
 import 'package:foodage_morello/models/food_list_model.dart';
-import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:group_button/group_button.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodage_morello/db/firestore_db.dart';
 import 'package:foodage_morello/db/firestore_db.dart';
+import 'package:provider/provider.dart';
+import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
+import 'package:foodage_morello/components/food_layout/food.dart';
+import 'package:foodage_morello/constants/constants.dart';
 
 enum DeadlineType {
   shortTerm,
@@ -84,142 +85,216 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leading: TextButton(
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
+    return Consumer<FoodListSections>(
+      builder: (context, foodListSections, child) {
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            leading: TextButton(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      'Annulla',
+                      style: TextStyle(fontSize: 10, color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                flex: 1,
-                child: Text(
-                  'Annulla',
-                  style: TextStyle(fontSize: 10, color: Colors.white),
-                ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: Center(
+              child: Text(
+                'Nuovo Prodotto',
               ),
+            ),
+            actions: [
+              TextButton(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Salva',
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                onPressed: () {
+                  final FoodCard newFood = FoodCard(
+                    sectionIcon: kFreezerIcon,
+                    foodName: 'Cavolo',
+                    deadlineDate: '22/08/2022',
+                  );
+                  Provider.of<FoodListSections>(context, listen: false)
+                      .addNewCardToTheList(newFood);
+                  print('added from save new food');
+                  foodListSections.freezerExpiredFood;
+                  //TODO
+                  // Food newFood = Food(
+                  //   foodName: foodName,
+                  //   deadlineDate: deadlineDate,
+                  //   deadlineType: deadlineType,
+                  //   cookedByMe: cookedByMe,
+                  //   sectionType: sectionType,
+                  //   labelList: labelList,
+                  //   shopName: shopName,
+                  //   price: price,
+                  //   note: note,
+                  // );
+                  // // ! TODO: capire perché è statica
+                  // await FoodDBWorker.addFood(
+                  //   foodName as String,
+                  //   newFood,
+                  // );
+                  Navigator.pop(context);
+                },
+              )
             ],
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Center(
-          child: Text(
-            'Nuovo Prodotto',
-          ),
-        ),
-        actions: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Icon(
-                  Icons.check,
-                  color: Colors.white,
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: MaterialButton(
-                  onPressed: () async {
-                    //TODO
-                    // Food newFood = Food(
-                    //   foodName: foodName,
-                    //   deadlineDate: deadlineDate,
-                    //   deadlineType: deadlineType,
-                    //   cookedByMe: cookedByMe,
-                    //   sectionType: sectionType,
-                    //   labelList: labelList,
-                    //   shopName: shopName,
-                    //   price: price,
-                    //   note: note,
-                    // );
-                    // // ! TODO: capire perché è statica
-                    // await FoodDBWorker.addFood(
-                    //   foodName as String,
-                    //   newFood,
-                    // );
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Salva',
-                    style: TextStyle(fontSize: 10, color: Colors.white),
+          body: Container(
+            color: Colors.teal[50],
+            padding: EdgeInsets.only(top: 20, right: 30, left: 30),
+            child: ListView(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.teal,
+                  radius: 50,
+                  child: Image.asset(
+                    'images/logo.png',
+                    height: 60,
+                    color: Colors.red.shade100,
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
-      ),
-      body: Container(
-        color: Colors.teal[50],
-        padding: EdgeInsets.only(top: 20, right: 30, left: 30),
-        child: ListView(
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.teal,
-              radius: 50,
-              child: Image.asset(
-                'images/logo.png',
-                height: 60,
-                color: Colors.red.shade100,
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            TextFormField(
-              controller: _foodNameController,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                hintText: 'Inserisci il nome del prodotto',
-                // labelText: 'Nome nuovo prodotto',
-              ),
-              onChanged: (String value) {
-                foodName = value;
-              },
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            DateTimeFormField(
-              decoration: const InputDecoration(
-                hintStyle: TextStyle(color: Colors.black45),
-                errorStyle: TextStyle(color: Colors.redAccent),
-                focusColor: Colors.teal,
-                // border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.event_note),
-                hintText: 'Data di scadenza',
-                labelStyle: TextStyle(fontSize: 20),
-              ),
-              mode: DateTimeFieldPickerMode.date,
-              autovalidateMode: AutovalidateMode.always,
-              onDateSelected: (value) {
-                setState(() {
-                  deadlineDate = value.toString();
-                });
-              },
-              onSaved: (value) {
-                deadlineDate = value.toString();
-              },
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            //TODO: inserire classe DeadLineContent DeadlineTypeContent(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  controller: _foodNameController,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    hintText: 'Inserisci il nome del prodotto',
+                    // labelText: 'Nome nuovo prodotto',
+                  ),
+                  onChanged: (String value) {
+                    foodName = value;
+                  },
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                DateTimeFormField(
+                  decoration: const InputDecoration(
+                    hintStyle: TextStyle(color: Colors.black45),
+                    errorStyle: TextStyle(color: Colors.redAccent),
+                    focusColor: Colors.teal,
+                    // border: OutlineInputBorder(),
+                    suffixIcon: Icon(Icons.event_note),
+                    hintText: 'Data di scadenza',
+                    labelStyle: TextStyle(fontSize: 20),
+                  ),
+                  mode: DateTimeFieldPickerMode.date,
+                  autovalidateMode: AutovalidateMode.always,
+                  onDateSelected: (value) {
+                    setState(() {
+                      deadlineDate = value.toString();
+                    });
+                  },
+                  onSaved: (value) {
+                    deadlineDate = value.toString();
+                  },
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                //TODO: inserire classe DeadLineContent DeadlineTypeContent(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Scegli il tipo di scadenza',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    RadioListTile<String>(
+                      title: Text('Scadenza a breve termine'),
+                      value: DeadlineType.shortTerm.toString(),
+                      groupValue: deadlineType,
+                      onChanged: (String? value) {
+                        setState(
+                          () {
+                            deadlineType = value;
+                            shortTermChecked = true;
+                          },
+                        );
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: Colors.teal,
+                    ),
+                    CheckboxListTile(
+                      title: Text(
+                        'Cucinato da me',
+                      ),
+                      contentPadding: EdgeInsets.only(
+                        left: 100,
+                      ),
+                      activeColor: Colors.teal,
+                      controlAffinity: ListTileControlAffinity.leading,
+                      value: cookedByMe,
+                      onChanged: !shortTermChecked
+                          ? null
+                          : (bool? value) {
+                              setState(() {
+                                cookedByMe = value;
+                              });
+                            },
+                    ),
+                    RadioListTile<String>(
+                      title: Text('Scadenza a lungo termine'),
+                      value: DeadlineType.longTerm.toString(),
+                      groupValue: deadlineType,
+                      onChanged: (String? value) {
+                        setState(
+                          () {
+                            deadlineType = value;
+                            shortTermChecked = false;
+                          },
+                        );
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: Colors.teal,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 40,
+                ),
                 Text(
-                  'Scegli il tipo di scadenza',
+                  'Sezione',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -228,176 +303,116 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 15,
                 ),
-                RadioListTile<String>(
-                  title: Text('Scadenza a breve termine'),
-                  value: DeadlineType.shortTerm.toString(),
-                  groupValue: deadlineType,
-                  onChanged: (String? value) {
-                    setState(
-                      () {
-                        deadlineType = value;
-                        shortTermChecked = true;
-                      },
-                    );
-                  },
-                  controlAffinity: ListTileControlAffinity.leading,
-                  activeColor: Colors.teal,
-                ),
-                CheckboxListTile(
-                  title: Text(
-                    'Cucinato da me',
-                  ),
-                  contentPadding: EdgeInsets.only(
-                    left: 100,
-                  ),
-                  activeColor: Colors.teal,
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: cookedByMe,
-                  onChanged: !shortTermChecked
-                      ? null
-                      : (bool? value) {
-                          setState(() {
-                            cookedByMe = value;
-                          });
-                        },
-                ),
-                RadioListTile<String>(
-                  title: Text('Scadenza a lungo termine'),
-                  value: DeadlineType.longTerm.toString(),
-                  groupValue: deadlineType,
-                  onChanged: (String? value) {
-                    setState(
-                      () {
-                        deadlineType = value;
-                        shortTermChecked = false;
-                      },
-                    );
-                  },
-                  controlAffinity: ListTileControlAffinity.leading,
-                  activeColor: Colors.teal,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Text(
-              'Sezione',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Table(
-              children: [
-                TableRow(
+                Table(
                   children: [
-                    SectionTypeSelectionButton(),
-                    //
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Text(
-              'Etichette',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            GroupButton(
-              isRadio: false,
-              spacing: 25,
-              onSelected: (index, isSelected) {
-                print('$index button is selected');
-                // labelList = GroupButton.buttons[index];
-                // print(labelList);
-                // ! da rivedere, non so se è giusto
-                return labelList?[index];
-              },
-              buttons: [
-                '🍎 Frutta',
-                '🥦 Verdura',
-                '🍞 Panificazione',
-                '🧀 Latticini & 🥚 Uova',
-                '🥩 Carne',
-                '🐟 Pesce',
-                '🛢 Scatolame',
-                '🌿 Condimenti & Spezie',
-                '🥫 Salse & Sughi pronti',
-                '❄️ Surgelati',
-                '🍝 Pasta, Riso & Cereali',
-                '🍰 Snack & Dolci',
-                '🧃 Bevande',
-                '🐾 Animali',
-              ],
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Table(
-              children: [
-                TableRow(
-                  children: [
-                    TextFormField(
-                      controller: _shopNameController,
-                      textAlign: TextAlign.start,
-                      decoration: InputDecoration(
-                        hintText: 'Nome del negozio',
-                      ),
-                      onChanged: (String value) {
-                        shopName = value;
-                      },
-                    ),
-                    TextFormField(
-                      controller: _priceController,
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.end,
-                      decoration: InputDecoration(
-                        hintText: 'Prezzo',
-                      ),
-                      onChanged: (String value) {
-                        price = value;
-                      },
+                    TableRow(
+                      children: [
+                        SectionTypeSelectionButton(),
+                        //
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              child: TextFormField(
-                controller: _noteController,
-                keyboardType: TextInputType.multiline,
-                maxLines: 4,
-                textAlign: TextAlign.start,
-                decoration: InputDecoration(
-                  hintText: 'Note',
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black45, width: 1.0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.teal, width: 1.0),
+                SizedBox(
+                  height: 40,
+                ),
+                Text(
+                  'Etichette',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                GroupButton(
+                  isRadio: false,
+                  spacing: 25,
+                  onSelected: (index, isSelected) {
+                    print('$index button is selected');
+                    // labelList = GroupButton.buttons[index];
+                    // print(labelList);
+                    // ! da rivedere, non so se è giusto
+                    return labelList?[index];
+                  },
+                  buttons: [
+                    '🍎 Frutta',
+                    '🥦 Verdura',
+                    '🍞 Panificazione',
+                    '🧀 Latticini & 🥚 Uova',
+                    '🥩 Carne',
+                    '🐟 Pesce',
+                    '🛢 Scatolame',
+                    '🌿 Condimenti & Spezie',
+                    '🥫 Salse & Sughi pronti',
+                    '❄️ Surgelati',
+                    '🍝 Pasta, Riso & Cereali',
+                    '🍰 Snack & Dolci',
+                    '🧃 Bevande',
+                    '🐾 Animali',
+                  ],
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Table(
+                  children: [
+                    TableRow(
+                      children: [
+                        TextFormField(
+                          controller: _shopNameController,
+                          textAlign: TextAlign.start,
+                          decoration: InputDecoration(
+                            hintText: 'Nome del negozio',
+                          ),
+                          onChanged: (String value) {
+                            shopName = value;
+                          },
+                        ),
+                        TextFormField(
+                          controller: _priceController,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.end,
+                          decoration: InputDecoration(
+                            hintText: 'Prezzo',
+                          ),
+                          onChanged: (String value) {
+                            price = value;
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: TextFormField(
+                    controller: _noteController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 4,
+                    textAlign: TextAlign.start,
+                    decoration: InputDecoration(
+                      hintText: 'Note',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black45, width: 1.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.teal, width: 1.0),
+                      ),
+                    ),
+                    onChanged: (String value) {
+                      note = value;
+                    },
                   ),
                 ),
-                onChanged: (String value) {
-                  note = value;
-                },
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

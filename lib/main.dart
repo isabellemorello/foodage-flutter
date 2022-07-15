@@ -15,6 +15,7 @@ import 'screens/registration_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/settings_screen.dart';
 import 'firebase_options.dart';
+import 'components/food_layout/food_list_sections.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,39 +31,43 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Foodage',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        accentColor: Colors.red.shade100,
-      ),
-      initialRoute: WelcomeScreen.id,
-      routes: {
-        WelcomeScreen.id: (context) => WelcomeScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        RegistrationScreen.id: (context) => RegistrationScreen(),
-        HomepageScreen.id: (context) => HomepageScreen(),
-        NewFoodScreen.id: (context) => NewFoodScreen(),
-        SettingsScreen.id: (context) => SettingsScreen(),
-        TrashScreen.id: (context) => TrashScreen(),
-        HandlerHomeScreen.id: (context) => HandlerHomeScreen(),
-        HandlerHomeSettingsScreen.id: (context) => HandlerHomeSettingsScreen(),
-      },
-      home: FutureBuilder(
-        future: _initialization,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print('You have an error: ${snapshot.hasError}');
-            return Text('Something went wrong!');
-          } else if (snapshot.hasData) {
-            return WelcomeScreen();
-          } else {
-            return Container(
-              color: Colors.teal.shade100,
-              child: Center(child: CircularProgressIndicator()),
-            );
-          }
+    return ChangeNotifierProvider<FoodListSections>(
+      create: (context) => FoodListSections(),
+      child: MaterialApp(
+        title: 'Foodage',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          accentColor: Colors.red.shade100,
+        ),
+        initialRoute: WelcomeScreen.id,
+        routes: {
+          WelcomeScreen.id: (context) => WelcomeScreen(),
+          LoginScreen.id: (context) => LoginScreen(),
+          RegistrationScreen.id: (context) => RegistrationScreen(),
+          HomepageScreen.id: (context) => HomepageScreen(),
+          NewFoodScreen.id: (context) => NewFoodScreen(),
+          SettingsScreen.id: (context) => SettingsScreen(),
+          TrashScreen.id: (context) => TrashScreen(),
+          HandlerHomeScreen.id: (context) => HandlerHomeScreen(),
+          HandlerHomeSettingsScreen.id: (context) =>
+              HandlerHomeSettingsScreen(),
         },
+        home: FutureBuilder(
+          future: _initialization,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print('You have an error: ${snapshot.hasError}');
+              return Text('Something went wrong!');
+            } else if (snapshot.hasData) {
+              return WelcomeScreen();
+            } else {
+              return Container(
+                color: Colors.teal.shade100,
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+          },
+        ),
       ),
     );
   }

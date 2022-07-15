@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/constants/constants.dart';
-import 'package:foodage_morello/models/food_list_model.dart';
+// import 'package:foodage_morello/models/food_list_model.dart';
 
 enum DeadlineType {
   shortTerm,
@@ -64,9 +64,8 @@ class _SectionTypeSelectionButtonState
               () {
                 sectionType = SectionType.Frigo.toString();
                 print('Button pressed: $sectionType');
-
-                foodsModel.foodBeingEdited!.sectionType = 'Frigo';
-                foodsModel.setSectionType('Frigo');
+                // foodsModel.foodBeingEdited!.sectionType = 'Frigo';
+                // foodsModel.setSectionType('Frigo');
               },
             );
           },
@@ -109,9 +108,8 @@ class _SectionTypeSelectionButtonState
               () {
                 sectionType = SectionType.Freezer.toString();
                 print('Button pressed: $sectionType');
-
-                foodsModel.foodBeingEdited!.sectionType = 'Freezer';
-                foodsModel.setSectionType('Freezer');
+                // foodsModel.foodBeingEdited!.sectionType = 'Freezer';
+                // foodsModel.setSectionType('Freezer');
               },
             );
           },
@@ -153,9 +151,8 @@ class _SectionTypeSelectionButtonState
               () {
                 sectionType = SectionType.Dispensa.toString();
                 print('Button pressed: $sectionType');
-
-                foodsModel.foodBeingEdited!.sectionType = 'Dispensa';
-                foodsModel.setSectionType('Dispensa');
+                // foodsModel.foodBeingEdited!.sectionType = 'Dispensa';
+                // foodsModel.setSectionType('Dispensa');
               },
             );
           },

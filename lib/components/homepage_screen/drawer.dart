@@ -54,32 +54,32 @@ class NavigationDrawerWidget extends StatelessWidget {
                 ),
               ),
             ),
-            buildMenuItem(
+            kBuildMenuItem(
               text: 'Home',
               icon: Icons.home,
               onClicked: () => selectedItem(context, 0),
             ),
-            buildMenuItem(
+            kBuildMenuItem(
               text: 'Scaduto',
               icon: Icons.sentiment_very_dissatisfied,
               onClicked: () => kFeatureNotDeveloped(context),
             ),
-            buildMenuItem(
+            kBuildMenuItem(
               text: 'Preferiti',
               icon: Icons.star,
               onClicked: () => kFeatureNotDeveloped(context),
             ),
-            buildMenuItem(
+            kBuildMenuItem(
               text: 'Spesa',
               icon: Icons.shopping_cart_sharp,
               onClicked: () => kFeatureNotDeveloped(context),
             ),
-            buildMenuItem(
+            kBuildMenuItem(
               text: 'Cucinato da me',
               icon: Icons.restaurant,
               onClicked: () => kFeatureNotDeveloped(context),
             ),
-            buildMenuItem(
+            kBuildMenuItem(
               text: 'Cestino',
               icon: Icons.delete_sharp,
               onClicked: () => selectedItem(context, 1),
@@ -113,17 +113,17 @@ class NavigationDrawerWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                labelButton(
+                kLabelButton(
                   icon: '🍎',
                   text: 'Frutta',
                   onPressed: () => kFeatureNotDeveloped(context),
                 ),
-                labelButton(
+                kLabelButton(
                   icon: '🥦',
                   text: 'Verdura',
                   onPressed: () => kFeatureNotDeveloped(context),
                 ),
-                labelButton(
+                kLabelButton(
                   icon: '🍞',
                   text: 'Panificazione',
                   onPressed: () => kFeatureNotDeveloped(context),
@@ -166,57 +166,13 @@ class NavigationDrawerWidget extends StatelessWidget {
               onTap: () => selectedItem(context, 2),
             ),
 
-            buildMenuItem(
+            kBuildMenuItem(
               text: 'Impostazioni',
               icon: Icons.settings,
               onClicked: () => selectedItem(context, 3),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget buildMenuItem({
-    required String text,
-    required dynamic icon,
-    VoidCallback? onClicked,
-  }) {
-    final color = Colors.teal.shade50;
-    final hoverColor = Colors.white70;
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: color,
-      ),
-      title: Text(
-        text,
-        style: TextStyle(color: color),
-      ),
-      hoverColor: hoverColor,
-      onTap: onClicked,
-    );
-  }
-
-  labelButton({required String icon, required text, onPressed}) {
-    final color = Colors.teal.shade50;
-
-    return TextButton(
-      onPressed: onPressed,
-      child: Column(
-        children: [
-          Text(
-            icon,
-            style: TextStyle(color: color),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Text(
-            text,
-            style: TextStyle(color: color),
-          ),
-        ],
       ),
     );
   }
