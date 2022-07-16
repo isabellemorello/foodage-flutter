@@ -4,14 +4,11 @@ import 'package:foodage_morello/constants/constants.dart';
 // import 'package:provider/provider.dart';
 import 'dart:collection';
 
-// IconData sectionTypo = kFreezerIcon;
-
-IconData sectionTypo = kFreezerIcon;
+import 'package:foodage_morello/models/food.dart';
 
 class FoodListSections extends ChangeNotifier {
   void addNewCardToTheList(FoodCard newCard) {
-    final food = newCard;
-    _freezerExpiredFood.add(food);
+    _freezerExpiredFood.add(newCard);
     print('$_freezerExpiredFood added');
     notifyListeners();
   }
@@ -148,15 +145,12 @@ class FoodListSections extends ChangeNotifier {
     Column(
       children: [
         Container(
-          child: Text('Ciao'),
-        ),
-        Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Scaduto'),
               FoodCard(
-                sectionIcon: Icons.access_alarm,
+                sectionIcon: kFreezerIcon,
                 foodName: 'Cipolla',
                 deadlineDate: '22/08/2022',
               ),
@@ -186,7 +180,7 @@ class FoodListSections extends ChangeNotifier {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Scade Scade domani'),
+              Text('Scade domani'),
               FoodCard(
                 sectionIcon: kFridgeIcon,
                 foodName: 'Ciaooo',
@@ -198,4 +192,14 @@ class FoodListSections extends ChangeNotifier {
       ],
     )
   ];
+
+// prendo tutta la lista di Food e la metto in Card
+  // allList() {
+  //   Food().foodList.forEach((element) {
+  //     FoodCard(
+  //         sectionIcon: element.sectionIcon,
+  //         foodName: element.name,
+  //         deadlineDate: element.deadlineDate);
+  //   });
+  // }
 }

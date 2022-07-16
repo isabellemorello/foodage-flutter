@@ -3,8 +3,8 @@ import 'package:foodage_morello/constants/constants.dart';
 // import 'package:foodage_morello/models/food_list_model.dart';
 
 enum DeadlineType {
-  shortTerm,
-  longTerm,
+  ShortTerm,
+  LongTerm,
 }
 
 enum SectionType {

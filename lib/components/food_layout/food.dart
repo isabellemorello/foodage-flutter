@@ -3,18 +3,22 @@ import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:provider/provider.dart';
 import 'bottomSheetFromFoodCard.dart';
+import 'package:foodage_morello/screens/show_single_food_screen.dart';
+import 'package:foodage_morello/models/food.dart';
 
 class FoodCard extends StatelessWidget {
-  const FoodCard({
+  FoodCard({
     required this.sectionIcon,
     required this.foodName,
     required this.deadlineDate,
     // required this.deleteFunction,
   });
-
-  final IconData sectionIcon;
-  final String foodName;
-  final String deadlineDate;
+  IconData? sectionIcon;
+  String? foodName;
+  String? deadlineDate;
+  // IconData? sectionIcon = Food().sectionIcon;
+  // String? foodName = Food().name;
+  // String? deadlineDate = Food().deadlineDate;
   // final deleteFunction;
 
   @override
@@ -22,6 +26,7 @@ class FoodCard extends StatelessWidget {
     return Consumer<FoodListSections>(
         builder: (context, foodListSections, child) {
       return Card(
+        margin: EdgeInsets.only(bottom: 15),
         color: Colors.red[50],
         child: Column(
           children: [
@@ -30,22 +35,31 @@ class FoodCard extends StatelessWidget {
               leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    sectionIcon,
-                    color: kActiveColorSectionType,
-                    size: 30,
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.red[100],
+                    child: Icon(
+                      sectionIcon,
+                      color: kActiveColorSectionType,
+                      size: 30,
+                    ),
                   ),
                 ],
               ),
-              title: Text(foodName),
+              title: Text(
+                foodName.toString(),
+                style: TextStyle(color: Colors.teal[600]),
+              ),
               subtitle: Text('Scadenza: $deadlineDate'),
               trailing: TextButton(
                 child: Icon(Icons.delete),
                 //! Riprovare a rimuovere una card dalla lista
-                onPressed: () => kFeatureNotDeveloped(context),
+                onPressed: () {
+                  kFeatureNotDeveloped(context);
+                },
               ),
               onTap: () {
-                kFeatureNotDeveloped(context);
+                Navigator.pushNamed(context, ShowSingleFoodScreen.id);
                 // foodListSections.removeItem(
                 //     Provider.of<FoodListSections>(context, listen: false)
                 //         .removeItem(removeCard);

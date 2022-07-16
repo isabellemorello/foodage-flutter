@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/screens/handler_home_screen.dart';
 import 'package:foodage_morello/screens/homepage_screen.dart';
+import 'package:foodage_morello/screens/labels_screen.dart';
 import 'package:foodage_morello/screens/settings_screen.dart';
 import 'package:foodage_morello/screens/trash_screen.dart';
 
@@ -104,32 +106,11 @@ class NavigationDrawerWidget extends StatelessWidget {
                 color: Colors.teal.shade50,
               ),
               onTap: () {
-                kFeatureNotDeveloped(context);
+                Navigator.pushNamed(context, LablesScreen.id);
+                // kFeatureNotDeveloped(context);
               },
             ),
-            // ListView(
-            //   scrollDirection: Axis.horizontal,
-            // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                kLabelButton(
-                  icon: '🍎',
-                  text: 'Frutta',
-                  onPressed: () => kFeatureNotDeveloped(context),
-                ),
-                kLabelButton(
-                  icon: '🥦',
-                  text: 'Verdura',
-                  onPressed: () => kFeatureNotDeveloped(context),
-                ),
-                kLabelButton(
-                  icon: '🍞',
-                  text: 'Panificazione',
-                  onPressed: () => kFeatureNotDeveloped(context),
-                ),
-              ],
-            ),
+            HorizontalLablesList(),
             SizedBox(
               height: 15,
             ),
@@ -199,5 +180,92 @@ class NavigationDrawerWidget extends StatelessWidget {
         Navigator.pushNamed(context, SettingsScreen.id);
         break;
     }
+  }
+}
+
+class HorizontalLablesList extends StatelessWidget {
+  const HorizontalLablesList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          kLabelButton(
+            icon: '🍎',
+            text: 'Frutta',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🥦',
+            text: 'Verdura',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🍞',
+            text: 'Panificazione',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🧀 🥚',
+            text: 'Latticini & Uova',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🥩',
+            text: 'Carne',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🐟',
+            text: 'Pesce',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🛢',
+            text: 'Scatolame',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🌿',
+            text: 'Condimenti & Spezie',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🥫',
+            text: 'Salse & Sughi pronti',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '❄️',
+            text: 'Surgelati',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🍝',
+            text: 'Pasta',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🍰',
+            text: 'Snack & Dolci',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🧃',
+            text: 'Bevande',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🐾',
+            text: 'Animali',
+            onPressed: () => kFeatureNotDeveloped(context),
+          ),
+        ],
+      ),
+    );
   }
 }

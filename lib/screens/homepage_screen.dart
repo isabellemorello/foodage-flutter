@@ -4,8 +4,6 @@ import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/screens/handler_home_screen.dart';
 import 'package:foodage_morello/screens/settings_screen.dart';
 import 'package:foodage_morello/screens/trash_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:foodage_morello/models/food_list_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -56,48 +54,45 @@ class _MyScaffoldState extends State<MyScaffold> {
   }
 
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: foodsModel,
-      child: Scaffold(
-        body: Container(
-          child: screens.elementAt(currentScreen),
-          color: Colors.teal[50],
-        ),
-        //
-        bottomNavigationBar: BottomAppBar(
-          child: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(kHomeIcon),
-                  label: 'Home',
-                  backgroundColor: Colors.teal,
+    return Scaffold(
+      body: Container(
+        child: screens.elementAt(currentScreen),
+        color: Colors.teal[50],
+      ),
+      //
+      bottomNavigationBar: BottomAppBar(
+        child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(kHomeIcon),
+                label: 'Home',
+                backgroundColor: Colors.teal,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(kDeleteIcon),
+                label: 'Cestino',
+                backgroundColor: Colors.teal,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(kSettingsIcon),
+                label: 'Impostazioni',
+                backgroundColor: Colors.teal,
+              ),
+              BottomNavigationBarItem(
+                icon: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 10.0,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(kDeleteIcon),
-                  label: 'Cestino',
-                  backgroundColor: Colors.teal,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(kSettingsIcon),
-                  label: 'Impostazioni',
-                  backgroundColor: Colors.teal,
-                ),
-                BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 10.0,
-                  ),
-                  label: 'Casa',
-                  backgroundColor: Colors.teal,
-                ),
-              ],
-              currentIndex: currentScreen,
-              onTap: (int inIndex) {
-                setState(() {
-                  currentScreen = inIndex;
-                });
-              }),
-        ),
+                label: 'Casa',
+                backgroundColor: Colors.teal,
+              ),
+            ],
+            currentIndex: currentScreen,
+            onTap: (int inIndex) {
+              setState(() {
+                currentScreen = inIndex;
+              });
+            }),
       ),
     );
   }

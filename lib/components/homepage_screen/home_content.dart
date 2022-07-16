@@ -34,13 +34,6 @@ class _HomeContentState extends State<HomeContent> {
       child: Scaffold(
         drawer: NavigationDrawerWidget(),
         appBar: AppBar(
-          // leading: TextButton(
-          //   child: Icon(
-          //     Icons.dehaze,
-          //     color: Colors.white,
-          //   ),
-          //   onPressed: () {},
-          // ),
           title: Text('Homepage'),
           centerTitle: true,
           actions: [

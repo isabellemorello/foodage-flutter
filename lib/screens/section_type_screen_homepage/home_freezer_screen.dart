@@ -9,16 +9,6 @@ class FreezerHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<FoodListSections>(
         builder: (context, foodListSections, child) {
-      final FoodCard newFood = FoodCard(
-        sectionIcon: kFreezerIcon,
-        foodName: 'Cavolo',
-        deadlineDate: '22/08/2022',
-        // removeCallBack: () {
-        //   final item = foodListSections.freezerExpiredFood;
-        //   Provider.of<FoodListSections>(context, listen: false)
-        //       .removeItem(item);
-        // },
-      );
       return Container(
         margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0),
         color: Colors.teal.shade50,
@@ -33,6 +23,16 @@ class FreezerHomeScreen extends StatelessWidget {
                   ),
                   child: Icon(Icons.ac_unit),
                   onPressed: () {
+                    final FoodCard newFood = FoodCard(
+                      sectionIcon: kFreezerIcon,
+                      foodName: 'Cavolo',
+                      deadlineDate: '22/08/2022',
+                      // removeCallBack: () {
+                      //   final item = foodListSections.freezerExpiredFood;
+                      //   Provider.of<FoodListSections>(context, listen: false)
+                      //       .removeItem(item);
+                      // },
+                    );
                     Provider.of<FoodListSections>(context, listen: false)
                         .addNewCardToTheList(newFood);
                     print('added');

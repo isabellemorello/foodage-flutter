@@ -125,7 +125,7 @@ class FoodDBWorker {
     await _firestore.collection('foods').add(
       {
         // '${inFood.currentUser}': currentUser,
-        '${inFood.foodName}': foodName,
+        '${inFood.name}': foodName,
         '${inFood.deadlineDate}': deadlineDate,
         '${inFood.deadlineType}': deadlineType,
         '${inFood.cookedByMe}': cookedByMe,
@@ -175,7 +175,7 @@ class FoodDBWorker {
         if (!snapshot.exists) {
           documentReference.set({
             // '${inFood.currentUser}': currentUser,
-            '${inFood.foodName}': foodName,
+            '${inFood.name}': foodName,
             '${inFood.deadlineDate}': deadlineDate,
             '${inFood.deadlineType}': deadlineType,
             '${inFood.cookedByMe}': cookedByMe,
@@ -194,7 +194,7 @@ class FoodDBWorker {
         // ! funzione mia, che forse funziona
         Map<String, dynamic> dataFood = snapshot.data() as Map<String, dynamic>;
 
-        String newFoodName = dataFood['foodName'] + inFood.foodName;
+        String newFoodName = dataFood['foodName'] + inFood.name;
         String newDeadlineDate = dataFood['deadlineDate'] + inFood.deadlineDate;
         String newDeadlineType = dataFood['deadlineType'] + inFood.deadlineType;
         bool newCookedByMe = dataFood['cookedByMe'] + inFood.cookedByMe;
@@ -230,7 +230,7 @@ class FoodDBWorker {
 
   Map<String, dynamic> foodToMap(Food inFood) {
     Map<String, dynamic> map = Map<String, dynamic>();
-    map['foodName'] = inFood.foodName;
+    map['foodName'] = inFood.name;
     map['deadlineDate'] = inFood.deadlineDate;
     map['deadlineType'] = inFood.deadlineType;
     map['cookedByMe'] = inFood.cookedByMe;
@@ -253,7 +253,7 @@ class FoodDBWorker {
   Food foodFromMap(Map inMap) {
     Food food = Food(
       // currentUser: inMap['currentUser'],
-      foodName: inMap['foodName'],
+      name: inMap['foodName'],
       deadlineDate: inMap['deadlineDate'],
       deadlineType: inMap['deadlineType'],
       cookedByMe: inMap['cookedByMe'],

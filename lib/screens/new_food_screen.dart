@@ -29,7 +29,7 @@ class NewFoodScaffold extends StatefulWidget {
 }
 
 class _NewFoodScaffoldState extends State<NewFoodScaffold> {
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
   // String foodName = '';
   bool shortTermChecked = true;
   // bool? cooked = false;
@@ -37,13 +37,13 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
 
   late User loggedInUser;
   String currentLoggedUser = '';
-  String? foodName = foodsModel.foodBeingEdited?.foodName;
+  String? foodName = foodsModel.foodBeingEdited?.name;
   String? deadlineDate = foodsModel.foodBeingEdited?.deadlineDate;
   String? deadlineType = foodsModel.foodBeingEdited?.deadlineType;
   // bool? cookedByMe = foodsModel.foodBeingEdited?.cookedByMe;
   String? sectionType = foodsModel.foodBeingEdited?.sectionType;
-  String? sectionIcon = foodsModel.foodBeingEdited?.sectionIcon;
-  List<String>? labelList = foodsModel.foodBeingEdited?.labelList;
+  // String? sectionIcon = foodsModel.foodBeingEdited?.sectionIcon;
+  // List<String>? labelList = foodsModel.foodBeingEdited?.labelList;
   String? shopName = foodsModel.foodBeingEdited?.shopName;
   String? price = foodsModel.foodBeingEdited?.price;
   String? note = foodsModel.foodBeingEdited?.note;
@@ -86,88 +86,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
       builder: (context, foodListSections, child) {
         return Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            leading: TextButton(
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      'Annulla',
-                      style: TextStyle(fontSize: 10, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            title: Center(
-              child: Text(
-                'Nuovo Prodotto',
-              ),
-            ),
-            actions: [
-              TextButton(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        'Salva',
-                        style: TextStyle(fontSize: 10, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-                onPressed: () {
-                  final FoodCard newFood = FoodCard(
-                    sectionIcon: kFreezerIcon,
-                    foodName: 'Cavolo',
-                    deadlineDate: '22/08/2022',
-                  );
-                  Navigator.pop(context);
-                  Provider.of<FoodListSections>(context, listen: false)
-                      .addNewCardToTheList(newFood);
-                  print('added from save new food');
-                  // return foodListSections.freezerExpiredFood;
-                  //TODO
-                  // Food newFood = Food(
-                  //   foodName: foodName,
-                  //   deadlineDate: deadlineDate,
-                  //   deadlineType: deadlineType,
-                  //   cookedByMe: cookedByMe,
-                  //   sectionType: sectionType,
-                  //   labelList: labelList,
-                  //   shopName: shopName,
-                  //   price: price,
-                  //   note: note,
-                  // );
-                  // // ! TODO: capire perché è statica
-                  // await FoodDBWorker.addFood(
-                  //   foodName as String,
-                  //   newFood,
-                  // );
-                },
-              )
-            ],
-          ),
+          appBar: newFoodAppBar(context),
           body: Container(
             color: Colors.teal[50],
             padding: EdgeInsets.only(top: 20, right: 30, left: 30),
@@ -175,10 +94,10 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
               children: [
                 CircleAvatar(
                   backgroundColor: Colors.teal,
-                  radius: 50,
+                  radius: 40,
                   child: Image.asset(
                     'images/logo.png',
-                    height: 60,
+                    height: 50,
                     color: Colors.red.shade100,
                   ),
                 ),
@@ -190,6 +109,10 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     hintText: 'Inserisci il nome del prodotto',
+                    hintStyle: TextStyle(
+                      color: Colors.teal.shade500,
+                      fontWeight: FontWeight.bold,
+                    ),
                     // labelText: 'Nome nuovo prodotto',
                   ),
                   onChanged: (String value) {
@@ -201,13 +124,16 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 ),
                 DateTimeFormField(
                   decoration: const InputDecoration(
-                    hintStyle: TextStyle(color: Colors.black45),
+                    hintStyle: TextStyle(
+                      color: Colors.teal,
+                      fontWeight: FontWeight.bold,
+                    ),
                     errorStyle: TextStyle(color: Colors.redAccent),
                     focusColor: Colors.teal,
                     // border: OutlineInputBorder(),
                     suffixIcon: Icon(Icons.event_note),
                     hintText: 'Data di scadenza',
-                    labelStyle: TextStyle(fontSize: 20),
+                    // labelStyle: TextStyle(fontSize: 20),
                   ),
                   mode: DateTimeFieldPickerMode.date,
                   autovalidateMode: AutovalidateMode.always,
@@ -229,10 +155,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                   children: [
                     Text(
                       'Scegli il tipo di scadenza',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: kTitleTextStyle(),
                     ),
                     SizedBox(
                       height: 15,
@@ -292,10 +215,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 ),
                 Text(
                   'Sezione',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: kTitleTextStyle(),
                 ),
                 SizedBox(
                   height: 15,
@@ -315,7 +235,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 ),
                 Text(
                   'Etichette',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: kTitleTextStyle(),
                 ),
                 SizedBox(
                   height: 15,
@@ -328,13 +248,14 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     // labelList = GroupButton.buttons[index];
                     // print(labelList);
                     // ! da rivedere, non so se è giusto
-                    return labelList?[index];
+                    // return labelList?[index];
                   },
                   buttons: [
                     '🍎 Frutta',
                     '🥦 Verdura',
                     '🍞 Panificazione',
-                    '🧀 Latticini & 🥚 Uova',
+                    '🧀 Latticini'
+                        '🥚 Uova',
                     '🥩 Carne',
                     '🐟 Pesce',
                     '🛢 Scatolame',
@@ -351,35 +272,42 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 40,
                 ),
-                Table(
-                  children: [
-                    TableRow(
-                      children: [
-                        TextFormField(
-                          controller: _shopNameController,
-                          textAlign: TextAlign.start,
-                          decoration: InputDecoration(
-                            hintText: 'Nome del negozio',
-                          ),
-                          onChanged: (String value) {
-                            shopName = value;
-                          },
-                        ),
-                        TextFormField(
-                          controller: _priceController,
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.end,
-                          decoration: InputDecoration(
-                            hintText: 'Prezzo',
-                          ),
-                          onChanged: (String value) {
-                            price = value;
-                          },
-                        ),
-                      ],
+                // Table(
+                //   children: [
+                //     TableRow(
+                //       children: [
+                TextFormField(
+                  controller: _shopNameController,
+                  textAlign: TextAlign.start,
+                  decoration: InputDecoration(
+                    hintText: 'Nome del negozio',
+                    hintStyle: TextStyle(
+                      color: Colors.teal.shade600,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
+                  onChanged: (String value) {
+                    shopName = value;
+                  },
                 ),
+                TextFormField(
+                  controller: _priceController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Prezzo',
+                    hintStyle: TextStyle(
+                      color: Colors.teal.shade600,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onChanged: (String value) {
+                    price = value;
+                  },
+                ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: 40,
                 ),
@@ -392,6 +320,10 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     textAlign: TextAlign.start,
                     decoration: InputDecoration(
                       hintText: 'Note',
+                      hintStyle: TextStyle(
+                        color: Colors.teal.shade600,
+                        fontWeight: FontWeight.bold,
+                      ),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.black45, width: 1.0),
@@ -410,6 +342,91 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
           ),
         );
       },
+    );
+  }
+
+  AppBar newFoodAppBar(BuildContext context) {
+    return AppBar(
+      leading: TextButton(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(
+                'Annulla',
+                style: TextStyle(fontSize: 10, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+      title: Center(
+        child: Text(
+          'Nuovo Prodotto',
+        ),
+      ),
+      actions: [
+        TextButton(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Icon(
+                  Icons.check,
+                  color: Colors.white,
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  'Salva',
+                  style: TextStyle(fontSize: 10, color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          onPressed: () {
+            final FoodCard newFood = FoodCard(
+              sectionIcon: kFreezerIcon,
+              foodName: 'Cavolo',
+              deadlineDate: '22/08/2022',
+            );
+            Provider.of<FoodListSections>(context, listen: false)
+                .addNewCardToTheList(newFood);
+            Navigator.pop(context);
+            print('added from save new food');
+            // return foodListSections.freezerExpiredFood;
+            //TODO
+            // Food newFood = Food(
+            //   foodName: foodName,
+            //   deadlineDate: deadlineDate,
+            //   deadlineType: deadlineType,
+            //   cookedByMe: cookedByMe,
+            //   sectionType: sectionType,
+            //   labelList: labelList,
+            //   shopName: shopName,
+            //   price: price,
+            //   note: note,
+            // );
+            // // ! TODO: capire perché è statica
+            // await FoodDBWorker.addFood(
+            //   foodName as String,
+            //   newFood,
+            // );
+          },
+        )
+      ],
     );
   }
 

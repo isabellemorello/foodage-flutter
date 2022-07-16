@@ -16,7 +16,7 @@ const kDeleteIcon = Icons.delete;
 const kSettingsIcon = Icons.settings;
 
 // TextStyle
-const kUpperCaseTextStyle = TextStyle(
+TextStyle kUpperCaseTextStyle = TextStyle(
   fontSize: 16,
   // fontWeight: FontWeight.bold,
   color: Colors.black38,
@@ -30,14 +30,14 @@ Future<dynamic> kFeatureNotDeveloped(BuildContext context) {
             content: Text(
               'Questa feature non è stata ancora implementata.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.red[100]),
+              style: TextStyle(color: Colors.teal[50]),
             ),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text(
                     'OK',
-                    style: TextStyle(color: Colors.red.shade100),
+                    style: TextStyle(color: Colors.teal.shade50),
                   ))
             ],
           ));
@@ -153,5 +153,21 @@ Widget kBuildMenuItem({
     ),
     hoverColor: hoverColor,
     onTap: onClicked,
+  );
+}
+
+TextStyle kTitleTextStyle() {
+  return TextStyle(
+    color: Colors.teal.shade600,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle kTitleSmallerTextStyle() {
+  return TextStyle(
+    color: Colors.teal.shade600,
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
   );
 }
