@@ -126,7 +126,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                 children: [
                   TextFormField(
                     controller: _userName,
-                    textAlign: TextAlign.center, //! non funziona
                     decoration: InputDecoration(
                       labelText: 'Nome Utente',
                       hintText: 'Nome Utente',
@@ -155,9 +154,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                       ),
                     ],
                   ),
-                  // SizedBox(
-                  //   height: 10.0,
-                  // ),
                   TextButton(
                     child: Text(
                       'Cambia Password',
@@ -180,7 +176,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                         'Visualizza i nomi degli altri membri quando scorri le liste'),
                   ),
                 ),
-                // Spacer(),
                 Expanded(
                   flex: 1,
                   child: Switch(
@@ -234,7 +229,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
             ),
             Row(
               children: [
-                //TODO:
                 Text(
                   'PRODOTTI SENZA SCADENZA',
                   style: kUpperCaseTextStyle,

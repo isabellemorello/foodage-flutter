@@ -98,6 +98,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 15,
                 ),
+                //* Nome
                 TextFormField(
                   controller: _foodNameController,
                   textAlign: TextAlign.center,
@@ -116,6 +117,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 15,
                 ),
+                //* Seleziona data
                 DateTimeFormField(
                   decoration: const InputDecoration(
                     hintStyle: TextStyle(
@@ -143,7 +145,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 40,
                 ),
-                //TODO: inserire classe DeadLineContent DeadlineTypeContent(),
+                //* Tipo di scadenza (breve o lunga, cucinato)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -207,6 +209,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 40,
                 ),
+                //* Tipo di Sezione (frigo, freezer, dispensa)
                 Text(
                   'Sezione',
                   style: kTitleTextStyle(),
@@ -214,160 +217,149 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 15,
                 ),
-                // Table(
-                //   children: [
-                //     TableRow(
-                // children: [
-                // SectionTypeSelectionButton(),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 20),
-                            decoration: BoxDecoration(
-                              color: sectionType == SectionType.Frigo
-                                  ? kActiveColorSectionType
-                                  : kInactiveColorSectionType,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  kFridgeIcon,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                          decoration: BoxDecoration(
+                            color: sectionType == SectionType.Frigo
+                                ? kActiveColorSectionType
+                                : kInactiveColorSectionType,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                kFridgeIcon,
+                                color: sectionType == SectionType.Frigo
+                                    ? kActiveColorComponentsSectionType
+                                    : kInactiveColorComponentsSectionType,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Frigo',
+                                style: TextStyle(
                                   color: sectionType == SectionType.Frigo
                                       ? kActiveColorComponentsSectionType
                                       : kInactiveColorComponentsSectionType,
                                 ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'Frigo',
-                                  style: TextStyle(
-                                    color: sectionType == SectionType.Frigo
-                                        ? kActiveColorComponentsSectionType
-                                        : kInactiveColorComponentsSectionType,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          onTap: () {
-                            setState(
-                              () {
-                                sectionType = SectionType.Frigo;
-                                foodListProvider.setSectionType(sectionType);
-                                print('Button pressed: $sectionType');
-
-                                // foodsModel.foodBeingEdited!.sectionType = 'Frigo';
-                                // foodsModel.setSectionType('Frigo');
-                              },
-                            );
-                          },
-                          // splashColor: Colors.teal,
                         ),
+                        onTap: () {
+                          setState(
+                            () {
+                              sectionType = SectionType.Frigo;
+                              foodListProvider.setSectionType(sectionType);
+                              print('Button pressed: $sectionType');
+                            },
+                          );
+                        },
+                        // splashColor: Colors.teal,
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 20),
-                            decoration: BoxDecoration(
-                              color: sectionType == SectionType.Freezer
-                                  ? kActiveColorSectionType
-                                  : kInactiveColorSectionType,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  kFreezerIcon,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                          decoration: BoxDecoration(
+                            color: sectionType == SectionType.Freezer
+                                ? kActiveColorSectionType
+                                : kInactiveColorSectionType,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                kFreezerIcon,
+                                color: sectionType == SectionType.Freezer
+                                    ? kActiveColorComponentsSectionType
+                                    : kInactiveColorComponentsSectionType,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Freezer',
+                                style: TextStyle(
                                   color: sectionType == SectionType.Freezer
                                       ? kActiveColorComponentsSectionType
                                       : kInactiveColorComponentsSectionType,
                                 ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'Freezer',
-                                  style: TextStyle(
-                                    color: sectionType == SectionType.Freezer
-                                        ? kActiveColorComponentsSectionType
-                                        : kInactiveColorComponentsSectionType,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          onTap: () {
-                            setState(
-                              () {
-                                sectionType = SectionType.Freezer;
-                                foodListProvider.setSectionType(sectionType);
-                                print('Button pressed: $sectionType');
-                                // foodsModel.foodBeingEdited!.sectionType = 'Freezer';
-                                // foodsModel.setSectionType('Freezer');
-                              },
-                            );
-                          },
                         ),
+                        onTap: () {
+                          setState(
+                            () {
+                              sectionType = SectionType.Freezer;
+                              foodListProvider.setSectionType(sectionType);
+                              print('Button pressed: $sectionType');
+                              // foodsModel.foodBeingEdited!.sectionType = 'Freezer';
+                              // foodsModel.setSectionType('Freezer');
+                            },
+                          );
+                        },
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 20),
-                            decoration: BoxDecoration(
-                              color: sectionType == SectionType.Dispensa
-                                  ? kActiveColorSectionType
-                                  : kInactiveColorSectionType,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  kDispensaIcon,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                          decoration: BoxDecoration(
+                            color: sectionType == SectionType.Dispensa
+                                ? kActiveColorSectionType
+                                : kInactiveColorSectionType,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                kDispensaIcon,
+                                color: sectionType == SectionType.Dispensa
+                                    ? kActiveColorComponentsSectionType
+                                    : kInactiveColorComponentsSectionType,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Dispensa',
+                                style: TextStyle(
                                   color: sectionType == SectionType.Dispensa
                                       ? kActiveColorComponentsSectionType
                                       : kInactiveColorComponentsSectionType,
                                 ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'Dispensa',
-                                  style: TextStyle(
-                                    color: sectionType == SectionType.Dispensa
-                                        ? kActiveColorComponentsSectionType
-                                        : kInactiveColorComponentsSectionType,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          onTap: () {
-                            setState(
-                              () {
-                                sectionType = SectionType.Dispensa;
-                                foodListProvider.setSectionType(sectionType);
-                                print('Button pressed: $sectionType');
-                                // foodsModel.foodBeingEdited!.sectionType = 'Dispensa';
-                                // foodsModel.setSectionType('Dispensa');
-                              },
-                            );
-                          },
                         ),
+                        onTap: () {
+                          setState(
+                            () {
+                              sectionType = SectionType.Dispensa;
+                              foodListProvider.setSectionType(sectionType);
+                              print('Button pressed: $sectionType');
+                              // foodsModel.foodBeingEdited!.sectionType = 'Dispensa';
+                              // foodsModel.setSectionType('Dispensa');
+                            },
+                          );
+                        },
                       ),
-                    ]),
-                //
-                //       ],
-                //     ),
-                //   ],
-                // ),
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 40,
                 ),
+                //* Etichette
                 Text(
                   'Etichette',
                   style: kTitleTextStyle(),
@@ -407,6 +399,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 40,
                 ),
+                //* Negozio
                 TextFormField(
                   controller: _shopNameController,
                   textAlign: TextAlign.start,
@@ -421,6 +414,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     shopName = value;
                   },
                 ),
+                //* Prezzo
                 TextFormField(
                   controller: _priceController,
                   keyboardType: TextInputType.number,
@@ -442,6 +436,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 40,
                 ),
+                //* Note
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
@@ -528,13 +523,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
             ],
           ),
           onPressed: () {
-            // final FoodCard newFood = FoodCard(
-            //   sectionIcon: kFreezerIcon,
-            //   foodName: 'Cavolo',
-            //   deadlineDate: '22/08/2022',
-            // );
-            // return foodListSections.freezerExpiredFood;
-            //TODO
             food = Food(
               name: name,
               deadlineDate: deadlineDate,
@@ -554,49 +542,41 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 .addNewFood(food);
             Navigator.pop(context);
             print('added ${food.name} from save new food');
-            for (Food food in foodList) {
-              print(
-                  'name ${food.name},\n deadline: ${food.deadlineDate},\n deadlineType: ${food.deadlineType},\n cookedByMe: ${food.cookedByMe},\n sectionType: ${food.sectionType},\n shopName: ${food.shopName},\n price: ${food.price},\n note: ${food.note}');
-            }
-            // // ! TODO: capire perché è statica
-            // await FoodDBWorker.addFood(
-            //   foodName as String,
-            //   newFood,
-            // );
+            print(
+                'name ${food.name},\n deadline: ${food.deadlineDate},\n deadlineType: ${food.deadlineType},\n cookedByMe: ${food.cookedByMe},\n sectionType: ${food.sectionType},\n sectionIcon: ${food.sectionIcon}\n, shopName: ${food.shopName},\n price: ${food.price},\n note: ${food.note}');
+            final snackBar = SnackBar(
+              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+              duration: Duration(seconds: 3),
+              behavior: SnackBarBehavior.floating,
+              width: MediaQuery.of(context).size.width - 30,
+              elevation: 6,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              backgroundColor: Colors.red[100],
+              content: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: Colors.teal[600],
+                    fontSize: 15,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Nuovo prodotto aggiunto: ',
+                    ),
+                    TextSpan(
+                      text: '${food.name.toString().toUpperCase()}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            );
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
         )
       ],
     );
   }
-
-  // Future<void> _save(BuildContext context) async {
-  //   // // Intanto dobbiamo andare a convalidare il form
-  //   // if (!_formKey.currentState!.validate()) {
-  //   //   return;
-  //   // }
-  //   // // _formKey.currentState!.save();
-  //   // // siamo nel caso in cui stiamo creando una nota vuota, perché l'identificatore di
-  //   // // una nota non viene creato / definito fino a quando non abbiamo una nota già completa perché
-  //   // // l'identificatore viene creato all'interno del codice del DB, nella funzione create()
-  //   // // Noi quindi creiamo una nuova nota e la salviamo nel notesModel.noteBeingEdited
-  //   if (foodsModel.foodBeingEdited?.currentUser == null) {
-  //     await FoodDBWorker().newFood(foodsModel.foodBeingEdited as Food);
-  //     print('Note created');
-  //   } else {
-  //     // In questo caso la nota esiste già e noi vogliamo salvare le modifiche
-  //     await FoodDBWorker().updateFood(foodsModel.foodBeingEdited as Food);
-  //     print('Note updated');
-  //   }
-
-  //   Navigator.popAndPushNamed(context, HomepageScreen.id);
-
-  //   // Vogliamo che appaia un messaggio che ci dica che effettivamente la nota è stata salvata
-  //   Scaffold.of(context).showSnackBar(
-  //     SnackBar(
-  //       backgroundColor: Colors.lime,
-  //       duration: Duration(seconds: 2),
-  //       content: Text('Note saved'),
-  //     ),
-  //   );
-  // }
 }

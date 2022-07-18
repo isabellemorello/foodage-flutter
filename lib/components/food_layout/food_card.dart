@@ -20,6 +20,10 @@ class FoodCard extends StatelessWidget {
       return Card(
         margin: EdgeInsets.only(bottom: 15),
         color: Colors.red[50],
+        shadowColor: Colors.teal[600],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         child: Column(
           children: [
             ListTile(
