@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class FridgeHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<FoodListSections>(
+    return Consumer<FoodListProvider>(
         builder: (context, foodListSections, child) {
       return Container(
         margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0),

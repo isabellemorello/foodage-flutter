@@ -9,8 +9,8 @@ class ShowSingleFoodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FoodListSections>(
-        builder: (context, foodListSections, child) {
+    return Consumer<FoodListProvider>(
+        builder: (context, foodListProvider, child) {
       return Scaffold(
         drawer: NavigationDrawerWidget(),
         appBar: AppBar(
@@ -39,7 +39,7 @@ class ShowSingleFoodScreen extends StatelessWidget {
           ),
           title: Center(
             child: Text(
-              foodListSections.expandedFood?.name ?? '',
+              foodListProvider.expandedFood?.name ?? '',
             ),
           ),
           actions: [
@@ -93,7 +93,7 @@ class ShowSingleFoodScreen extends StatelessWidget {
                     'Data di scadenza',
                     style: kTitleSmallerTextStyle(),
                   ),
-                  Text(foodListSections.expandedFood?.deadlineDate ?? ''),
+                  Text(foodListProvider.expandedFood?.deadlineDate ?? ''),
                   // Text('foodListSections.freezerExpiredFood[0].deadlineDate'),
                 ],
               ),

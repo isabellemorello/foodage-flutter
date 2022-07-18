@@ -13,8 +13,8 @@ class HomeAllFoodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FoodListSections>(
-        builder: (context, foodListSections, child) {
+    return Consumer<FoodListProvider>(
+        builder: (context, foodListProvider, child) {
       return Container(
         // padding: EdgeInsets.only(bottom: 30.0),
         margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0),

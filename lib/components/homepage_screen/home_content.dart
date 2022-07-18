@@ -7,7 +7,7 @@ import '/screens/section_type_screen_homepage/home_all_food_screen.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_fridge_screen.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_freezer_screen.dart';
 import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
-import 'package:foodage_morello/components/food_layout/food.dart';
+import 'package:foodage_morello/components/food_layout/food_card.dart';
 import 'package:provider/provider.dart';
 
 class HomeContent extends StatefulWidget {
@@ -29,8 +29,8 @@ class _HomeContentState extends State<HomeContent> {
   // );
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<FoodListSections>(
-      create: (context) => FoodListSections(),
+    return ChangeNotifierProvider<FoodListProvider>(
+      create: (context) => FoodListProvider(),
       child: Scaffold(
         drawer: NavigationDrawerWidget(),
         appBar: AppBar(

@@ -13,7 +13,7 @@ class DispensaHomeScreen extends StatefulWidget {
 class _DispensaHomeScreenState extends State<DispensaHomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<FoodListSections>(
+    return Consumer<FoodListProvider>(
       builder: (context, foodListSections, child) {
         return Container(
           margin: EdgeInsets.only(top: 30.0, right: 20.0, left: 20.0),

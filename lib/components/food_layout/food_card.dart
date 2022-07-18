@@ -15,8 +15,8 @@ class FoodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FoodListSections>(
-        builder: (context, foodListSections, child) {
+    return Consumer<FoodListProvider>(
+        builder: (context, foodListProvider, child) {
       return Card(
         margin: EdgeInsets.only(bottom: 15),
         color: Colors.red[50],
@@ -45,22 +45,14 @@ class FoodCard extends StatelessWidget {
               subtitle: Text('Scadenza: ${food.deadlineDate}'),
               trailing: TextButton(
                 child: Icon(Icons.delete),
-                //! Riprovare a rimuovere una card dalla lista
                 onPressed: () {
-                  foodListSections.deleteFood(food);
-                  // kFeatureNotDeveloped(context);
-                  // var food = foodList.where((element) => element.id == id);
-                  // foodList.remove(food);
+                  foodListProvider.deleteFood(food);
                   print('${food.id} deleted');
                 },
               ),
               onTap: () {
-                foodListSections.setExpandedFood(food);
+                foodListProvider.setExpandedFood(food);
                 Navigator.pushNamed(context, ShowSingleFoodScreen.id);
-                // foodListSections.removeItem(
-                //     Provider.of<FoodListSections>(context, listen: false)
-                //         .removeItem(removeCard);
-                // Navigator.pushNamed(context, NewFoodScreen.id);
               },
               onLongPress: () {
                 bottomSheetFromFoodCard(context);

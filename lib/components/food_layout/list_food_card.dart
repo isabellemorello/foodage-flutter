@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/food_layout/food.dart';
+import 'package:foodage_morello/components/food_layout/food_card.dart';
 import 'package:foodage_morello/models/food.dart';
 
 class ListFoodCard extends StatelessWidget {

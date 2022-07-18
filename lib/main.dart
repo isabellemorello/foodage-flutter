@@ -14,7 +14,6 @@ import 'screens/settings_screen.dart';
 import 'firebase_options.dart';
 import 'components/food_layout/food_list_sections.dart';
 import 'screens/show_single_food_screen.dart';
-import 'screens/labels_grid_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +29,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<FoodListSections>(
-      create: (context) => FoodListSections(),
+    return ChangeNotifierProvider<FoodListProvider>(
+      create: (context) => FoodListProvider(),
       child: MaterialApp(
         title: 'Foodage',
         theme: ThemeData(
@@ -53,7 +52,6 @@ class MyApp extends StatelessWidget {
               HandlerHomeSettingsScreen(),
           ShowSingleFoodScreen.id: (context) => ShowSingleFoodScreen(),
           LablesScreen.id: (context) => LablesScreen(),
-          LabelsGridScreen.id: (context) => LabelsGridScreen(),
         },
         home: FutureBuilder(
           future: _initialization,
