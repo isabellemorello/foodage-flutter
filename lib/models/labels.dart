@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Label {
   String? icon;
   String? name;

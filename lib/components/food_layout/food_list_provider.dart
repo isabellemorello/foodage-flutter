@@ -12,11 +12,22 @@ class FoodListProvider extends ChangeNotifier {
 
   Food? expandedFood;
   SectionType? sectionType;
+  bool isList = true;
 
   void setExpandedFood(Food food) {
     expandedFood = food;
     notifyListeners();
   }
+
+  void setIsList() {
+    isList = !isList;
+    notifyListeners();
+  }
+
+  // void isListFunction(bool inIsList) {
+  //   setIsList(inIsList);
+  //   notifyListeners();
+  // }
 
   void setSectionType(SectionType inSectionType) {
     sectionType = inSectionType;

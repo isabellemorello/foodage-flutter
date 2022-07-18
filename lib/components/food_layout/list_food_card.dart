@@ -9,9 +9,8 @@ class ListFoodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (foodList == null) return Container();
-
     return ListView.builder(
+        shrinkWrap: true,
         itemCount: foodList.length,
         itemBuilder: (BuildContext inContext, int inIndex) {
           var food = foodList[inIndex];

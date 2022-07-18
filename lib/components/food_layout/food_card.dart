@@ -46,7 +46,9 @@ class FoodCard extends StatelessWidget {
                 food.name.toString(),
                 style: TextStyle(color: Colors.teal[600]),
               ),
-              subtitle: Text('Scadenza: ${food.deadlineDate}'),
+              subtitle: food.deadlineDate != null
+                  ? Text('Scadenza: ${food.deadlineDate}')
+                  : Text('Scadenza: Nessuna'),
               trailing: TextButton(
                 child: Icon(Icons.delete),
                 onPressed: () {

@@ -25,89 +25,96 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: NavigationDrawerWidget(),
-      appBar: AppBar(
-        title: Text('Homepage'),
-        centerTitle: true,
-        actions: [
-          TextButton(
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // Provider.of<FoodListSections>(context, listen: false)
-              //     .addNewCardToTheList(newFood);
-              // print('added from search');
-              //!
-              // FoodDBWorker().logOutUser(context);
-              // lista.add(Text('data4'));
-              // print('added');
-              // FoodListSections().freezerExpiredFood.add(newFood
-              //     // FoodCard(
-              //     //   sectionIcon: kFreezerIcon,
-              //     //   foodName: 'Cavolo',
-              //     //   deadlineDate: '22/08/2022',
-              //     // ),
-              //     );
-              // print('${FoodListSections().freezerExpiredFood} added');
+    return Consumer<FoodListProvider>(
+      builder: (context, foodListProvider, child) {
+        bool isList = foodListProvider.isList;
+        return Scaffold(
+          drawer: NavigationDrawerWidget(),
+          appBar: AppBar(
+            title: Text('Homepage'),
+            centerTitle: true,
+            actions: [
+              TextButton(
+                child: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  // Provider.of<FoodListSections>(context, listen: false)
+                  //     .addNewCardToTheList(newFood);
+                  // print('added from search');
+                  //!
+                  // FoodDBWorker().logOutUser(context);
+                  // lista.add(Text('data4'));
+                  // print('added');
+                  // FoodListSections().freezerExpiredFood.add(newFood
+                  //     // FoodCard(
+                  //     //   sectionIcon: kFreezerIcon,
+                  //     //   foodName: 'Cavolo',
+                  //     //   deadlineDate: '22/08/2022',
+                  //     // ),
+                  //     );
+                  // print('${FoodListSections().freezerExpiredFood} added');
 
-              // SnackBar(
-              //   content: Text('Added'),
-              //   backgroundColor: Colors.amber,
-              // );
-              // FoodListSections().addNewCardToTheList(newCard);
+                  // SnackBar(
+                  //   content: Text('Added'),
+                  //   backgroundColor: Colors.amber,
+                  // );
+                  // FoodListSections().addNewCardToTheList(newCard);
+                },
+              ),
+            ],
+            bottom: TabBar(
+              labelStyle: TextStyle(fontSize: 11),
+              tabs: [
+                Tab(
+                  icon: Image.asset(
+                    'images/logo.png',
+                    width: 30,
+                    color: Colors.red.shade100,
+                  ),
+                  text: typeContainerFood[0],
+                ),
+                Tab(
+                  icon: Icon(kFridgeIcon),
+                  text: typeContainerFood[1],
+                ),
+                Tab(
+                  icon: Icon(kFreezerIcon),
+                  text: typeContainerFood[2],
+                ),
+                Tab(
+                  icon: Icon(kDispensaIcon),
+                  text: typeContainerFood[3],
+                )
+              ],
+            ),
+          ),
+          backgroundColor: Colors.teal[50],
+          floatingActionButtonLocation: isList
+              ? FloatingActionButtonLocation.centerFloat
+              : FloatingActionButtonLocation.endFloat,
+          floatingActionButton: FloatingActionButton(
+            child: Icon(
+              Icons.add,
+              color: Colors.teal,
+            ),
+            elevation: 4.0,
+            onPressed: () {
+              Navigator.pushNamed(context, NewFoodScreen.id);
             },
           ),
-        ],
-        bottom: TabBar(
-          labelStyle: TextStyle(fontSize: 11),
-          tabs: [
-            Tab(
-              icon: Image.asset(
-                'images/logo.png',
-                width: 30,
-                color: Colors.red.shade100,
-              ),
-              text: typeContainerFood[0],
-            ),
-            Tab(
-              icon: Icon(kFridgeIcon),
-              text: typeContainerFood[1],
-            ),
-            Tab(
-              icon: Icon(kFreezerIcon),
-              text: typeContainerFood[2],
-            ),
-            Tab(
-              icon: Icon(kDispensaIcon),
-              text: typeContainerFood[3],
-            )
-          ],
-        ),
-      ),
-      backgroundColor: Colors.teal[50],
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.teal,
-        ),
-        elevation: 4.0,
-        onPressed: () {
-          Navigator.pushNamed(context, NewFoodScreen.id);
-        },
-      ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: TabBarView(
-        children: [
-          HomeAllFoodScreen(),
-          FridgeHomeScreen(),
-          FreezerHomeScreen(),
-          DispensaHomeScreen(),
-        ],
-      ),
+          // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          body: TabBarView(
+            children: [
+              HomeAllFoodScreen(),
+              FridgeHomeScreen(),
+              FreezerHomeScreen(),
+              DispensaHomeScreen(),
+            ],
+          ),
+        );
+      },
     );
   }
 }

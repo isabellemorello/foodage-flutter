@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/components/labels_layout/grid_view_label.dart';
 import 'package:foodage_morello/components/labels_layout/list_view_label.dart';
-import 'package:foodage_morello/constants/constants.dart';
-import 'package:foodage_morello/models/labels.dart';
 
 class LablesScreen extends StatefulWidget {
   static const String id = 'labels_screen';
@@ -38,32 +36,26 @@ class _LablesScreenState extends State<LablesScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: isList
-                      ? Icon(
-                          Icons.grid_view,
-                          color: Colors.white,
-                          size: 20,
-                        )
-                      : Icon(
-                          Icons.drag_handle_sharp,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: isList
-                      ? Text(
-                          'Griglia',
-                          style: TextStyle(fontSize: 10, color: Colors.white),
-                        )
-                      : Text(
-                          'Lista',
-                          style: TextStyle(fontSize: 10, color: Colors.white),
-                        ),
-                ),
+                isList
+                    ? Icon(
+                        Icons.grid_view,
+                        color: Colors.white,
+                        size: 20,
+                      )
+                    : Icon(
+                        Icons.list,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                isList
+                    ? Text(
+                        'Griglia',
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      )
+                    : Text(
+                        'Lista',
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ),
               ],
             ),
             onPressed: () {
