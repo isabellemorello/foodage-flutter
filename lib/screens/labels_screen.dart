@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/models/labels.dart';
+import 'package:foodage_morello/screens/labels_grid_screen.dart';
 
 class LablesScreen extends StatefulWidget {
   static const String id = 'labels_screen';
@@ -11,82 +12,10 @@ class LablesScreen extends StatefulWidget {
 }
 
 class _LablesScreenState extends State<LablesScreen> {
+  bool isList = true;
   @override
   Widget build(BuildContext context) {
-    var listViewLabels = [
-      // LabelCard(
-      //     iconLabel: Label().labelsList[0].icon.toString(),
-      //     nameLabel: Label().labelsList[0].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[1].icon.toString(),
-      //     nameLabel: Label().labelsList[1].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[2].icon.toString(),
-      //     nameLabel: Label().labelsList[2].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[3].icon.toString(),
-      //     nameLabel: Label().labelsList[3].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[4].icon.toString(),
-      //     nameLabel: Label().labelsList[4].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[5].icon.toString(),
-      //     nameLabel: Label().labelsList[5].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[6].icon.toString(),
-      //     nameLabel: Label().labelsList[6].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[7].icon.toString(),
-      //     nameLabel: Label().labelsList[7].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[8].icon.toString(),
-      //     nameLabel: Label().labelsList[8].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[9].icon.toString(),
-      //     nameLabel: Label().labelsList[9].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[10].icon.toString(),
-      //     nameLabel: Label().labelsList[10].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[11].icon.toString(),
-      //     nameLabel: Label().labelsList[11].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[12].icon.toString(),
-      //     nameLabel: Label().labelsList[12].name.toString(),
-      //     numberLabel: '1'),
-      // LabelCard(
-      //     iconLabel: Label().labelsList[13].icon.toString(),
-      //     nameLabel: Label().labelsList[13].name.toString(),
-      //     numberLabel: '1'),
-      LabelCard(iconLabel: '🥦', nameLabel: 'Verdura', numberLabel: '1'),
-      LabelCard(iconLabel: '🍞', nameLabel: 'Panificazione', numberLabel: '1'),
-      LabelCard(
-          iconLabel: '🧀🥚', nameLabel: 'Latticini & Uova', numberLabel: '1'),
-      LabelCard(iconLabel: '🥩', nameLabel: 'Carne', numberLabel: '1'),
-      LabelCard(iconLabel: '🐟', nameLabel: 'Pesce', numberLabel: '1'),
-      LabelCard(iconLabel: '🛢', nameLabel: 'Scatolame', numberLabel: '1'),
-      LabelCard(
-          iconLabel: '🌿', nameLabel: 'Condimenti & Spezie', numberLabel: '1'),
-      LabelCard(
-          iconLabel: '🥫', nameLabel: 'Salse & Sughi pronti', numberLabel: '1'),
-      LabelCard(iconLabel: '❄️', nameLabel: 'Surgelati', numberLabel: '1'),
-      LabelCard(iconLabel: '🍝', nameLabel: 'Pasta', numberLabel: '1'),
-      LabelCard(iconLabel: '🍰', nameLabel: 'Snack & Dolci', numberLabel: '1'),
-      LabelCard(iconLabel: '🧃', nameLabel: 'Bevande', numberLabel: '1'),
-      LabelCard(iconLabel: '🐾', nameLabel: 'Animali', numberLabel: '1'),
-    ];
+    // ];
     return Scaffold(
       drawer: NavigationDrawerWidget(),
       appBar: AppBar(
@@ -110,40 +39,55 @@ class _LablesScreenState extends State<LablesScreen> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: Icon(
-                    Icons.grid_view,
-                    color: Colors.white,
-                    size: 20,
-                  ),
+                  child: isList
+                      ? Icon(
+                          Icons.grid_view,
+                          color: Colors.white,
+                          size: 20,
+                        )
+                      : Icon(
+                          Icons.drag_handle_sharp,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Text(
-                    'Griglia',
-                    style: TextStyle(fontSize: 10, color: Colors.white),
-                  ),
+                  child: isList
+                      ? Text(
+                          'Griglia',
+                          style: TextStyle(fontSize: 10, color: Colors.white),
+                        )
+                      : Text(
+                          'Lista',
+                          style: TextStyle(fontSize: 10, color: Colors.white),
+                        ),
                 ),
               ],
             ),
             onPressed: () {
-              kFeatureNotDeveloped(context);
+              setState(() {
+                isList = !isList;
+                print(isList);
+              });
             },
           ),
         ],
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 20, right: 30, left: 30),
-        color: Colors.teal.shade50,
-        child: ListView(
-          children: listViewLabels,
+        padding: EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: isList ? 30 : 10,
         ),
+        color: Colors.teal.shade50,
+        child: isList ? ListViewLabel() : GridViewLabel(),
       ),
     );
   }
 }
 
-class LabelCard extends StatelessWidget {
-  LabelCard(
+class ListViewLabelCard extends StatelessWidget {
+  ListViewLabelCard(
       {required this.iconLabel,
       required this.nameLabel,
       required this.numberLabel});
@@ -165,6 +109,199 @@ class LabelCard extends StatelessWidget {
         ),
         title: Text(nameLabel),
         trailing: Text(numberLabel),
+      ),
+    );
+  }
+}
+
+class ListViewLabel extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(children: [
+      ListViewLabelCard(
+          iconLabel: labels[0].icon.toString(),
+          nameLabel: labels[0].name.toString(),
+          numberLabel: '1'),
+      ListViewLabelCard(
+          iconLabel: labels[1].icon.toString(),
+          nameLabel: labels[1].name.toString(),
+          numberLabel: '2'),
+      ListViewLabelCard(
+          iconLabel: labels[2].icon.toString(),
+          nameLabel: labels[2].name.toString(),
+          numberLabel: '1'),
+      ListViewLabelCard(
+          iconLabel: labels[3].icon.toString(),
+          nameLabel: labels[3].name.toString(),
+          numberLabel: '3'),
+      ListViewLabelCard(
+          iconLabel: labels[4].icon.toString(),
+          nameLabel: labels[4].name.toString(),
+          numberLabel: '0'),
+      ListViewLabelCard(
+          iconLabel: labels[5].icon.toString(),
+          nameLabel: labels[5].name.toString(),
+          numberLabel: '1'),
+      ListViewLabelCard(
+          iconLabel: labels[6].icon.toString(),
+          nameLabel: labels[6].name.toString(),
+          numberLabel: '0'),
+      ListViewLabelCard(
+          iconLabel: labels[7].icon.toString(),
+          nameLabel: labels[7].name.toString(),
+          numberLabel: '1'),
+      ListViewLabelCard(
+          iconLabel: labels[8].icon.toString(),
+          nameLabel: labels[8].name.toString(),
+          numberLabel: '0'),
+      ListViewLabelCard(
+          iconLabel: labels[9].icon.toString(),
+          nameLabel: labels[9].name.toString(),
+          numberLabel: '0'),
+      ListViewLabelCard(
+          iconLabel: labels[10].icon.toString(),
+          nameLabel: labels[10].name.toString(),
+          numberLabel: '2'),
+      ListViewLabelCard(
+          iconLabel: labels[11].icon.toString(),
+          nameLabel: labels[11].name.toString(),
+          numberLabel: '0'),
+      ListViewLabelCard(
+          iconLabel: labels[12].icon.toString(),
+          nameLabel: labels[12].name.toString(),
+          numberLabel: '1'),
+      ListViewLabelCard(
+          iconLabel: labels[13].icon.toString(),
+          nameLabel: labels[13].name.toString(),
+          numberLabel: '0'),
+      ListViewLabelCard(
+          iconLabel: labels[14].icon.toString(),
+          nameLabel: labels[14].name.toString(),
+          numberLabel: '0'),
+    ]);
+  }
+}
+
+class GridViewLabel extends StatelessWidget {
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = size.width / 2;
+    return GridView.count(
+      childAspectRatio: (itemWidth / itemHeight),
+      crossAxisCount: 3,
+      padding: EdgeInsets.symmetric(vertical: 30),
+      children: [
+        LabelGridCard(
+            iconLabel: labels[0].icon.toString(),
+            nameLabel: labels[0].name.toString(),
+            numberLabel: '1'),
+        LabelGridCard(
+            iconLabel: labels[1].icon.toString(),
+            nameLabel: labels[1].name.toString(),
+            numberLabel: '2'),
+        LabelGridCard(
+            iconLabel: labels[2].icon.toString(),
+            nameLabel: labels[2].name.toString(),
+            numberLabel: '1'),
+        LabelGridCard(
+            iconLabel: labels[3].icon.toString(),
+            nameLabel: labels[3].name.toString(),
+            numberLabel: '3'),
+        LabelGridCard(
+            iconLabel: labels[4].icon.toString(),
+            nameLabel: labels[4].name.toString(),
+            numberLabel: '0'),
+        LabelGridCard(
+            iconLabel: labels[5].icon.toString(),
+            nameLabel: labels[5].name.toString(),
+            numberLabel: '1'),
+        LabelGridCard(
+            iconLabel: labels[6].icon.toString(),
+            nameLabel: labels[6].name.toString(),
+            numberLabel: '0'),
+        LabelGridCard(
+            iconLabel: labels[7].icon.toString(),
+            nameLabel: labels[7].name.toString(),
+            numberLabel: '1'),
+        LabelGridCard(
+            iconLabel: labels[8].icon.toString(),
+            nameLabel: labels[8].name.toString(),
+            numberLabel: '0'),
+        LabelGridCard(
+            iconLabel: labels[9].icon.toString(),
+            nameLabel: labels[9].name.toString(),
+            numberLabel: '0'),
+        LabelGridCard(
+            iconLabel: labels[10].icon.toString(),
+            nameLabel: labels[10].name.toString(),
+            numberLabel: '2'),
+        LabelGridCard(
+            iconLabel: labels[11].icon.toString(),
+            nameLabel: labels[11].name.toString(),
+            numberLabel: '0'),
+        LabelGridCard(
+            iconLabel: labels[12].icon.toString(),
+            nameLabel: labels[12].name.toString(),
+            numberLabel: '1'),
+        LabelGridCard(
+            iconLabel: labels[13].icon.toString(),
+            nameLabel: labels[13].name.toString(),
+            numberLabel: '0'),
+        LabelGridCard(
+            iconLabel: labels[14].icon.toString(),
+            nameLabel: labels[14].name.toString(),
+            numberLabel: '0'),
+      ],
+      //
+    );
+  }
+}
+
+class LabelGridCard extends StatelessWidget {
+  LabelGridCard(
+      {required this.iconLabel,
+      required this.nameLabel,
+      required this.numberLabel});
+
+  final String iconLabel;
+  final String nameLabel;
+  final String numberLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () => kFeatureNotDeveloped(context),
+      child: Card(
+        color: Colors.red.shade50,
+        elevation: 1,
+        shadowColor: Colors.teal,
+        child: Container(
+          height: 140,
+          width: 140,
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.red.shade100,
+                child: Text(iconLabel),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                nameLabel,
+                textAlign: TextAlign.center,
+                style: TextStyle(),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(numberLabel),
+            ],
+          ),
+        ),
       ),
     );
   }

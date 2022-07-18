@@ -22,11 +22,11 @@ class _HomeContentState extends State<HomeContent> {
     'Freezer',
     'Dispensa',
   ];
-  final FoodCard newFood = FoodCard(
-    sectionIcon: kFreezerIcon,
-    foodName: 'Cavolo',
-    deadlineDate: '22/08/2022',
-  );
+  // final FoodCard newFood = FoodCard(
+  //   sectionIcon: kFreezerIcon,
+  //   foodName: 'Cavolo',
+  //   deadlineDate: '22/08/2022',
+  // );
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<FoodListSections>(
@@ -43,9 +43,9 @@ class _HomeContentState extends State<HomeContent> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Provider.of<FoodListSections>(context, listen: false)
-                    .addNewCardToTheList(newFood);
-                print('added from search');
+                // Provider.of<FoodListSections>(context, listen: false)
+                //     .addNewCardToTheList(newFood);
+                // print('added from search');
                 //!
                 // FoodDBWorker().logOutUser(context);
                 // lista.add(Text('data4'));
@@ -94,7 +94,7 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ),
         backgroundColor: Colors.teal[50],
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,

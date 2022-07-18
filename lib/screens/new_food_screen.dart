@@ -41,7 +41,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   String? deadlineDate = foodsModel.foodBeingEdited?.deadlineDate;
   String? deadlineType = foodsModel.foodBeingEdited?.deadlineType;
   // bool? cookedByMe = foodsModel.foodBeingEdited?.cookedByMe;
-  String? sectionType = foodsModel.foodBeingEdited?.sectionType;
+  SectionType? sectionType = foodsModel.foodBeingEdited?.sectionType;
   // String? sectionIcon = foodsModel.foodBeingEdited?.sectionIcon;
   // List<String>? labelList = foodsModel.foodBeingEdited?.labelList;
   String? shopName = foodsModel.foodBeingEdited?.shopName;
@@ -397,13 +397,13 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
             ],
           ),
           onPressed: () {
-            final FoodCard newFood = FoodCard(
-              sectionIcon: kFreezerIcon,
-              foodName: 'Cavolo',
-              deadlineDate: '22/08/2022',
-            );
-            Provider.of<FoodListSections>(context, listen: false)
-                .addNewCardToTheList(newFood);
+            // final FoodCard newFood = FoodCard(
+            //   sectionIcon: kFreezerIcon,
+            //   foodName: 'Cavolo',
+            //   deadlineDate: '22/08/2022',
+            // );
+            // Provider.of<FoodListSections>(context, listen: false)
+            //     .addNewCardToTheList(newFood);
             Navigator.pop(context);
             print('added from save new food');
             // return foodListSections.freezerExpiredFood;

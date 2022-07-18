@@ -39,7 +39,7 @@ class ShowSingleFoodScreen extends StatelessWidget {
           ),
           title: Center(
             child: Text(
-              '${foodListSections.freezerExpiredFood[0].foodName}',
+              foodListSections.expandedFood?.name ?? '',
             ),
           ),
           actions: [
@@ -93,8 +93,8 @@ class ShowSingleFoodScreen extends StatelessWidget {
                     'Data di scadenza',
                     style: kTitleSmallerTextStyle(),
                   ),
-                  Text(foodListSections.freezerExpiredFood[0].deadlineDate
-                      .toString()),
+                  Text(foodListSections.expandedFood?.deadlineDate ?? ''),
+                  // Text('foodListSections.freezerExpiredFood[0].deadlineDate'),
                 ],
               ),
               SizedBox(

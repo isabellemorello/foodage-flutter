@@ -7,19 +7,11 @@ import 'package:foodage_morello/screens/show_single_food_screen.dart';
 import 'package:foodage_morello/models/food.dart';
 
 class FoodCard extends StatelessWidget {
+  final Food food;
+
   FoodCard({
-    required this.sectionIcon,
-    required this.foodName,
-    required this.deadlineDate,
-    // required this.deleteFunction,
+    required this.food,
   });
-  IconData? sectionIcon;
-  String? foodName;
-  String? deadlineDate;
-  // IconData? sectionIcon = Food().sectionIcon;
-  // String? foodName = Food().name;
-  // String? deadlineDate = Food().deadlineDate;
-  // final deleteFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +31,7 @@ class FoodCard extends StatelessWidget {
                     radius: 25,
                     backgroundColor: Colors.red[100],
                     child: Icon(
-                      sectionIcon,
+                      food.sectionIcon,
                       color: kActiveColorSectionType,
                       size: 30,
                     ),
@@ -47,18 +39,22 @@ class FoodCard extends StatelessWidget {
                 ],
               ),
               title: Text(
-                foodName.toString(),
+                food.name.toString(),
                 style: TextStyle(color: Colors.teal[600]),
               ),
-              subtitle: Text('Scadenza: $deadlineDate'),
+              subtitle: Text('Scadenza: ${food.deadlineDate}'),
               trailing: TextButton(
                 child: Icon(Icons.delete),
                 //! Riprovare a rimuovere una card dalla lista
                 onPressed: () {
                   kFeatureNotDeveloped(context);
+                  // var food = foodList.where((element) => element.id == id);
+                  // foodList.remove(food);
+                  // print('$food deleted');
                 },
               ),
               onTap: () {
+                foodListSections.setExpandedFood(food);
                 Navigator.pushNamed(context, ShowSingleFoodScreen.id);
                 // foodListSections.removeItem(
                 //     Provider.of<FoodListSections>(context, listen: false)
