@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/food_layout/food.dart';
-import 'package:foodage_morello/constants/constants.dart';
+// import 'package:foodage_morello/components/food_layout/food.dart';
+// import 'package:foodage_morello/constants/constants.dart';
 // import 'package:provider/provider.dart';
-import 'dart:collection';
+// import 'dart:collection';
 
 import 'package:foodage_morello/models/food.dart';
 
@@ -36,6 +36,11 @@ class FoodListSections extends ChangeNotifier {
 
   void clearExpandedFood() {
     expandedFood = null;
+    notifyListeners();
+  }
+
+  void deleteFood(Food food) {
+    foodList.remove(food);
     notifyListeners();
   }
 

@@ -47,10 +47,11 @@ class FoodCard extends StatelessWidget {
                 child: Icon(Icons.delete),
                 //! Riprovare a rimuovere una card dalla lista
                 onPressed: () {
-                  kFeatureNotDeveloped(context);
+                  foodListSections.deleteFood(food);
+                  // kFeatureNotDeveloped(context);
                   // var food = foodList.where((element) => element.id == id);
                   // foodList.remove(food);
-                  // print('$food deleted');
+                  print('${food.id} deleted');
                 },
               ),
               onTap: () {
