@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/food_layout/list_food_card.dart';
+import 'package:foodage_morello/components/homepage_screen/list_food_card.dart';
 import 'package:foodage_morello/components/homepage_screen/food_grid.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/models/food.dart';
@@ -20,7 +20,9 @@ class _HomeAllFoodScreenState extends State<HomeAllFoodScreen> {
       builder: (context, foodListProvider, child) {
         bool isList = foodListProvider.isList;
         return Container(
-            margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 50.0),
+            margin: isList
+                ? EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0)
+                : EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 50.0),
             color: Colors.teal[50],
             child: Column(
               children: [

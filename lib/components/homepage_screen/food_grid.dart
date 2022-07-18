@@ -25,6 +25,7 @@ class FoodGridCard extends StatelessWidget {
           bottomSheetFromFoodCard(context);
         },
         child: Card(
+          margin: EdgeInsets.all(0),
           color: Colors.red.shade50,
           elevation: 1,
           shadowColor: Colors.teal[600],
@@ -33,9 +34,10 @@ class FoodGridCard extends StatelessWidget {
           ),
           child: Container(
             // height: 200,
-            width: 140,
+            // width: 90,
             padding: const EdgeInsets.all(10.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
@@ -46,14 +48,17 @@ class FoodGridCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 10,
                 ),
                 Expanded(
                   flex: 3,
                   child: Text(
                     '${food.name}',
                     textAlign: TextAlign.center,
-                    style: TextStyle(),
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal.shade600),
                   ),
                 ),
                 Expanded(
@@ -63,11 +68,11 @@ class FoodGridCard extends StatelessWidget {
                         ? 'Scadenza: ${food.deadlineDate}'
                         : 'Scadenza: Nessuna',
                     textAlign: TextAlign.center,
-                    style: TextStyle(),
+                    style: TextStyle(fontSize: 10),
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: TextButton(
                     child: Icon(Icons.delete),
                     onPressed: () {

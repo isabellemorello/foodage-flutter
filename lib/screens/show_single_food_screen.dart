@@ -107,7 +107,7 @@ class ShowSingleFoodScreen extends StatelessWidget {
                     'Tipo di scadenza',
                     style: kTitleSmallerTextStyle(),
                   ),
-                  Text('Scadenza a breve termine'),
+                  Text('Breve termine'),
                 ],
               ),
               SizedBox(
