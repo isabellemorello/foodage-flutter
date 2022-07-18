@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/new_food_screen/section_type_selection_button.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'labels.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
@@ -186,3 +185,14 @@ List<Food> foodList = [
       shopName: 'discount',
       price: '3,59'),
 ];
+
+enum DeadlineType {
+  ShortTerm,
+  LongTerm,
+}
+
+enum SectionType {
+  Frigo,
+  Freezer,
+  Dispensa,
+}

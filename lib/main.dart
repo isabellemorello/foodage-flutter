@@ -12,7 +12,7 @@ import 'screens/registration_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/settings_screen.dart';
 import 'firebase_options.dart';
-import 'components/food_layout/food_list_sections.dart';
+import 'components/food_layout/food_list_provider.dart';
 import 'screens/show_single_food_screen.dart';
 
 Future<void> main() async {

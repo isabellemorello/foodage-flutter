@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/new_food_screen/section_type_selection_button.dart';
 import 'package:date_field/date_field.dart';
-import 'package:foodage_morello/models/food_list_model.dart';
+import 'package:foodage_morello/models/food.dart';
 import 'package:group_button/group_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
-import 'package:foodage_morello/components/food_layout/food_card.dart';
+import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
 import 'package:foodage_morello/constants/constants.dart';
-
-enum DeadlineType {
-  shortTerm,
-  longTerm,
-}
 
 class NewFoodScreen extends StatelessWidget {
   static const String id = 'new_food_screen';
@@ -37,18 +30,19 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
 
   late User loggedInUser;
   String currentLoggedUser = '';
-  String? foodName = foodsModel.foodBeingEdited?.name;
-  String? deadlineDate = foodsModel.foodBeingEdited?.deadlineDate;
-  String? deadlineType = foodsModel.foodBeingEdited?.deadlineType;
-  // bool? cookedByMe = foodsModel.foodBeingEdited?.cookedByMe;
-  SectionType? sectionType = foodsModel.foodBeingEdited?.sectionType;
-  // String? sectionIcon = foodsModel.foodBeingEdited?.sectionIcon;
-  // List<String>? labelList = foodsModel.foodBeingEdited?.labelList;
-  String? shopName = foodsModel.foodBeingEdited?.shopName;
-  String? price = foodsModel.foodBeingEdited?.price;
-  String? note = foodsModel.foodBeingEdited?.note;
-
+  Food food = Food();
+  String? name;
+  String? deadlineDate;
+  String? deadlineType;
   bool? cookedByMe = false;
+  SectionType sectionType = SectionType.Frigo;
+  IconData? sectionIcon;
+  // List<String>? labelList = foodsModel.foodBeingEdited?.labelList;
+  String? shopName;
+  String? price;
+  String? note;
+
+  // bool? cookedByMe = false;
 
   // TODO: inserire in tutti i TextField:
   // onChanged: (value) {},
@@ -71,19 +65,19 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   //   }
   // }
   TextEditingController _foodNameController = TextEditingController();
-  // TextEditingController _deadlineDateController = TextEditingController();
-  // TextEditingController _deadlineTypeController = TextEditingController();
-  // TextEditingController _cookedByMeController = TextEditingController();
-  // TextEditingController _sectionTypeController = TextEditingController();
+  TextEditingController _deadlineDateController = TextEditingController();
+  TextEditingController _deadlineTypeController = TextEditingController();
+  TextEditingController _cookedByMeController = TextEditingController();
+  TextEditingController _sectionTypeController = TextEditingController();
+  TextEditingController _sectionIconController = TextEditingController();
   // TextEditingController _labelListController = TextEditingController();
   TextEditingController _shopNameController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
   TextEditingController _noteController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Consumer<FoodListProvider>(
-      builder: (context, foodListSections, child) {
+      builder: (context, foodListProvider, child) {
         return Scaffold(
           extendBodyBehindAppBar: true,
           appBar: newFoodAppBar(context),
@@ -116,7 +110,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     // labelText: 'Nome nuovo prodotto',
                   ),
                   onChanged: (String value) {
-                    foodName = value;
+                    name = value;
                   },
                 ),
                 SizedBox(
@@ -162,7 +156,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     ),
                     RadioListTile<String>(
                       title: Text('Scadenza a breve termine'),
-                      value: DeadlineType.shortTerm.toString(),
+                      value: DeadlineType.ShortTerm.toString(),
                       groupValue: deadlineType,
                       onChanged: (String? value) {
                         setState(
@@ -195,7 +189,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     ),
                     RadioListTile<String>(
                       title: Text('Scadenza a lungo termine'),
-                      value: DeadlineType.longTerm.toString(),
+                      value: DeadlineType.LongTerm.toString(),
                       groupValue: deadlineType,
                       onChanged: (String? value) {
                         setState(
@@ -220,16 +214,157 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 15,
                 ),
-                Table(
-                  children: [
-                    TableRow(
-                      children: [
-                        SectionTypeSelectionButton(),
-                        //
-                      ],
-                    ),
-                  ],
-                ),
+                // Table(
+                //   children: [
+                //     TableRow(
+                // children: [
+                // SectionTypeSelectionButton(),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 20),
+                            decoration: BoxDecoration(
+                              color: sectionType == SectionType.Frigo
+                                  ? kActiveColorSectionType
+                                  : kInactiveColorSectionType,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  kFridgeIcon,
+                                  color: sectionType == SectionType.Frigo
+                                      ? kActiveColorComponentsSectionType
+                                      : kInactiveColorComponentsSectionType,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Frigo',
+                                  style: TextStyle(
+                                    color: sectionType == SectionType.Frigo
+                                        ? kActiveColorComponentsSectionType
+                                        : kInactiveColorComponentsSectionType,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            setState(
+                              () {
+                                sectionType = SectionType.Frigo;
+                                foodListProvider.setSectionType(sectionType);
+                                print('Button pressed: $sectionType');
+
+                                // foodsModel.foodBeingEdited!.sectionType = 'Frigo';
+                                // foodsModel.setSectionType('Frigo');
+                              },
+                            );
+                          },
+                          // splashColor: Colors.teal,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 20),
+                            decoration: BoxDecoration(
+                              color: sectionType == SectionType.Freezer
+                                  ? kActiveColorSectionType
+                                  : kInactiveColorSectionType,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  kFreezerIcon,
+                                  color: sectionType == SectionType.Freezer
+                                      ? kActiveColorComponentsSectionType
+                                      : kInactiveColorComponentsSectionType,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Freezer',
+                                  style: TextStyle(
+                                    color: sectionType == SectionType.Freezer
+                                        ? kActiveColorComponentsSectionType
+                                        : kInactiveColorComponentsSectionType,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            setState(
+                              () {
+                                sectionType = SectionType.Freezer;
+                                foodListProvider.setSectionType(sectionType);
+                                print('Button pressed: $sectionType');
+                                // foodsModel.foodBeingEdited!.sectionType = 'Freezer';
+                                // foodsModel.setSectionType('Freezer');
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 20),
+                            decoration: BoxDecoration(
+                              color: sectionType == SectionType.Dispensa
+                                  ? kActiveColorSectionType
+                                  : kInactiveColorSectionType,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  kDispensaIcon,
+                                  color: sectionType == SectionType.Dispensa
+                                      ? kActiveColorComponentsSectionType
+                                      : kInactiveColorComponentsSectionType,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Dispensa',
+                                  style: TextStyle(
+                                    color: sectionType == SectionType.Dispensa
+                                        ? kActiveColorComponentsSectionType
+                                        : kInactiveColorComponentsSectionType,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            setState(
+                              () {
+                                sectionType = SectionType.Dispensa;
+                                foodListProvider.setSectionType(sectionType);
+                                print('Button pressed: $sectionType');
+                                // foodsModel.foodBeingEdited!.sectionType = 'Dispensa';
+                                // foodsModel.setSectionType('Dispensa');
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ]),
+                //
+                //       ],
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: 40,
                 ),
@@ -272,10 +407,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 SizedBox(
                   height: 40,
                 ),
-                // Table(
-                //   children: [
-                //     TableRow(
-                //       children: [
                 TextFormField(
                   controller: _shopNameController,
                   textAlign: TextAlign.start,
@@ -402,23 +533,31 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
             //   foodName: 'Cavolo',
             //   deadlineDate: '22/08/2022',
             // );
-            // Provider.of<FoodListSections>(context, listen: false)
-            //     .addNewCardToTheList(newFood);
-            Navigator.pop(context);
-            print('added from save new food');
             // return foodListSections.freezerExpiredFood;
             //TODO
-            // Food newFood = Food(
-            //   foodName: foodName,
-            //   deadlineDate: deadlineDate,
-            //   deadlineType: deadlineType,
-            //   cookedByMe: cookedByMe,
-            //   sectionType: sectionType,
-            //   labelList: labelList,
-            //   shopName: shopName,
-            //   price: price,
-            //   note: note,
-            // );
+            food = Food(
+              name: name,
+              deadlineDate: deadlineDate,
+              deadlineType: deadlineType,
+              cookedByMe: cookedByMe,
+              sectionType: sectionType,
+              sectionIcon: sectionIcon,
+              // labelList: labelList,
+              shopName: shopName,
+              price: price,
+              note: note,
+            );
+
+            Provider.of<FoodListProvider>(context, listen: false)
+                .setSectionIcon(food);
+            Provider.of<FoodListProvider>(context, listen: false)
+                .addNewFood(food);
+            Navigator.pop(context);
+            print('added ${food.name} from save new food');
+            for (Food food in foodList) {
+              print(
+                  'name ${food.name},\n deadline: ${food.deadlineDate},\n deadlineType: ${food.deadlineType},\n cookedByMe: ${food.cookedByMe},\n sectionType: ${food.sectionType},\n shopName: ${food.shopName},\n price: ${food.price},\n note: ${food.note}');
+            }
             // // ! TODO: capire perché è statica
             // await FoodDBWorker.addFood(
             //   foodName as String,

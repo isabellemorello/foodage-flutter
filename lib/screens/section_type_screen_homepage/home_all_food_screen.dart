@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/food_layout/list_food_card.dart';
 import 'package:foodage_morello/models/food.dart';
 import 'package:provider/provider.dart';
-import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
+import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
 // import 'package:foodage_morello/models/food.dart';
 // import 'package:foodage_morello/models/food_list_model.dart';
 

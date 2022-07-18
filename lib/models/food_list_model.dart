@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/models/food.dart';
-import 'package:foodage_morello/components/new_food_screen/section_type_selection_button.dart';
 
 class FoodsModel extends ChangeNotifier {
   int stackIndex = 0; // ! non so se metterlo

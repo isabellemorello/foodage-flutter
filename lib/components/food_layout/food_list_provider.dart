@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/components/food_layout/food_card.dart';
-// import 'package:foodage_morello/constants/constants.dart';
-// import 'package:provider/provider.dart';
-// import 'dart:collection';
+import 'package:foodage_morello/constants/constants.dart';
 
 import 'package:foodage_morello/models/food.dart';
 
@@ -14,9 +11,26 @@ class FoodListProvider extends ChangeNotifier {
   // }
 
   Food? expandedFood;
+  SectionType? sectionType;
 
   void setExpandedFood(Food food) {
     expandedFood = food;
+    notifyListeners();
+  }
+
+  void setSectionType(SectionType inSectionType) {
+    sectionType = inSectionType;
+    notifyListeners();
+  }
+
+  void setSectionIcon(Food food) {
+    if (food.sectionType == SectionType.Frigo) {
+      food.sectionIcon = kFridgeIcon;
+    } else if (food.sectionType == SectionType.Freezer) {
+      food.sectionIcon = kFreezerIcon;
+    } else if (food.sectionType == SectionType.Dispensa) {
+      food.sectionIcon = kDispensaIcon;
+    }
     notifyListeners();
   }
 

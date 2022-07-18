@@ -6,7 +6,7 @@ import 'package:foodage_morello/screens/section_type_screen_homepage/home_dispen
 import '/screens/section_type_screen_homepage/home_all_food_screen.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_fridge_screen.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_freezer_screen.dart';
-import 'package:foodage_morello/components/food_layout/food_list_sections.dart';
+import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
 import 'package:foodage_morello/components/food_layout/food_card.dart';
 import 'package:provider/provider.dart';
 
@@ -22,98 +22,91 @@ class _HomeContentState extends State<HomeContent> {
     'Freezer',
     'Dispensa',
   ];
-  // final FoodCard newFood = FoodCard(
-  //   sectionIcon: kFreezerIcon,
-  //   foodName: 'Cavolo',
-  //   deadlineDate: '22/08/2022',
-  // );
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<FoodListProvider>(
-      create: (context) => FoodListProvider(),
-      child: Scaffold(
-        drawer: NavigationDrawerWidget(),
-        appBar: AppBar(
-          title: Text('Homepage'),
-          centerTitle: true,
-          actions: [
-            TextButton(
-              child: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // Provider.of<FoodListSections>(context, listen: false)
-                //     .addNewCardToTheList(newFood);
-                // print('added from search');
-                //!
-                // FoodDBWorker().logOutUser(context);
-                // lista.add(Text('data4'));
-                // print('added');
-                // FoodListSections().freezerExpiredFood.add(newFood
-                //     // FoodCard(
-                //     //   sectionIcon: kFreezerIcon,
-                //     //   foodName: 'Cavolo',
-                //     //   deadlineDate: '22/08/2022',
-                //     // ),
-                //     );
-                // print('${FoodListSections().freezerExpiredFood} added');
-
-                // SnackBar(
-                //   content: Text('Added'),
-                //   backgroundColor: Colors.amber,
-                // );
-                // FoodListSections().addNewCardToTheList(newCard);
-              },
+    return Scaffold(
+      drawer: NavigationDrawerWidget(),
+      appBar: AppBar(
+        title: Text('Homepage'),
+        centerTitle: true,
+        actions: [
+          TextButton(
+            child: Icon(
+              Icons.search,
+              color: Colors.white,
             ),
-          ],
-          bottom: TabBar(
-            labelStyle: TextStyle(fontSize: 11),
-            tabs: [
-              Tab(
-                icon: Image.asset(
-                  'images/logo.png',
-                  width: 30,
-                  color: Colors.red.shade100,
-                ),
-                text: typeContainerFood[0],
-              ),
-              Tab(
-                icon: Icon(kFridgeIcon),
-                text: typeContainerFood[1],
-              ),
-              Tab(
-                icon: Icon(kFreezerIcon),
-                text: typeContainerFood[2],
-              ),
-              Tab(
-                icon: Icon(kDispensaIcon),
-                text: typeContainerFood[3],
-              )
-            ],
+            onPressed: () {
+              // Provider.of<FoodListSections>(context, listen: false)
+              //     .addNewCardToTheList(newFood);
+              // print('added from search');
+              //!
+              // FoodDBWorker().logOutUser(context);
+              // lista.add(Text('data4'));
+              // print('added');
+              // FoodListSections().freezerExpiredFood.add(newFood
+              //     // FoodCard(
+              //     //   sectionIcon: kFreezerIcon,
+              //     //   foodName: 'Cavolo',
+              //     //   deadlineDate: '22/08/2022',
+              //     // ),
+              //     );
+              // print('${FoodListSections().freezerExpiredFood} added');
+
+              // SnackBar(
+              //   content: Text('Added'),
+              //   backgroundColor: Colors.amber,
+              // );
+              // FoodListSections().addNewCardToTheList(newCard);
+            },
           ),
-        ),
-        backgroundColor: Colors.teal[50],
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            color: Colors.teal,
-          ),
-          elevation: 4.0,
-          onPressed: () {
-            Navigator.pushNamed(context, NewFoodScreen.id);
-          },
-        ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: TabBarView(
-          children: [
-            HomeAllFoodScreen(),
-            FridgeHomeScreen(),
-            FreezerHomeScreen(),
-            DispensaHomeScreen(),
+        ],
+        bottom: TabBar(
+          labelStyle: TextStyle(fontSize: 11),
+          tabs: [
+            Tab(
+              icon: Image.asset(
+                'images/logo.png',
+                width: 30,
+                color: Colors.red.shade100,
+              ),
+              text: typeContainerFood[0],
+            ),
+            Tab(
+              icon: Icon(kFridgeIcon),
+              text: typeContainerFood[1],
+            ),
+            Tab(
+              icon: Icon(kFreezerIcon),
+              text: typeContainerFood[2],
+            ),
+            Tab(
+              icon: Icon(kDispensaIcon),
+              text: typeContainerFood[3],
+            )
           ],
         ),
+      ),
+      backgroundColor: Colors.teal[50],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.teal,
+        ),
+        elevation: 4.0,
+        onPressed: () {
+          Navigator.pushNamed(context, NewFoodScreen.id);
+        },
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: TabBarView(
+        children: [
+          HomeAllFoodScreen(),
+          FridgeHomeScreen(),
+          FreezerHomeScreen(),
+          DispensaHomeScreen(),
+        ],
       ),
     );
   }
