@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_field/date_field.dart';
+import 'package:flutter/services.dart';
 import 'package:foodage_morello/models/food.dart';
 import 'package:group_button/group_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,18 +23,14 @@ class NewFoodScaffold extends StatefulWidget {
 }
 
 class _NewFoodScaffoldState extends State<NewFoodScaffold> {
-  // final _auth = FirebaseAuth.instance;
-  // String foodName = '';
   bool shortTermChecked = true;
-  // bool? cooked = false;
-  // DeadlineType? deadline = DeadlineType.shortTerm;
 
   late User loggedInUser;
   String currentLoggedUser = '';
   Food food = Food();
   String? name;
-  String? deadlineDate;
-  String? deadlineType;
+  DateTime? deadlineDate;
+  String? deadlineType = DeadlineType.ShortTerm.toString();
   bool? cookedByMe = false;
   SectionType sectionType = SectionType.Frigo;
   IconData? sectionIcon;
@@ -41,35 +38,18 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   String? shopName;
   String? price;
   String? note;
+  List<String> quantityList = ['confezione', 'grammi', 'unità'];
+  String? valueSelectedQuantity = 'confezione';
+  String? quantityNumber = '1';
 
-  // bool? cookedByMe = false;
-
-  // TODO: inserire in tutti i TextField:
-  // onChanged: (value) {},
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getCurrentUser();
-  // }
-
-  // void getCurrentUser() async {
-  //   try {
-  //     final user = await _auth.currentUser;
-  //     if (user != null) {
-  //       loggedInUser = user;
-  //       currentLoggedUser = loggedInUser.email.toString();
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  GlobalKey<FormState> nameKey = GlobalKey<FormState>();
   TextEditingController _foodNameController = TextEditingController();
-  TextEditingController _deadlineDateController = TextEditingController();
-  TextEditingController _deadlineTypeController = TextEditingController();
-  TextEditingController _cookedByMeController = TextEditingController();
-  TextEditingController _sectionTypeController = TextEditingController();
-  TextEditingController _sectionIconController = TextEditingController();
+  TextEditingController _quantityNumberController = TextEditingController();
+  // TextEditingController _deadlineDateController = TextEditingController();
+  // TextEditingController _deadlineTypeController = TextEditingController();
+  // TextEditingController _cookedByMeController = TextEditingController();
+  // TextEditingController _sectionTypeController = TextEditingController();
+  // TextEditingController _sectionIconController = TextEditingController();
   // TextEditingController _labelListController = TextEditingController();
   TextEditingController _shopNameController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
@@ -99,20 +79,30 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                   height: 15,
                 ),
                 //* Nome
-                TextFormField(
-                  controller: _foodNameController,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    hintText: 'Inserisci il nome del prodotto',
-                    hintStyle: TextStyle(
-                      color: Colors.teal.shade500,
-                      fontWeight: FontWeight.bold,
+                Form(
+                  key: nameKey,
+                  child: TextFormField(
+                    controller: _foodNameController,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      hintText: 'Inserisci il nome del prodotto',
+                      hintStyle: TextStyle(
+                        color: Colors.teal.shade500,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // labelText: 'Nome nuovo prodotto',
                     ),
-                    // labelText: 'Nome nuovo prodotto',
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (String? inValue) {
+                      if (inValue.toString().length == 0) {
+                        return 'Per favore inserisci il nome del nuovo prodotto';
+                      }
+                      return null;
+                    },
+                    onChanged: (String value) {
+                      name = value;
+                    },
                   ),
-                  onChanged: (String value) {
-                    name = value;
-                  },
                 ),
                 SizedBox(
                   height: 15,
@@ -122,12 +112,14 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                   decoration: const InputDecoration(
                     hintStyle: TextStyle(
                       color: Colors.teal,
-                      fontWeight: FontWeight.bold,
                     ),
                     errorStyle: TextStyle(color: Colors.redAccent),
                     focusColor: Colors.teal,
                     // border: OutlineInputBorder(),
-                    suffixIcon: Icon(Icons.event_note),
+                    suffixIcon: Icon(
+                      Icons.event_note,
+                      color: Colors.teal,
+                    ),
                     hintText: 'Data di scadenza',
                     // labelStyle: TextStyle(fontSize: 20),
                   ),
@@ -135,12 +127,83 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                   autovalidateMode: AutovalidateMode.always,
                   onDateSelected: (value) {
                     setState(() {
-                      deadlineDate = value.toString();
+                      deadlineDate = value;
                     });
                   },
                   onSaved: (value) {
-                    deadlineDate = value.toString();
+                    deadlineDate = value;
                   },
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                //* Quantità
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Inserisci la quantità',
+                      style: kTitleTextStyle(),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                          child: TextFormField(
+                            controller: _quantityNumberController,
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              hintText: 'Quantità',
+                              hintStyle: TextStyle(
+                                color: Colors.teal.shade500,
+                              ),
+                              // labelText: 'Nome nuovo prodotto',
+                            ),
+                            onChanged: (String value) {
+                              quantityNumber = value;
+                            },
+                          ),
+                        )),
+                        Expanded(
+                          child: Container(
+                            width: 200,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: (Colors.teal), width: 2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                  value: valueSelectedQuantity,
+                                  isExpanded: true,
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.teal,
+                                  ),
+                                  iconSize: 30,
+                                  items: quantityList
+                                      .map(buildMenuQuantity)
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      valueSelectedQuantity = value;
+                                      print(value);
+                                    });
+                                  }),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
                 SizedBox(
                   height: 40,
@@ -261,7 +324,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                             },
                           );
                         },
-                        // splashColor: Colors.teal,
                       ),
                     ),
                     Expanded(
@@ -302,8 +364,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                               sectionType = SectionType.Freezer;
                               foodListProvider.setSectionType(sectionType);
                               print('Button pressed: $sectionType');
-                              // foodsModel.foodBeingEdited!.sectionType = 'Freezer';
-                              // foodsModel.setSectionType('Freezer');
                             },
                           );
                         },
@@ -347,8 +407,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                               sectionType = SectionType.Dispensa;
                               foodListProvider.setSectionType(sectionType);
                               print('Button pressed: $sectionType');
-                              // foodsModel.foodBeingEdited!.sectionType = 'Dispensa';
-                              // foodsModel.setSectionType('Dispensa');
                             },
                           );
                         },
@@ -481,6 +539,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
               child: Icon(
                 Icons.arrow_back,
                 color: Colors.white,
+                size: 20,
               ),
             ),
             Expanded(
@@ -511,6 +570,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 child: Icon(
                   Icons.check,
                   color: Colors.white,
+                  size: 20,
                 ),
               ),
               Expanded(
@@ -523,60 +583,116 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
             ],
           ),
           onPressed: () {
-            food = Food(
-              name: name,
-              deadlineDate: deadlineDate,
-              deadlineType: deadlineType,
-              cookedByMe: cookedByMe,
-              sectionType: sectionType,
-              sectionIcon: sectionIcon,
-              // labelList: labelList,
-              shopName: shopName,
-              price: price,
-              note: note,
-            );
+            if (nameKey.currentState!.validate()) {
+              food = Food(
+                name: name,
+                quantity: '$quantityNumber $valueSelectedQuantity',
+                deadlineDate:
+                    Provider.of<FoodListProvider>(context, listen: false)
+                        .formatDateAsDayMonthYear(deadlineDate),
+                deadlineType: deadlineType,
+                cookedByMe:
+                    Provider.of<FoodListProvider>(context, listen: false)
+                        .setCoockedByMe(cookedByMe as bool),
+                sectionType: sectionType,
+                sectionIcon: sectionIcon,
+                // labelList: labelList,
+                shopName: shopName,
+                price: price,
+                note: note,
+              );
 
-            Provider.of<FoodListProvider>(context, listen: false)
-                .setSectionIcon(food);
-            Provider.of<FoodListProvider>(context, listen: false)
-                .addNewFood(food);
-            Navigator.pop(context);
-            print('added ${food.name} from save new food');
-            print(
-                'name ${food.name},\n deadline: ${food.deadlineDate},\n deadlineType: ${food.deadlineType},\n cookedByMe: ${food.cookedByMe},\n sectionType: ${food.sectionType},\n sectionIcon: ${food.sectionIcon}\n, shopName: ${food.shopName},\n price: ${food.price},\n note: ${food.note}');
-            final snackBar = SnackBar(
-              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-              duration: Duration(seconds: 3),
-              behavior: SnackBarBehavior.floating,
-              width: MediaQuery.of(context).size.width - 30,
-              elevation: 6,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              backgroundColor: Colors.red[100],
-              content: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: Colors.teal[600],
-                    fontSize: 15,
-                  ),
+              Provider.of<FoodListProvider>(context, listen: false)
+                  .setDeadlineType(food);
+              Provider.of<FoodListProvider>(context, listen: false)
+                  .setSectionIcon(food);
+              Provider.of<FoodListProvider>(context, listen: false)
+                  .addNewFood(food);
+
+              Navigator.pop(context);
+              print('added ${food.name} from save new food');
+              print(
+                'name ${food.name},\n quantity ${food.quantity},\n deadline: ${food.deadlineDate},\n deadlineType: ${food.deadlineType},\n cookedByMe: ${food.cookedByMe},\n sectionType: ${food.sectionType},\n sectionIcon: ${food.sectionIcon}\n, shopName: ${food.shopName},\n price: ${food.price},\n note: ${food.note}',
+              );
+              final snackBar = SnackBar(
+                padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+                duration: Duration(seconds: 3),
+                behavior: SnackBarBehavior.floating,
+                width: MediaQuery.of(context).size.width - 30,
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                backgroundColor: Colors.red[100],
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextSpan(
-                      text: 'Nuovo prodotto aggiunto: ',
+                    Text(
+                      'Nuovo prodotto aggiunto',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: Colors.teal[600],
+                        fontSize: 15,
+                      ),
                     ),
-                    TextSpan(
-                      text: '${food.name.toString().toUpperCase()}',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      '${food.name.toString().toUpperCase()}',
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal[600],
+                        fontSize: 15,
+                      ),
                     ),
                   ],
                 ),
-              ),
-            );
+                // ),
+              );
 
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  backgroundColor: Colors.red.shade100,
+                  title: Text(
+                    'Campo vuoto',
+                    style: TextStyle(
+                        color: Colors.teal[600], fontWeight: FontWeight.bold),
+                  ),
+                  content: Text(
+                    'Il nome del nuovo prodotto è obbligatorio',
+                    style: TextStyle(
+                      color: Colors.teal[600],
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(
+                        'OK',
+                        style: TextStyle(
+                            color: Colors.teal[600],
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
           },
         )
       ],
+    );
+  }
+
+  DropdownMenuItem<String> buildMenuQuantity(quantity) {
+    return DropdownMenuItem(
+      value: quantity,
+      child: Text(
+        quantity,
+        style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+      ),
     );
   }
 }

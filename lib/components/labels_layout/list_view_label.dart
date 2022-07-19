@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/models/labels.dart';
 
 class ListViewLabelCard extends StatelessWidget {
@@ -13,19 +14,22 @@ class ListViewLabelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 15, top: 5),
-      child: Card(
-        color: Colors.red.shade50,
-        elevation: 1,
-        shadowColor: Colors.teal,
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.red.shade100,
-            child: Text(iconLabel),
+    return TextButton(
+      onPressed: () => kFeatureNotDeveloped(context),
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10, top: 5),
+        child: Card(
+          color: Colors.red.shade50,
+          elevation: 1,
+          shadowColor: Colors.teal,
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.red.shade100,
+              child: Text(iconLabel),
+            ),
+            title: Text(nameLabel),
+            trailing: Text(numberLabel),
           ),
-          title: Text(nameLabel),
-          trailing: Text(numberLabel),
         ),
       ),
     );

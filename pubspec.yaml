@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.4
   # datetime_picker_formfield: ^2.0.0
   date_field: ^2.1.3 # per selezionare una data
+  date_format: ^2.0.6 # per il formato delle date
   group_button: ^3.3.1 # per lista di bottoni (chips)
   provider: ^6.0.1
   firebase_core: ^1.10.6
