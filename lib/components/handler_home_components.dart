@@ -59,24 +59,7 @@ class MembersListTile extends StatelessWidget {
                 Icons.clear,
                 color: Colors.teal,
               ),
-              onPressed: () => showDialog(
-                    context: context,
-                    builder: (context2) => AlertDialog(
-                      title: Text('ATTENZIONE'),
-                      content: Text(
-                          'Sicuro di voler rimuovere questo Membro dalla Casa?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text('No'),
-                        ),
-                        TextButton(
-                          onPressed: () => kDialogFeatureNotDeveloped(context2),
-                          child: Text('Sì'),
-                        ),
-                      ],
-                    ),
-                  )),
+              onPressed: () => kDialogRemoveMemberFromHome(context)),
         ),
       ],
     );

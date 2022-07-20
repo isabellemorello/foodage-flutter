@@ -21,7 +21,7 @@ class HandlerSettingsScaffold extends StatefulWidget {
 class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
   @override
   Widget build(BuildContext context) {
-    List<MembersListTile> getList(int membersNumber) {
+    List<MembersListTile> getListOfMembers(int membersNumber) {
       List<MembersListTile> members = [];
       for (int i = 0; i < membersNumber; i++) {
         members.add(MembersListTile(
@@ -107,7 +107,7 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
                   ),
                   Container(
                     child: Column(
-                      children: getList(4),
+                      children: getListOfMembers(4),
                     ),
                   ),
                   SizedBox(

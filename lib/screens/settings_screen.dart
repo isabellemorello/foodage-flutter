@@ -229,9 +229,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      showDialog(
-                          context: context,
-                          builder: (_) => DeadlineFreeAlertDialog());
+                      kDialogSettingsInfoDeadlineType(context);
                     });
                   },
                   icon: KShadowedContainerCircular(
@@ -291,7 +289,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
               height: 30,
             ),
             Text(
-              'Prodotti senza scadenza, ma a medio termine',
+              'Prodotti senza scadenza, ma a lungo termine',
             ),
             KShadowedContainer(
               padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
@@ -334,40 +332,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   child: BottomNavigationBar(
-      //       items: const <BottomNavigationBarItem>[
-      //         BottomNavigationBarItem(
-      //           icon: Icon(kHomeIcon),
-      //           label: 'Home',
-      //           backgroundColor: Colors.teal,
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(kDeleteIcon),
-      //           label: 'Cestino',
-      //           backgroundColor: Colors.teal,
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(kSettingsIcon),
-      //           label: 'Impostazioni',
-      //           backgroundColor: Colors.teal,
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: CircleAvatar(
-      //             backgroundColor: Colors.white,
-      //             radius: 10.0,
-      //           ),
-      //           label: 'Casa',
-      //           backgroundColor: Colors.teal,
-      //         ),
-      //       ],
-      //       currentIndex: currentScreen,
-      //       onTap: (int inIndex) {
-      //         setState(() {
-      //           currentScreen = inIndex;
-      //         });
-      //       }),
-      // ),
     );
   }
 

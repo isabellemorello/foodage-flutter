@@ -87,26 +87,32 @@ class DeadlineFreeAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Prodotti senza scadenza'),
+      backgroundColor: Colors.teal[600],
+      title: Text(
+        'Prodotti senza scadenza',
+        style: TextStyle(
+          color: Colors.red[100],
+        ),
+      ),
       content: RichText(
         text: TextSpan(
           style: TextStyle(
             fontSize: 14.0,
-            color: Colors.black,
+            color: Colors.teal[50],
           ),
           children: [
             TextSpan(text: 'I prodotti senza scadenza ma a '),
             TextSpan(
                 text: 'breve termine ',
-                style:
-                    TextStyle(color: Colors.teal, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    color: Colors.red[100], fontWeight: FontWeight.bold)),
             TextSpan(
                 text:
                     'sono quei prodotti, come frutta e verdura o le pietanze cucinate, che non hanno una scadenza precisa, ma che possono stare in frigo per alcuni giorni. \n\n I prodotti senza scadenza ma a '),
             TextSpan(
-                text: 'medio termine ',
-                style:
-                    TextStyle(color: Colors.teal, fontWeight: FontWeight.bold)),
+                text: 'lungo termine ',
+                style: TextStyle(
+                    color: Colors.red[100], fontWeight: FontWeight.bold)),
             TextSpan(
                 text:
                     'sono quei prodotti, come cipolle e patate, che non hanno una scadenza precisa, ma che possono durare diversi giorni.'),
@@ -115,18 +121,23 @@ class DeadlineFreeAlertDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK'))
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            'OK',
+            style: TextStyle(
+              color: Colors.red[100],
+            ),
+          ),
+        ),
       ],
       elevation: 5,
-      backgroundColor: Colors.teal.shade50,
     );
   }
 }
 
-// Per scegliere il colore
+/// Costruisce la griglia Colori
 class BuildColorPicker {
   BuildColorPicker({required this.onColorChanged});
 
@@ -156,6 +167,7 @@ class BuildColorPicker {
       );
 }
 
+/// Per scegliere il colore
 class PickColor {
   void Function(Color) onColorChanged;
 
@@ -180,62 +192,3 @@ class PickColor {
         ),
       );
 }
-
-// // Per caricare una foto da fotocamera o galleria
-// class PickPhotoProfile {
-//   Future capture(BuildContext context, void setState) async {
-//     showDialog(
-//       context: context,
-//       builder: (context) => AlertDialog(
-//         backgroundColor: Colors.teal.shade50,
-//         title: Text('Seleziona foto'),
-//         content: Column(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             ListTile(
-//               contentPadding: EdgeInsets.symmetric(horizontal: 16),
-//               title: Text(
-//                 'Da Fotocamera',
-//                 style: TextStyle(fontSize: 18),
-//               ),
-//               leading: Icon(Icons.photo_camera),
-//               onTap: () {
-//                 pickImage(ImageSource.camera, setState);
-//                 Navigator.of(context).pop();
-//               },
-//             ),
-//             ListTile(
-//               contentPadding: EdgeInsets.symmetric(horizontal: 16),
-//               title: Text(
-//                 'Da Galleria',
-//                 style: TextStyle(fontSize: 18),
-//               ),
-//               leading: Icon(Icons.image),
-//               onTap: () {
-//                 pickImage(ImageSource.gallery, setState);
-//                 Navigator.of(context).pop();
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//       routeSettings: RouteSettings(arguments: this),
-//     );
-//   }
-
-//   File? image;
-
-//   Future pickImage(ImageSource imageFrom, void setState) async {
-//     try {
-//       final image = await ImagePicker().pickImage(source: imageFrom);
-//       if (image == null) return;
-//       final imageTemporary = File(image.path);
-//       setState;
-//       // setState(() {
-//       //   this.image = imageTemporary;
-//       // });
-//     } on PlatformException catch (e) {
-//       print('Failed to pick image: $e');
-//     }
-//   }
-// }

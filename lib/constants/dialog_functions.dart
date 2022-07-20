@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
+import 'package:foodage_morello/components/settings_components.dart';
 import 'package:foodage_morello/models/food.dart';
 
 /// Finestra di dialogo che avverte l'utente che può eliminare definitivamente il prodotto dall'applicazione
@@ -92,26 +93,6 @@ Future<dynamic> kDialogToRestoreFood(
   );
 }
 
-/// Informa l'utente sulla funzionalità della schermata "Le mie case"
-Future<dynamic> kDialogHandlerHomeScreen(BuildContext context) {
-  return showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: Text('Le mie case'),
-      content: Text(
-        'Questa è la sezione dove puoi gestire tutte le informazioni riguardanti le varie case. \nTenendo premuto su una casa, puoi cambiare l\'ordine delle case e quella che sarà in prima posizione sarà la casa che visualizzerai nella Home, con tutte le relative liste.',
-      ),
-      backgroundColor: Colors.teal.shade50,
-      actions: [
-        TextButton(
-          child: Text('HO CAPITO'),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ],
-    ),
-  );
-}
-
 /// Informa l'utente che la feature richiesta non è stata ancora implementata
 Future<dynamic> kDialogFeatureNotDeveloped(BuildContext context) {
   return showDialog(
@@ -132,4 +113,74 @@ Future<dynamic> kDialogFeatureNotDeveloped(BuildContext context) {
                   ))
             ],
           ));
+}
+
+/// Dà maggiori informazioni su cosa si intende per scadenza a BREVE o a LUNGO termine
+Future<dynamic> kDialogSettingsInfoDeadlineType(BuildContext context) {
+  return showDialog(
+      context: context, builder: (_) => DeadlineFreeAlertDialog());
+}
+
+/// Informa l'utente sulla funzionalità della schermata "Le mie case"
+Future<dynamic> kDialogHandlerHomeScreen(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: Colors.teal.shade600,
+      title: Text(
+        'Le mie case',
+        style: TextStyle(
+          color: Colors.teal.shade50,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      content: Text(
+        'Questa è la sezione dove puoi gestire tutte le informazioni riguardanti le varie case. \nTenendo premuto su una casa, puoi cambiare l\'ordine delle case e quella che sarà in prima posizione sarà la casa che visualizzerai nella Home, con tutte le relative liste.',
+        style: TextStyle(color: Colors.teal.shade50),
+      ),
+      actions: [
+        TextButton(
+          child: Text(
+            'HO CAPITO',
+            style: TextStyle(color: Colors.teal.shade50),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Chiede conferma per eliminare un componente dalla casa
+Future<dynamic> kDialogRemoveMemberFromHome(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context2) => AlertDialog(
+      backgroundColor: Colors.red[50],
+      title: Text(
+        'ATTENZIONE',
+        style: TextStyle(color: Colors.red),
+      ),
+      content: Text(
+        'Sicuro di voler rimuovere questo Membro dalla Casa?',
+        style: TextStyle(color: Colors.red),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            'NO',
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
+        TextButton(
+          onPressed: () => kDialogFeatureNotDeveloped(context2),
+          child: Text(
+            'SI',
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
+      ],
+    ),
+  );
 }
