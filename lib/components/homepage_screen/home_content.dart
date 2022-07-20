@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/screens/new_food_screen.dart';
 import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_dispensa_screen.dart';
@@ -7,7 +8,6 @@ import '/screens/section_type_screen_homepage/home_all_food_screen.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_fridge_screen.dart';
 import 'package:foodage_morello/screens/section_type_screen_homepage/home_freezer_screen.dart';
 import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
-import 'package:foodage_morello/components/food_layout/food_card.dart';
 import 'package:provider/provider.dart';
 
 class HomeContent extends StatefulWidget {
@@ -40,27 +40,7 @@ class _HomeContentState extends State<HomeContent> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  // Provider.of<FoodListSections>(context, listen: false)
-                  //     .addNewCardToTheList(newFood);
-                  // print('added from search');
-                  //!
-                  // FoodDBWorker().logOutUser(context);
-                  // lista.add(Text('data4'));
-                  // print('added');
-                  // FoodListSections().freezerExpiredFood.add(newFood
-                  //     // FoodCard(
-                  //     //   sectionIcon: kFreezerIcon,
-                  //     //   foodName: 'Cavolo',
-                  //     //   deadlineDate: '22/08/2022',
-                  //     // ),
-                  //     );
-                  // print('${FoodListSections().freezerExpiredFood} added');
-
-                  // SnackBar(
-                  //   content: Text('Added'),
-                  //   backgroundColor: Colors.amber,
-                  // );
-                  // FoodListSections().addNewCardToTheList(newCard);
+                  kDialogFeatureNotDeveloped(context);
                 },
               ),
             ],

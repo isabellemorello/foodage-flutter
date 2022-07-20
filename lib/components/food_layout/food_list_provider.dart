@@ -99,6 +99,16 @@ class FoodListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void moveFoodToTrash(Food food) {
+    food.isDeleted = true;
+    notifyListeners();
+  }
+
+  void moveFoodToList(Food food) {
+    food.isDeleted = false;
+    notifyListeners();
+  }
+
   /// Aggiunge un nuovo food alla lista
   void addNewFood(Food food) {
     foodList.add(food);

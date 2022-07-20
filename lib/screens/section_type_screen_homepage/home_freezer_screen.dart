@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/homepage_screen/list_food_card.dart';
-import 'package:foodage_morello/components/homepage_screen/food_grid.dart';
-import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/components/homepage_screen/grid_food_card.dart';
 import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/models/food.dart';
 import 'package:provider/provider.dart';
 
@@ -14,15 +14,6 @@ class FreezerHomeScreen extends StatefulWidget {
 class _FreezerHomeScreenState extends State<FreezerHomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // Food food = Food(
-    //     id: '12',
-    //     name: 'Cucciolone',
-    //     sectionIcon: kFreezerIcon,
-    //     deadlineDate: '11/08/2022',
-    //     deadlineType: 'Scadenza a lungo termine',
-    //     labelList: [labels[3]],
-    //     price: '1,09');
-
     return Consumer<FoodListProvider>(
         builder: (context, foodListProvider, child) {
       bool isList = foodListProvider.isList;
@@ -77,7 +68,7 @@ class _FreezerHomeScreenState extends State<FreezerHomeScreen> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => kFeatureNotDeveloped(context),
+                    onPressed: () => kDialogFeatureNotDeveloped(context),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

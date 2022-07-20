@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/handler_home_components.dart';
 import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 
 class HandlerHomeSettingsScreen extends StatelessWidget {
   static const String id = 'handler_home_settings_screen';
@@ -20,8 +21,6 @@ class HandlerSettingsScaffold extends StatefulWidget {
 class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
   @override
   Widget build(BuildContext context) {
-    // int membersNumber = 6;
-
     List<MembersListTile> getList(int membersNumber) {
       List<MembersListTile> members = [];
       for (int i = 0; i < membersNumber; i++) {
@@ -72,7 +71,7 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
                       ),
                       backgroundColor: Colors.red.shade100,
                     ),
-                    onPressed: () => kFeatureNotDeveloped(context),
+                    onPressed: () => kDialogFeatureNotDeveloped(context),
                   ),
                 ],
               ),
@@ -109,12 +108,6 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
                   Container(
                     child: Column(
                       children: getList(4),
-
-                      // membersSetting(
-                      //     4,
-                      //     MembersListTile(
-                      //         leading: Icons.person,
-                      //         title: Text('Membro $membersNumber'))),
                     ),
                   ),
                   SizedBox(
@@ -126,7 +119,6 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
                         borderRadius: BorderRadius.circular(5)),
                     width: 250,
                     child: TextButton(
-                      // style: ButtonStyle(backgroundColor: Colors.teal),
                       child: Text(
                         'Invita partecipanti',
                         style: TextStyle(
@@ -136,7 +128,7 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
                           letterSpacing: 1.3,
                         ),
                       ),
-                      onPressed: () => kFeatureNotDeveloped(context),
+                      onPressed: () => kDialogFeatureNotDeveloped(context),
                     ),
                   )
                 ],
@@ -149,7 +141,6 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
               decoration: BoxDecoration(
                   color: Colors.teal, borderRadius: BorderRadius.circular(5)),
               child: TextButton(
-                // style: ButtonStyle(backgroundColor: Colors.teal),
                 child: Text(
                   'Elimina questa casa',
                   style: TextStyle(
@@ -159,7 +150,7 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
                     letterSpacing: 1.3,
                   ),
                 ),
-                onPressed: () => kFeatureNotDeveloped(context),
+                onPressed: () => kDialogFeatureNotDeveloped(context),
               ),
             )
           ],
@@ -168,8 +159,3 @@ class _HandlerSettingsScaffoldState extends State<HandlerSettingsScaffold> {
     );
   }
 }
-
-
-
-// Text('La casa verrà eliminata definitivamente e nessun membro'),
-// Sicuro di voler eliminare questa Casa?

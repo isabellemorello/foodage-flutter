@@ -22,27 +22,6 @@ TextStyle kUpperCaseTextStyle = TextStyle(
   color: Colors.black38,
 );
 
-Future<dynamic> kFeatureNotDeveloped(BuildContext context) {
-  return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            backgroundColor: Colors.teal[600],
-            content: Text(
-              'Questa feature non è stata ancora implementata.',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.teal[50]),
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text(
-                    'OK',
-                    style: TextStyle(color: Colors.teal.shade50),
-                  ))
-            ],
-          ));
-}
-
 class KShadowedContainer extends StatefulWidget {
   KShadowedContainer(
       {required this.child, this.padding, this.margin, this.color});

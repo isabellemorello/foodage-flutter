@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
 import 'package:foodage_morello/components/homepage_screen/list_food_card.dart';
-import 'package:foodage_morello/components/homepage_screen/food_grid.dart';
-import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/components/homepage_screen/grid_food_card.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/models/food.dart';
 import 'package:provider/provider.dart';
 
@@ -68,7 +68,7 @@ class _DispensaHomeScreenState extends State<DispensaHomeScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => kFeatureNotDeveloped(context),
+                      onPressed: () => kDialogFeatureNotDeveloped(context),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

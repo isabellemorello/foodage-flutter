@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/models/labels.dart';
 
 class LabelGridCard extends StatelessWidget {
@@ -15,13 +15,12 @@ class LabelGridCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => kFeatureNotDeveloped(context),
+      onPressed: () => kDialogFeatureNotDeveloped(context),
       child: Card(
         color: Colors.red.shade50,
         elevation: 1,
         shadowColor: Colors.teal,
         child: Container(
-          // height: 140,
           width: 140,
           padding: const EdgeInsets.all(10.0),
           child: Column(

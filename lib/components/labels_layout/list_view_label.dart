@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/models/labels.dart';
 
 class ListViewLabelCard extends StatelessWidget {
@@ -15,7 +15,7 @@ class ListViewLabelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => kFeatureNotDeveloped(context),
+      onPressed: () => kDialogFeatureNotDeveloped(context),
       child: Container(
         margin: EdgeInsets.only(bottom: 10, top: 5),
         child: Card(

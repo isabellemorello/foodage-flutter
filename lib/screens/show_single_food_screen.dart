@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/constants/constants.dart';
-import 'package:foodage_morello/models/labels.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:provider/provider.dart';
 
 class ShowSingleFoodScreen extends StatelessWidget {
@@ -56,7 +56,7 @@ class ShowSingleFoodScreen extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                kFeatureNotDeveloped(context);
+                kDialogFeatureNotDeveloped(context);
               },
             ),
           ],
@@ -97,7 +97,6 @@ class ShowSingleFoodScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Text('foodListSections.freezerExpiredFood[0].deadlineDate'),
                 ],
               ),
               SizedBox(
@@ -121,7 +120,6 @@ class ShowSingleFoodScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Text('foodListSections.freezerExpiredFood[0].deadlineDate'),
                 ],
               ),
               SizedBox(
@@ -210,8 +208,7 @@ class ShowSingleFoodScreen extends StatelessWidget {
                     style: kTitleSmallerTextStyle(),
                     textAlign: TextAlign.left,
                   ),
-
-                  // foodListProvider.expandedFood!.labelList.forEach((label) {
+                  // Per creare una lista di Chip contenenti le etichette
                   LabelChips(),
                 ],
               ),
@@ -286,6 +283,7 @@ class ShowSingleFoodScreen extends StatelessWidget {
   }
 }
 
+/// Per creare una lista di Chip contenenti le etichette
 class LabelChips extends StatelessWidget {
   const LabelChips({
     Key? key,
@@ -301,19 +299,11 @@ class LabelChips extends StatelessWidget {
             : Wrap(
                 children: [iterableChip(foodListProvider)],
               ),
-
-        // for (var label in foodListProvider.expandedFood!.labelList!) {
-        //   return Chip(
-        //     label: Text(label.toString()),
-        //     backgroundColor: Colors.white,
-        //     elevation: 1,
-        //     shadowColor: Colors.teal,
-        //   );
-        // },
       );
     });
   }
 
+  /// Definisce le chip per le etichette
   dynamic iterableChip(FoodListProvider foodListProvider) {
     for (var label in foodListProvider.expandedFood!.labelList!) {
       return Chip(
@@ -332,20 +322,3 @@ class LabelChips extends StatelessWidget {
     }
   }
 }
-
-// Widget buildChips(FoodListProvider foodListProvider, int index) => Wrap(
-//   children:  foodListProvider.map(() => Chip(
-//         label: Row(
-//           children: [
-//             Text(
-//                 foodListProvider.expandedFood!.labelList![index].icon.toString()),
-//             Text(' '),
-//             Text(
-//                 foodListProvider.expandedFood!.labelList![index].name.toString()),
-//           ],
-//         ),
-//         backgroundColor: Colors.white,
-//         elevation: 1,
-//         shadowColor: Colors.teal,
-//       )).toList(),
-// );

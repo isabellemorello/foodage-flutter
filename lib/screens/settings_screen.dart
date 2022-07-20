@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/components/settings_components.dart';
 import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/db/firestore_db.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -52,17 +53,10 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
   bool longTermSwitched = false;
   Color selectedColorShortTerm = Colors.teal;
   Color selectedColorLongTerm = Colors.teal;
+  File? image;
 
   @override
   Widget build(BuildContext context) {
-    // var currentScreen = 0;
-    // var screens = [
-    //   HomeContent(),
-    //   TrashScreen(),
-    //   SettingsScreen(),
-    //   Text('Gestione Case'),
-    // ];
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: NavigationDrawerWidget(),
@@ -72,7 +66,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
         backgroundColor: Colors.teal,
       ),
       body: Container(
-        // child: screens.elementAt(currentScreen),
         padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
         color: Colors.teal.shade50,
         child: ListView(
@@ -97,7 +90,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                           bottom: 0,
                           right: 0,
                           child: IconButton(
-                            // iconSize: ,
                             icon: CircleAvatar(
                               backgroundColor: Colors.teal,
                               child: Icon(
@@ -106,7 +98,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                                 size: 20,
                               ),
                             ),
-                            onPressed: () => capture(context),
+                            onPressed: () => kDialogCaptureImage(context),
                           ),
                         ),
                       ],
@@ -116,7 +108,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
               // TODO: qui modificare
               onPressed: () {
                 setState(() {
-                  capture(context);
+                  kDialogCaptureImage(context);
                 });
               },
             ),
@@ -159,7 +151,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                       'Cambia Password',
                     ),
                     style: ButtonStyle(),
-                    onPressed: () => kFeatureNotDeveloped(context),
+                    onPressed: () => kDialogFeatureNotDeveloped(context),
                   ),
                 ],
               ),
@@ -379,8 +371,8 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
     );
   }
 
-// funzioni "capture" e "pickImage" per selezionare la foto di profilo
-  Future capture(BuildContext context) async {
+  /// funzioni "capture" e "pickImage" per selezionare la foto di profilo
+  Future kDialogCaptureImage(BuildContext context) async {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -397,7 +389,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
               ),
               leading: Icon(Icons.photo_camera),
               onTap: () {
-                pickImage(ImageSource.camera);
+                kDialogPickImage(ImageSource.camera);
                 Navigator.of(context).pop();
               },
             ),
@@ -409,7 +401,7 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
               ),
               leading: Icon(Icons.image),
               onTap: () {
-                pickImage(ImageSource.gallery);
+                kDialogPickImage(ImageSource.gallery);
                 Navigator.of(context).pop();
               },
             ),
@@ -420,8 +412,8 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
     );
   }
 
-  File? image;
-  Future pickImage(ImageSource source) async {
+  /// funzioni "capture" e "pickImage" per selezionare la foto di profilo
+  Future kDialogPickImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
@@ -435,12 +427,4 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
       print('Failed to pick image: $e');
     }
   }
-
-  // Future<File> saveImagePermanently(String imagePath) async {
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final name = basename(imagePath);
-  //   final image = File('${directory.path}/$name');
-
-  //   return File(image.path).copy(image.path);
-  // }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/screens/handler_home_screen.dart';
 import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:foodage_morello/screens/labels_screen.dart';
@@ -64,22 +64,22 @@ class NavigationDrawerWidget extends StatelessWidget {
             kBuildMenuItem(
               text: 'Scaduto',
               icon: Icons.sentiment_very_dissatisfied,
-              onClicked: () => kFeatureNotDeveloped(context),
+              onClicked: () => kDialogFeatureNotDeveloped(context),
             ),
             kBuildMenuItem(
               text: 'Preferiti',
               icon: Icons.star,
-              onClicked: () => kFeatureNotDeveloped(context),
+              onClicked: () => kDialogFeatureNotDeveloped(context),
             ),
             kBuildMenuItem(
               text: 'Spesa',
               icon: Icons.shopping_cart_sharp,
-              onClicked: () => kFeatureNotDeveloped(context),
+              onClicked: () => kDialogFeatureNotDeveloped(context),
             ),
             kBuildMenuItem(
               text: 'Cucinato da me',
               icon: Icons.restaurant,
-              onClicked: () => kFeatureNotDeveloped(context),
+              onClicked: () => kDialogFeatureNotDeveloped(context),
             ),
             kBuildMenuItem(
               text: 'Cestino',
@@ -197,72 +197,72 @@ class HorizontalLablesList extends StatelessWidget {
           kLabelButton(
             icon: '🍎',
             text: 'Frutta',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🥦',
             text: 'Verdura',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🍞',
             text: 'Panificazione',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🧀 🥚',
             text: 'Latticini & Uova',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🥩',
             text: 'Carne',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🐟',
             text: 'Pesce',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🛢',
             text: 'Scatolame',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🌿',
             text: 'Condimenti & Spezie',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🥫',
             text: 'Salse & Sughi pronti',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '❄️',
             text: 'Surgelati',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🍝',
             text: 'Pasta',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🍰',
             text: 'Snack & Dolci',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🧃',
             text: 'Bevande',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
             icon: '🐾',
             text: 'Animali',
-            onPressed: () => kFeatureNotDeveloped(context),
+            onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
         ],
       ),

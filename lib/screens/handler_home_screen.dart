@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodage_morello/components/handler_home_components.dart';
 import 'package:foodage_morello/components/homepage_screen/drawer.dart';
 import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/screens/handler_home_settings_screen.dart';
 
 class HandlerHomeScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class _HandlerHomeScaffoldState extends State<HandlerHomeScaffold> {
           color: Colors.teal,
         ),
         onPressed: () {
-          kFeatureNotDeveloped(context);
+          kDialogFeatureNotDeveloped(context);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -42,22 +43,7 @@ class _HandlerHomeScaffoldState extends State<HandlerHomeScaffold> {
               Icons.info,
               color: Colors.teal.shade50,
             ),
-            onPressed: () => showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Le mie case'),
-                content: Text(
-                  'Questa è la sezione dove puoi gestire tutte le informazioni riguardanti le varie case. \nTenendo premuto su una casa, puoi cambiare l\'ordine delle case e quella che sarà in prima posizione sarà la casa che visualizzerai nella Home, con tutte le relative liste.',
-                ),
-                backgroundColor: Colors.teal.shade50,
-                actions: [
-                  TextButton(
-                    child: Text('HO CAPITO'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ],
-              ),
-            ),
+            onPressed: () => kDialogHandlerHomeScreen(context),
           ),
         ],
         centerTitle: true,

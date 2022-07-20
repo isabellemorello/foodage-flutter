@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 
 // Per cambiare la foto profilo
 class ProfileCircleAvatar extends StatelessWidget {
@@ -67,7 +67,7 @@ class NotificationBySection extends StatelessWidget {
         Text(text),
         Spacer(),
         IconButton(
-          onPressed: () => kFeatureNotDeveloped(context),
+          onPressed: () => kDialogFeatureNotDeveloped(context),
           icon: Icon(
             Icons.notifications,
             color: Colors.teal,

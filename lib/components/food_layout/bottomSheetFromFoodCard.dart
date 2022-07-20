@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/constants/constants.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 
 Future<dynamic> bottomSheetFromFoodCard(BuildContext context) {
   return showModalBottomSheet(
@@ -66,36 +67,31 @@ Future<dynamic> bottomSheetFromFoodCard(BuildContext context) {
                   text: 'Scaduto',
                   icon: Icons.sentiment_very_dissatisfied,
                   onClicked: () {
-                    kFeatureNotDeveloped(context);
-                    // Navigator.of(context).pop();
+                    kDialogFeatureNotDeveloped(context);
                   }),
               kBuildMenuItem(
                   text: 'Preferiti',
                   icon: Icons.star,
                   onClicked: () {
-                    kFeatureNotDeveloped(context);
-                    // Navigator.of(context).pop();
+                    kDialogFeatureNotDeveloped(context);
                   }),
               kBuildMenuItem(
                   text: 'Spesa',
                   icon: Icons.shopping_cart_sharp,
                   onClicked: () {
-                    kFeatureNotDeveloped(context);
-                    // Navigator.of(context).pop();
+                    kDialogFeatureNotDeveloped(context);
                   }),
               kBuildMenuItem(
                   text: 'Cucinato da me',
                   icon: Icons.restaurant,
                   onClicked: () {
-                    kFeatureNotDeveloped(context);
-                    // Navigator.of(context).pop();
+                    kDialogFeatureNotDeveloped(context);
                   }),
               kBuildMenuItem(
                   text: 'Cestino',
                   icon: Icons.delete_sharp,
                   onClicked: () {
-                    kFeatureNotDeveloped(context);
-                    // Navigator.of(context).pop();
+                    kDialogFeatureNotDeveloped(context);
                   }),
             ],
           ),
