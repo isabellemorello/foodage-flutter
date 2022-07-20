@@ -54,95 +54,99 @@ class _HandlerHomeScaffoldState extends State<HandlerHomeScaffold> {
         color: Colors.teal.shade50,
         child: ListView(
           children: [
-            IntrinsicHeight(
-              child: KShadowedContainer(
-                padding: EdgeInsets.fromLTRB(5, 20, 15, 20),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Icon(
-                          Icons.image_outlined,
-                          size: 100,
-                          color: Colors.teal,
+            TextButton(
+              onLongPress: () => kDialogFeatureNotDeveloped(context),
+              onPressed: () {},
+              child: IntrinsicHeight(
+                child: KShadowedContainer(
+                  padding: EdgeInsets.fromLTRB(5, 20, 15, 20),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          child: Icon(
+                            Icons.image_outlined,
+                            size: 100,
+                            color: Colors.teal,
+                          ),
                         ),
                       ),
-                    ),
-                    VerticalDivider(
-                      color: Colors.teal,
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Stack(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Casa 1',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15.0, top: 15.0),
-                                      child: membersNumber == 1
-                                          ? Text('$membersNumber membro')
-                                          : Text('$membersNumber membri'),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Row(
-                                  children: membersNumber > 3
-                                      ? membersHome(3)
-                                      : membersHome(membersNumber),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.teal,
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: 20,
-                                  color: Colors.teal.shade50,
-                                ),
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, HandlerHomeSettingsScreen.id);
-                                },
+                      VerticalDivider(
+                        color: Colors.teal,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Stack(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Casa 1',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15.0, top: 15.0),
+                                        child: membersNumber == 1
+                                            ? Text('$membersNumber membro')
+                                            : Text('$membersNumber membri'),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  Row(
+                                    children: membersNumber > 3
+                                        ? membersHome(3)
+                                        : membersHome(membersNumber),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          membersNumber > 3
-                              ? Positioned(
-                                  bottom: 31,
-                                  right: 4,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.teal,
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                backgroundColor: Colors.teal,
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    size: 20,
+                                    color: Colors.teal.shade50,
                                   ),
-                                )
-                              : Positioned(
-                                  child: Text(''),
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, HandlerHomeSettingsScreen.id);
+                                  },
                                 ),
-                        ],
+                              ),
+                            ),
+                            membersNumber > 3
+                                ? Positioned(
+                                    bottom: 31,
+                                    right: 4,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.teal,
+                                    ),
+                                  )
+                                : Positioned(
+                                    child: Text(''),
+                                  ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

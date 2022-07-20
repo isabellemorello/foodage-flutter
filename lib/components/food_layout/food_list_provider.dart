@@ -5,12 +5,6 @@ import 'package:foodage_morello/constants/constants.dart';
 import 'package:foodage_morello/models/food.dart';
 
 class FoodListProvider extends ChangeNotifier {
-  // void addNewCardToTheList(FoodCard newCard) {
-  //   _freezerExpiredFood.add(newCard);
-  //   print('$_freezerExpiredFood added');
-  //   notifyListeners();
-  // }
-
   Food? expandedFood;
   SectionType? sectionType;
   bool isList = true;
@@ -40,6 +34,7 @@ class FoodListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Converte da SectionType alla Stringa opportuna
   String? setSectionTypeString(Food food) {
     if (food.sectionType == SectionType.Frigo) {
       return 'Frigo';
@@ -50,10 +45,6 @@ class FoodListProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  // String? sectionTypeToString(SectionType inSectionType) {
-  //   if (inSectionType == )
-  // }
 
   /// In base alla sezione, viene visualizzata l'icona opportuna
   IconData? setSectionIcon(Food food) {
@@ -87,23 +78,19 @@ class FoodListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-// /// Ripulisce lo stato
-//   void clearExpandedFood() {
-//     expandedFood = null;
-//     notifyListeners();
-//   }
-
-  /// Elimina un singolo food dalla lista
+  /// Elimina un singolo food definitivamente
   void deleteFood(Food food) {
     foodList.remove(food);
     notifyListeners();
   }
 
+  /// Sposta il food dalla lista al cestino
   void moveFoodToTrash(Food food) {
     food.isDeleted = true;
     notifyListeners();
   }
 
+  /// Sposta il food dal cestino alla lista
   void moveFoodToList(Food food) {
     food.isDeleted = false;
     notifyListeners();

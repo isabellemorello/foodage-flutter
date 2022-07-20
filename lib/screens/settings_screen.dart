@@ -10,7 +10,6 @@ import 'package:foodage_morello/db/firestore_db.dart';
 import 'package:image_picker/image_picker.dart';
 
 TextEditingController _userName = TextEditingController();
-// TextEditingController _userEmail = TextEditingController();
 late User loggedInUser;
 
 class SettingsScreen extends StatelessWidget {
@@ -18,7 +17,6 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MySettingsScaffold();
-  // DefaultTabController(length: 4, child: MySettingsScaffold());
 }
 
 class MySettingsScaffold extends StatefulWidget {
@@ -104,8 +102,6 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                       ],
                     )
                   : ProfileCircleAvatar(),
-
-              // TODO: qui modificare
               onPressed: () {
                 setState(() {
                   kDialogCaptureImage(context);
@@ -340,8 +336,14 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.teal.shade50,
-        title: Text('Seleziona foto'),
+        backgroundColor: Colors.teal,
+        title: Text(
+          'Seleziona Immagine',
+          style: TextStyle(
+            color: Colors.teal.shade50,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -349,9 +351,15 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
               contentPadding: EdgeInsets.symmetric(horizontal: 16),
               title: Text(
                 'Da Fotocamera',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.teal.shade50,
+                ),
               ),
-              leading: Icon(Icons.photo_camera),
+              leading: Icon(
+                Icons.photo_camera,
+                color: Colors.red[100],
+              ),
               onTap: () {
                 kDialogPickImage(ImageSource.camera);
                 Navigator.of(context).pop();
@@ -361,12 +369,32 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
               contentPadding: EdgeInsets.symmetric(horizontal: 16),
               title: Text(
                 'Da Galleria',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.teal.shade50,
+                ),
               ),
-              leading: Icon(Icons.image),
+              leading: Icon(
+                Icons.image,
+                color: Colors.red[100],
+              ),
               onTap: () {
                 kDialogPickImage(ImageSource.gallery);
                 Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 16),
+              title: Text(
+                'Scegli un avatar',
+                style: TextStyle(fontSize: 18, color: Colors.teal.shade50),
+              ),
+              leading: Icon(
+                Icons.person_sharp,
+                color: Colors.red[100],
+              ),
+              onTap: () {
+                kDialogFeatureNotDeveloped(context);
               },
             ),
           ],
