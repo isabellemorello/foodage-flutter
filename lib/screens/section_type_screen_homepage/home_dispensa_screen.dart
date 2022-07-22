@@ -93,13 +93,15 @@ class _DispensaHomeScreenState extends State<DispensaHomeScreen> {
                     ? ListFoodCard(
                         foodList: foodList
                             .where((element) =>
-                                element.sectionType == SectionType.Dispensa)
+                                element.sectionType == SectionType.Dispensa &&
+                                element.isDeleted == false)
                             .toList(),
                       )
                     : GridViewFoodCard(
                         foodList: foodList
                             .where((element) =>
-                                element.sectionType == SectionType.Dispensa)
+                                element.sectionType == SectionType.Dispensa &&
+                                element.isDeleted == false)
                             .toList(),
                       ),
               ),

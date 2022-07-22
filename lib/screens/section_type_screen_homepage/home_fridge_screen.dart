@@ -90,13 +90,15 @@ class _FridgeHomeScreenState extends State<FridgeHomeScreen> {
                     ? ListFoodCard(
                         foodList: foodList
                             .where((element) =>
-                                element.sectionType == SectionType.Frigo)
+                                element.sectionType == SectionType.Frigo &&
+                                element.isDeleted == false)
                             .toList(),
                       )
                     : GridViewFoodCard(
                         foodList: foodList
                             .where((element) =>
-                                element.sectionType == SectionType.Frigo)
+                                element.sectionType == SectionType.Frigo &&
+                                element.isDeleted == false)
                             .toList(),
                       ),
               ),

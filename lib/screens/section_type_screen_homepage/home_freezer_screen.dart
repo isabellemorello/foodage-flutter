@@ -90,13 +90,15 @@ class _FreezerHomeScreenState extends State<FreezerHomeScreen> {
                     ? ListFoodCard(
                         foodList: foodList
                             .where((element) =>
-                                element.sectionType == SectionType.Freezer)
+                                element.sectionType == SectionType.Freezer &&
+                                element.isDeleted == false)
                             .toList(),
                       )
                     : GridViewFoodCard(
                         foodList: foodList
                             .where((element) =>
-                                element.sectionType == SectionType.Freezer)
+                                element.sectionType == SectionType.Freezer &&
+                                element.isDeleted == false)
                             .toList(),
                       ),
               ),
