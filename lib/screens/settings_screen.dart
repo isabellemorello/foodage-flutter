@@ -103,9 +103,11 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                     )
                   : ProfileCircleAvatar(),
               onPressed: () {
-                setState(() {
-                  kDialogCaptureImage(context);
-                });
+                setState(
+                  () {
+                    kDialogCaptureImage(context);
+                  },
+                );
               },
             ),
             Container(
@@ -169,10 +171,12 @@ class _MySettingsScaffoldState extends State<MySettingsScaffold> {
                   child: Switch(
                     value: memberSwitched,
                     onChanged: (value) {
-                      setState(() {
-                        memberSwitched = value;
-                        print(memberSwitched);
-                      });
+                      setState(
+                        () {
+                          memberSwitched = value;
+                          print(memberSwitched);
+                        },
+                      );
                     },
                     activeTrackColor: Colors.teal,
                     activeColor: Colors.teal.shade100,

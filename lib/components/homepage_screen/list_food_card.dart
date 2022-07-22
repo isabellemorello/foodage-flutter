@@ -11,14 +11,15 @@ class ListFoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: foodList.length,
-        itemBuilder: (BuildContext inContext, int inIndex) {
-          var food = foodList[inIndex];
-          return FoodCard(
-            food: food,
-          );
-        });
+      shrinkWrap: true,
+      itemCount: foodList.length,
+      itemBuilder: (BuildContext inContext, int inIndex) {
+        var food = foodList[inIndex];
+        return FoodCard(
+          food: food,
+        );
+      },
+    );
   }
 }
 
@@ -31,13 +32,14 @@ class ListTrashFoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: foodList.length,
-        itemBuilder: (BuildContext inContext, int inIndex) {
-          var food = foodList[inIndex];
-          return TrashFoodCard(
-            food: food,
-          );
-        });
+      shrinkWrap: true,
+      itemCount: foodList.length,
+      itemBuilder: (BuildContext inContext, int inIndex) {
+        var food = foodList[inIndex];
+        return TrashFoodCard(
+          food: food,
+        );
+      },
+    );
   }
 }

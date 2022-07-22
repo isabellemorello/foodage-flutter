@@ -5,9 +5,7 @@ import 'package:foodage_morello/screens/handler_home_screen.dart';
 import 'package:foodage_morello/screens/settings_screen.dart';
 import 'package:foodage_morello/screens/trash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 
-// final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
 
 class HomepageScreen extends StatelessWidget {
@@ -62,79 +60,40 @@ class _MyScaffoldState extends State<MyScaffold> {
       //
       bottomNavigationBar: BottomAppBar(
         child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(kHomeIcon),
-                label: 'Home',
-                backgroundColor: Colors.teal,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(kDeleteIcon),
-                label: 'Cestino',
-                backgroundColor: Colors.teal,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(kSettingsIcon),
-                label: 'Impostazioni',
-                backgroundColor: Colors.teal,
-              ),
-              BottomNavigationBarItem(
-                icon: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 10.0,
-                ),
-                label: 'Casa',
-                backgroundColor: Colors.teal,
-              ),
-            ],
-            currentIndex: currentScreen,
-            onTap: (int inIndex) {
-              setState(() {
-                currentScreen = inIndex;
-              });
-            }),
-      ),
-    );
-  }
-}
-
-class MoreButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 30.0, right: 20.0, left: 20.0),
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ElevatedButton(
-            child: Container(
-              height: 55,
-              padding: EdgeInsets.only(
-                top: 5,
-                bottom: 5,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 20,
-                  ),
-                  Text(
-                    'Statistic',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ],
-              ),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(kHomeIcon),
+              label: 'Home',
+              backgroundColor: Colors.teal,
             ),
-            onPressed: () {},
-          ),
-          SizedBox(
-            height: 8,
-          ),
-        ],
+            BottomNavigationBarItem(
+              icon: Icon(kDeleteIcon),
+              label: 'Cestino',
+              backgroundColor: Colors.teal,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(kSettingsIcon),
+              label: 'Impostazioni',
+              backgroundColor: Colors.teal,
+            ),
+            BottomNavigationBarItem(
+              icon: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 10.0,
+              ),
+              label: 'Casa',
+              backgroundColor: Colors.teal,
+            ),
+          ],
+          currentIndex: currentScreen,
+          onTap: (int inIndex) {
+            setState(
+              () {
+                currentScreen = inIndex;
+              },
+            );
+          },
+        ),
       ),
     );
   }

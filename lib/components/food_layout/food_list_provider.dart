@@ -1,7 +1,6 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:foodage_morello/constants/constants.dart';
-
 import 'package:foodage_morello/models/food.dart';
 
 class FoodListProvider extends ChangeNotifier {
@@ -69,7 +68,7 @@ class FoodListProvider extends ChangeNotifier {
   }
 
   /// Specifica se il food è stato cucinato o meno
-  String? setCoockedByMe(bool? cookedByMe) {
+  String? setCookedByMe(bool? cookedByMe) {
     if (cookedByMe == true) {
       return 'Sì';
     } else if (cookedByMe == false || cookedByMe == null) {

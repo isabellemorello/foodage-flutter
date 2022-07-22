@@ -5,8 +5,6 @@ import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/models/food.dart';
 import 'package:provider/provider.dart';
 import 'package:foodage_morello/components/food_layout/food_list_provider.dart';
-// import 'package:foodage_morello/models/food.dart';
-// import 'package:foodage_morello/models/food_list_model.dart';
 
 class HomeAllFoodScreen extends StatefulWidget {
   @override

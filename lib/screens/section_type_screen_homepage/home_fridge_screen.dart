@@ -15,96 +15,95 @@ class _FridgeHomeScreenState extends State<FridgeHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<FoodListProvider>(
-        builder: (context, foodListProvider, child) {
-      bool? isList = foodListProvider.isList;
-      return Container(
-        margin: isList
-            ? EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0)
-            : EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 50.0),
-        color: Colors.teal.shade50,
-        child: Column(
-          children: [
-            Container(
-              height: 50,
-              margin: EdgeInsets.only(bottom: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      // setState(() {
-                      //   isList = !isList;
-                      // });
-                      Provider.of<FoodListProvider>(context, listen: false)
-                          .setIsList();
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        isList
-                            ? Icon(
-                                Icons.grid_view,
-                                color: Colors.black87,
-                                size: 20,
-                              )
-                            : Icon(
-                                Icons.list,
-                                color: Colors.black87,
-                                size: 20,
-                              ),
-                        isList
-                            ? Text(
-                                'Griglia',
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.black87),
-                              )
-                            : Text(
-                                'Lista',
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.black87),
-                              ),
-                      ],
+      builder: (context, foodListProvider, child) {
+        bool? isList = foodListProvider.isList;
+        return Container(
+          margin: isList
+              ? EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0)
+              : EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 50.0),
+          color: Colors.teal.shade50,
+          child: Column(
+            children: [
+              Container(
+                height: 50,
+                margin: EdgeInsets.only(bottom: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Provider.of<FoodListProvider>(context, listen: false)
+                            .setIsList();
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          isList
+                              ? Icon(
+                                  Icons.grid_view,
+                                  color: Colors.black87,
+                                  size: 20,
+                                )
+                              : Icon(
+                                  Icons.list,
+                                  color: Colors.black87,
+                                  size: 20,
+                                ),
+                          isList
+                              ? Text(
+                                  'Griglia',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.black87),
+                                )
+                              : Text(
+                                  'Lista',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.black87),
+                                ),
+                        ],
+                      ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () => kDialogFeatureNotDeveloped(context),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.arrow_upward,
-                          color: Colors.black87,
-                          size: 20,
-                        ),
-                        Text(
-                          'Ordina per',
-                          style: TextStyle(fontSize: 12, color: Colors.black87),
-                        ),
-                      ],
+                    TextButton(
+                      onPressed: () => kDialogFeatureNotDeveloped(context),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_upward,
+                            color: Colors.black87,
+                            size: 20,
+                          ),
+                          Text(
+                            'Ordina per',
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.black87),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Flexible(
-              child: isList
-                  ? ListFoodCard(
-                      foodList: foodList
-                          .where((element) =>
-                              element.sectionType == SectionType.Frigo)
-                          .toList(),
-                    )
-                  : GridViewFoodCard(
-                      foodList: foodList
-                          .where((element) =>
-                              element.sectionType == SectionType.Frigo)
-                          .toList(),
-                    ),
-            ),
-          ],
-        ),
-      );
-    });
+              Flexible(
+                child: isList
+                    ? ListFoodCard(
+                        foodList: foodList
+                            .where((element) =>
+                                element.sectionType == SectionType.Frigo)
+                            .toList(),
+                      )
+                    : GridViewFoodCard(
+                        foodList: foodList
+                            .where((element) =>
+                                element.sectionType == SectionType.Frigo)
+                            .toList(),
+                      ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

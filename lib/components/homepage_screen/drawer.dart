@@ -16,7 +16,6 @@ class NavigationDrawerWidget extends StatelessWidget {
       child: Material(
         color: Colors.teal.shade600,
         child: ListView(
-          // padding: EdgeInsets.symmetric(horizontal: 20),
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 30.0, left: 20.0),
@@ -89,9 +88,6 @@ class NavigationDrawerWidget extends StatelessWidget {
             Divider(
               color: Colors.white70,
             ),
-            // SizedBox(
-            //   height: 20,
-            // ),
             ListTile(
               title: Text(
                 'Etichette'.toUpperCase(),
@@ -107,7 +103,6 @@ class NavigationDrawerWidget extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.pushNamed(context, LablesScreen.id);
-                // kFeatureNotDeveloped(context);
               },
             ),
             HorizontalLablesList(),
@@ -146,7 +141,6 @@ class NavigationDrawerWidget extends StatelessWidget {
               hoverColor: Colors.white70,
               onTap: () => selectedItem(context, 2),
             ),
-
             kBuildMenuItem(
               text: 'Impostazioni',
               icon: Icons.settings,
@@ -210,8 +204,13 @@ class HorizontalLablesList extends StatelessWidget {
             onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(
-            icon: '🧀 🥚',
-            text: 'Latticini & Uova',
+            icon: '🧀',
+            text: 'Latticini',
+            onPressed: () => kDialogFeatureNotDeveloped(context),
+          ),
+          kLabelButton(
+            icon: '🥚',
+            text: 'Uova',
             onPressed: () => kDialogFeatureNotDeveloped(context),
           ),
           kLabelButton(

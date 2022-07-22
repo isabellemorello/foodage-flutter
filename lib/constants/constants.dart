@@ -18,7 +18,6 @@ const kSettingsIcon = Icons.settings;
 // TextStyle
 TextStyle kUpperCaseTextStyle = TextStyle(
   fontSize: 16,
-  // fontWeight: FontWeight.bold,
   color: Colors.black38,
 );
 
@@ -114,6 +113,7 @@ kLabelButton({required String icon, required text, onPressed}) {
   );
 }
 
+/// Per la lista nel drawer
 Widget kBuildMenuItem({
   required String text,
   required dynamic icon,
@@ -135,6 +135,7 @@ Widget kBuildMenuItem({
   );
 }
 
+/// Per il titolo delle card nella visualizzazione a griglia
 TextStyle kTitleTextStyle() {
   return TextStyle(
     color: Colors.teal.shade600,
@@ -143,6 +144,7 @@ TextStyle kTitleTextStyle() {
   );
 }
 
+/// Per il testo delle card nella visualizzazione a griglia
 TextStyle kTitleSmallerTextStyle() {
   return TextStyle(
     color: Colors.teal.shade600,

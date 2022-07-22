@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodage_morello/constants/dialog_functions.dart';
 import 'package:foodage_morello/screens/homepage_screen.dart';
 import 'package:foodage_morello/components/rounded_button.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -11,8 +12,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // String email = '';
-  // String password = '';
   bool showSpinner = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController _emailField = TextEditingController();
@@ -51,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 3,
-                      // color: Colors.pinkAccent
                     ),
                   ),
                 ],
@@ -74,9 +72,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      // onSaved: (value) {
-                      //   this.email = value.toString();
-                      // },
                       decoration: InputDecoration(
                         hintText: 'Inserisci la tua email',
                       ),
@@ -94,9 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      // onSaved: (value) {
-                      //   this.password = value.toString();
-                      // },
                       decoration:
                           InputDecoration(hintText: 'Inserisci la password'),
                     ),
@@ -120,29 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (shouldNavigate) {
                           Navigator.pushNamed(context, HomepageScreen.id);
                         } else {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    backgroundColor: Colors.red.shade100,
-                                    title: Text(
-                                      'Credenziali non valide',
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                    content: Text(
-                                      'L\'e-mail o la password è errata.',
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text(
-                                          'RIPROVA',
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                    ],
-                                  ));
+                          kDialogInvalidLogin(context);
                         }
                       },
                     ),

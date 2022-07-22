@@ -184,3 +184,30 @@ Future<dynamic> kDialogRemoveMemberFromHome(BuildContext context) {
     ),
   );
 }
+
+/// Per il login
+Future<dynamic> kDialogInvalidLogin(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: Colors.red.shade100,
+      title: Text(
+        'Credenziali non valide',
+        style: TextStyle(color: Colors.red),
+      ),
+      content: Text(
+        'L\'e-mail o la password è errata.',
+        style: TextStyle(color: Colors.red),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            'RIPROVA',
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
+      ],
+    ),
+  );
+}

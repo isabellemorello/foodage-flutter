@@ -49,11 +49,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   Text(
                     'FOODAGE',
                     style: TextStyle(
-                        fontFamily: 'PatrickHand',
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 3,
-                        color: Colors.black),
+                      fontFamily: 'PatrickHand',
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 3,
+                      color: Colors.black,
+                    ),
                   ),
                 ],
               ),
@@ -74,9 +75,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         }
                         return null;
                       },
-                      // onSaved: (value) {
-                      //   this.email = value.toString();
-                      // },
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
                         hintText: 'Inserisci la tua email',

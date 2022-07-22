@@ -84,7 +84,6 @@ class _HomeContentState extends State<HomeContent> {
               Navigator.pushNamed(context, NewFoodScreen.id);
             },
           ),
-          // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           body: TabBarView(
             children: [
               HomeAllFoodScreen(),

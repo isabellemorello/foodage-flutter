@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_field/date_field.dart';
-import 'package:flutter/services.dart';
 import 'package:foodage_morello/models/food.dart';
+import 'package:foodage_morello/models/labels.dart';
 import 'package:group_button/group_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +34,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   bool? cookedByMe = false;
   SectionType sectionType = SectionType.Frigo;
   IconData? sectionIcon;
-  // List<String>? labelList = foodsModel.foodBeingEdited?.labelList;
   String? shopName;
   String? price;
   String? note;
@@ -45,12 +44,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
   GlobalKey<FormState> nameKey = GlobalKey<FormState>();
   TextEditingController _foodNameController = TextEditingController();
   TextEditingController _quantityNumberController = TextEditingController();
-  // TextEditingController _deadlineDateController = TextEditingController();
-  // TextEditingController _deadlineTypeController = TextEditingController();
-  // TextEditingController _cookedByMeController = TextEditingController();
-  // TextEditingController _sectionTypeController = TextEditingController();
-  // TextEditingController _sectionIconController = TextEditingController();
-  // TextEditingController _labelListController = TextEditingController();
   TextEditingController _shopNameController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
   TextEditingController _noteController = TextEditingController();
@@ -430,27 +423,33 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                   spacing: 25,
                   onSelected: (index, isSelected) {
                     print('$index button is selected');
-                    // labelList = GroupButton.buttons[index];
-                    // print(labelList);
-                    // ! da rivedere, non so se è giusto
-                    // return labelList?[index];
                   },
                   buttons: [
-                    '🍎 Frutta',
-                    '🥦 Verdura',
-                    '🍞 Panificazione',
-                    '🧀 Latticini'
-                        '🥚 Uova',
-                    '🥩 Carne',
-                    '🐟 Pesce',
-                    '🛢 Scatolame',
-                    '🌿 Condimenti & Spezie',
-                    '🥫 Salse & Sughi pronti',
-                    '❄️ Surgelati',
-                    '🍝 Pasta, Riso & Cereali',
-                    '🍰 Snack & Dolci',
-                    '🧃 Bevande',
-                    '🐾 Animali',
+                    labels[0].icon.toString() + ' ' + labels[0].name.toString(),
+                    labels[1].icon.toString() + ' ' + labels[1].name.toString(),
+                    labels[2].icon.toString() + ' ' + labels[2].name.toString(),
+                    labels[3].icon.toString() + ' ' + labels[3].name.toString(),
+                    labels[4].icon.toString() + ' ' + labels[4].name.toString(),
+                    labels[5].icon.toString() + ' ' + labels[5].name.toString(),
+                    labels[6].icon.toString() + ' ' + labels[6].name.toString(),
+                    labels[7].icon.toString() + ' ' + labels[7].name.toString(),
+                    labels[8].icon.toString() + ' ' + labels[8].name.toString(),
+                    labels[9].icon.toString() + ' ' + labels[9].name.toString(),
+                    labels[10].icon.toString() +
+                        ' ' +
+                        labels[10].name.toString(),
+                    labels[11].icon.toString() +
+                        ' ' +
+                        labels[11].name.toString(),
+                    labels[12].icon.toString() +
+                        ' ' +
+                        labels[12].name.toString(),
+                    labels[13].icon.toString() +
+                        ' ' +
+                        labels[13].name.toString(),
+                    labels[14].icon.toString() +
+                        ' ' +
+                        labels[14].name.toString(),
                   ],
                   borderRadius: BorderRadius.circular(20.0),
                 ),
@@ -487,10 +486,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     price = value;
                   },
                 ),
-                //       ],
-                //     ),
-                //   ],
-                // ),
                 SizedBox(
                   height: 40,
                 ),
@@ -593,10 +588,9 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 deadlineType: deadlineType,
                 cookedByMe:
                     Provider.of<FoodListProvider>(context, listen: false)
-                        .setCoockedByMe(cookedByMe as bool),
+                        .setCookedByMe(cookedByMe as bool),
                 sectionType: sectionType,
                 sectionIcon: sectionIcon,
-                // labelList: labelList,
                 shopName: shopName,
                 price: price,
                 note: note,
@@ -646,7 +640,6 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                     ),
                   ],
                 ),
-                // ),
               );
 
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -686,6 +679,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
     );
   }
 
+  /// Per il menù a tendina della quantità
   DropdownMenuItem<String> buildMenuQuantity(quantity) {
     return DropdownMenuItem(
       value: quantity,

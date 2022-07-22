@@ -35,23 +35,17 @@ class Food {
     this.isDeleted,
     this.currentUser,
   });
+}
 
-  // factory Food.fromFirestore(DocumentSnapshot doc) {
-  //   Map data = doc.data() as Map<String, dynamic>;
+enum DeadlineType {
+  ShortTerm,
+  LongTerm,
+}
 
-  //   return Food(
-  //     id: doc.id,
-  //     foodName: data['foodName'] ?? '',
-  //     deadlineDate: data['deadlineDate'] ?? '',
-  //     deadlineType: data['deadlineType'] ?? '',
-  //     cookedByMe: data['cookedByMe'] ?? '',
-  //     sectionType: data['sectionType'] ?? 'SectionType.Frigo.toString()',
-  //     labelList: data['labelList'] ?? [],
-  //     shopName: data['shopName'] ?? '',
-  //     price: data['price'] ?? '',
-  //     note: data['note'] ?? '',
-  //   );
-  // }
+enum SectionType {
+  Frigo,
+  Freezer,
+  Dispensa,
 }
 
 List<Food> foodList = [
@@ -211,13 +205,22 @@ List<Food> foodList = [
   ),
 ];
 
-enum DeadlineType {
-  ShortTerm,
-  LongTerm,
-}
 
-enum SectionType {
-  Frigo,
-  Freezer,
-  Dispensa,
-}
+
+  /// Vecchia funzione per il db di Firebase
+  // factory Food.fromFirestore(DocumentSnapshot doc) {
+  //   Map data = doc.data() as Map<String, dynamic>;
+
+  //   return Food(
+  //     id: doc.id,
+  //     foodName: data['foodName'] ?? '',
+  //     deadlineDate: data['deadlineDate'] ?? '',
+  //     deadlineType: data['deadlineType'] ?? '',
+  //     cookedByMe: data['cookedByMe'] ?? '',
+  //     sectionType: data['sectionType'] ?? 'SectionType.Frigo.toString()',
+  //     labelList: data['labelList'] ?? [],
+  //     shopName: data['shopName'] ?? '',
+  //     price: data['price'] ?? '',
+  //     note: data['note'] ?? '',
+  //   );
+  // }

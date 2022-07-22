@@ -65,7 +65,6 @@ class ShowSingleFoodScreen extends StatelessWidget {
           color: Colors.teal.shade50,
           padding: EdgeInsets.only(top: 20, right: 30, left: 30),
           child: ListView(
-            // shrinkWrap: true,
             children: [
               CircleAvatar(
                 backgroundColor: Colors.teal,
@@ -200,8 +199,8 @@ class ShowSingleFoodScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Etichette',
@@ -295,7 +294,12 @@ class LabelChips extends StatelessWidget {
         builder: (context, foodListProvider, child) {
       return Container(
         child: foodListProvider.expandedFood!.labelList == null
-            ? Text('Nessuna etichetta')
+            ? Chip(
+                label: Text('🚫 Nessuna'),
+                backgroundColor: Colors.white,
+                elevation: 1,
+                shadowColor: Colors.teal,
+              )
             : Wrap(
                 children: [iterableChip(foodListProvider)],
               ),
