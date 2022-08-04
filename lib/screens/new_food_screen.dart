@@ -594,6 +594,7 @@ class _NewFoodScaffoldState extends State<NewFoodScaffold> {
                 shopName: shopName,
                 price: price,
                 note: note,
+                isDeleted: false,
               );
 
               Provider.of<FoodListProvider>(context, listen: false)
